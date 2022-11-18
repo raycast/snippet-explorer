@@ -1,7 +1,12 @@
 .container {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 64px 48px 192px;
+  padding: 64px 24px 192px;
+
+  @media (min-width: 768px) {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
 }
 
 .nav {
@@ -9,6 +14,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .subtitle {
@@ -24,16 +31,21 @@
   position: relative;
   z-index: 1;
 
-  &[data-grid="2"] {
-    grid-template-columns: repeat(2, 1fr);
+  @media (min-width: 768px) {
+    &[data-grid="2"] {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &[data-grid="3"],
+    &[data-grid="4"] {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
-  &[data-grid="3"] {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  &[data-grid="4"] {
-    grid-template-columns: repeat(4, 1fr);
+  @media (min-width: 960px) {
+    &[data-grid="4"] {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 }
 
@@ -204,8 +216,14 @@
   gap: 12px;
   border: 1px solid hsla(0, 0%, 100%, 0.2);
   box-shadow: 0 4px 16px 0 rgb(0 0 0 / 60%);
-  width: 520px;
   pointer-events: all;
+  width: calc(100% - 20vw);
+  flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+    width: 520px;
+  }
 }
 
 .checkoutText {
