@@ -132,14 +132,14 @@
 
 .text {
   font-size: 24px;
+  padding: 24px;
+  display: block;
 }
 
 .snippet {
   background-color: rgba(255, 255, 255, 0.05);
-  padding: 24px;
   border-radius: 10px;
   max-height: 320px;
-  overflow: auto;
 }
 
 .template {

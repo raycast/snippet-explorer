@@ -29,6 +29,7 @@ import {
 import { SnippetLogo } from "../components/SnippetLogo";
 import Link from "next/link";
 import { Toast, ToastTitle } from "../components/Toast";
+import { ScrollArea } from "../components/ScrollArea";
 
 const arrows = [
   {
@@ -852,7 +853,9 @@ export default function Home() {
                     <div className={styles.snippet}>
                       {snippet.type === "template" ||
                       snippet.type === "spelling" ? (
-                        <pre className={styles.template}>{snippet.text}</pre>
+                        <ScrollArea>
+                          <pre className={styles.template}>{snippet.text}</pre>
+                        </ScrollArea>
                       ) : (
                         <span className={styles.text}>{snippet.text}</span>
                       )}
