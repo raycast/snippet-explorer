@@ -42,3 +42,16 @@
     transform: translate(-50%, -50%) scale(1);
   }
 }
+
+.close {
+  all: unset;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  color: hsla(0, 0%, 100%, 0.4);
+  transition: color 150ms ease;
+
+  &:hover {
+    color: hsla(0, 0%, 100%, 1);
+  }
+}

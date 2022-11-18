@@ -272,11 +272,12 @@
   }
 }
 
-.controls {
+.modifierControls {
   display: flex;
   gap: 24px;
   color: rgba(255, 255, 255, 0.6);
   user-select: none;
+  margin-bottom: 24px;
 }
 
 .modifierInput {
@@ -286,24 +287,24 @@
   font-weight: 500;
   letter-spacing: 0.1px;
   align-items: center;
+  color: white;
 }
 
-.instructionTitle {
+.dialogTitle {
   color: hsla(0, 0%, 100%, 0.4);
   font-size: 16px;
   font-weight: 500;
-  margin-top: 24px;
   margin-bottom: 24px;
 }
 
-.instructionDescription {
+.dialogDescription {
   color: hsla(0, 0%, 100%, 0.6);
   font-size: 14px;
   line-height: 1.6;
   margin-bottom: 24px;
 }
 
-.instructionButtons {
+.dialogButtons {
   display: flex;
   align-items: center;
   gap: 12px;

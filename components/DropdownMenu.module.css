@@ -96,3 +96,8 @@
     transform: translateX(0);
   }
 }
+
+.separator {
+  height: 1px;
+  background-color: hsla(0, 0%, 100%, 0.07);
+}
