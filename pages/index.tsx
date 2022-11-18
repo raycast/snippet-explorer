@@ -631,6 +631,93 @@ const spelling = [
   },
 ];
 
+const unicodes = [
+  {
+    id: nanoid(),
+    name: "Shrug",
+    text: "¯\\_(ツ)_/¯",
+    keyword: "shrug",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Happy With It Unicode",
+    text: "ʘ‿ʘ",
+    keyword: "happy",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Cute Unicode",
+    text: "•‿•",
+    keyword: "cute",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Tears Of Joy Unicode",
+    text: "ಥ‿ಥ",
+    keyword: "tears-of-joy",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Wink Unicode",
+    text: "◕‿↼",
+    keyword: "tears-of-joy",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Glasses of Disapproval Unicode",
+    text: "(-■_■)",
+    keyword: "glasses-disapproval",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Meh Unicode",
+    text: "ヽ(。_°)ノ",
+    keyword: "meh",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Serious Lookg Unicode",
+    text: "(ಠ_ಠ)",
+    keyword: "serious-look",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Flipping Table Unicode",
+    text: "(╯°□°)╯︵ ┻━┻",
+    keyword: "flipping-table",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Putting Table Back Unicode",
+    text: "┳━┳ ヽ(ಠل͜ಠ)ﾉ",
+    keyword: "flipping-table",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Angry Cat Unicode",
+    text: "(^._.^)ﾉ",
+    keyword: "angry-cat",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Lenny Unicode",
+    text: "( ͡° ͜ʖ ͡°)",
+    keyword: "lenny",
+    type: "unicode",
+  },
+];
+
 const snippets = [
   { name: "Coding", gridCols: 2, snippets: coding },
   { name: "Feedback", gridCols: 2, snippets: feedback },
@@ -643,6 +730,7 @@ const snippets = [
   { name: "Maths", gridCols: 4, snippets: maths },
   { name: "Currency", gridCols: 4, snippets: currency },
   { name: "Symbols", gridCols: 4, snippets: symbols },
+  { name: "Unicode", gridCols: 4, snippets: unicodes },
 ];
 
 const modifiders = [":", "!", "_", "__", "-", "@", ";", "empty"];
@@ -658,12 +746,6 @@ export default function Home() {
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [sharedSnippetsInURL, setSharedSnippetsInURL] = React.useState([]);
-
-  React.useEffect(() => {
-    if (router.query.snippet) {
-      setSharedSnippetsInURL(formatURLSnippet(router.query.snippet));
-    }
-  }, [router.query]);
 
   const hasSharedSnippets = sharedSnippetsInURL.length > 0;
 
@@ -734,6 +816,12 @@ export default function Home() {
   }, [selectedSnippetsConfig, startMod, endMod]);
 
   React.useEffect(() => {
+    if (router.query.snippet) {
+      setSharedSnippetsInURL(formatURLSnippet(router.query.snippet));
+    }
+  }, [router.query]);
+
+  React.useEffect(() => {
     const down = (event) => {
       const { key, metaKey, shiftKey } = event;
 
@@ -750,12 +838,14 @@ export default function Home() {
       }
 
       if (key === "c" && metaKey && !shiftKey) {
+        if (selectedSnippetsConfig.length === 0) return;
         handleCopyData();
         setActionsOpen(false);
       }
 
       if (key === "c" && metaKey && shiftKey) {
         event.preventDefault();
+        if (selectedSnippetsConfig.length === 0) return;
         handleCopyUrl();
         setActionsOpen(false);
       }
@@ -857,7 +947,9 @@ export default function Home() {
                           <pre className={styles.template}>{snippet.text}</pre>
                         </ScrollArea>
                       ) : (
-                        <span className={styles.text}>{snippet.text}</span>
+                        <span className={styles.text} data-type={snippet.type}>
+                          {snippet.text}
+                        </span>
                       )}
                     </div>
                     {snippet.keyword && (
@@ -939,13 +1031,12 @@ export default function Home() {
                 </span>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                {/* <DropdownMenuItem>Download JSON</DropdownMenuItem> */}
                 <DropdownMenuItem
                   onSelect={(event) => {
                     setDialogOpen(true);
                   }}
                 >
-                  <ClipboardIcon /> Download{" "}
+                  <DownloadIcon /> Download
                   <span className={styles.hotkeys}>
                     <kbd>⌘</kbd>
                     <kbd>D</kbd>
