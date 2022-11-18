@@ -278,14 +278,14 @@ const currency = [
     id: nanoid(),
     text: "£",
     name: "Sterling",
-    keyword: "sterling",
+    keyword: "gbp",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "€",
     name: "Euro",
-    keyword: "euro",
+    keyword: "eur",
     type: "symbol",
   },
   {
@@ -299,7 +299,7 @@ const currency = [
     id: nanoid(),
     text: "$",
     name: "Dollar",
-    keyword: "dollar",
+    keyword: "usd",
     type: "symbol",
   },
 ];
@@ -788,6 +788,23 @@ export default function Home() {
       .join(",")}]`;
   }, [selectedSnippetsConfig, startMod, endMod]);
 
+  const makeQueryString = React.useCallback(() => {
+    const queryString = selectedSnippetsConfig
+      .map((snippet) => {
+        const { name, text, type } = snippet;
+        const keyword = addModifiersToKeyword({
+          keyword: snippet.keyword,
+          start: startMod,
+          end: endMod,
+        });
+        return `snippet=${encodeURIComponent(
+          JSON.stringify({ name, text, keyword, type })
+        )}`;
+      })
+      .join("&");
+    return queryString;
+  }, [selectedSnippetsConfig, startMod, endMod]);
+
   const handleDownload = React.useCallback(() => {
     const encodedSnippetsData = encodeURIComponent(makeSnippetImportData());
     const jsonString = `data:text/json;chatset=utf-8,${encodedSnippetsData}`;
@@ -803,23 +820,23 @@ export default function Home() {
   }, [makeSnippetImportData]);
 
   const handleCopyUrl = React.useCallback(() => {
-    const queryString = selectedSnippetsConfig
-      .map((snippet) => {
-        const { name, text, type } = snippet;
-        const keyword = addModifiersToKeyword({
-          keyword: snippet.keyword,
-          start: startMod,
-          end: endMod,
-        });
-        return `snippet=${encodeURIComponent(
-          JSON.stringify({ name, text, keyword, type })
-        )}`;
-      })
-      .join("&");
+    // const queryString = selectedSnippetsConfig
+    //   .map((snippet) => {
+    //     const { name, text, type } = snippet;
+    //     const keyword = addModifiersToKeyword({
+    //       keyword: snippet.keyword,
+    //       start: startMod,
+    //       end: endMod,
+    //     });
+    //     return `snippet=${encodeURIComponent(
+    //       JSON.stringify({ name, text, keyword, type })
+    //     )}`;
+    //   })
+    //   .join("&");
 
-    copy(`${window.location.origin}?${queryString}`);
+    copy(`${window.location.origin}?${makeQueryString()}`);
     setCopied(true);
-  }, [selectedSnippetsConfig, startMod, endMod]);
+  }, [makeQueryString]);
 
   React.useEffect(() => {
     if (router.query.snippet) {
@@ -961,14 +978,9 @@ export default function Home() {
               {selectedSnippetsConfig.length > 1 ? "Snippets" : "Snippet"}{" "}
               Selected
             </p>
-            <Dialog open={instructionsOpen} onOpenChange={setInstructionsOpen}>
+            {/* <Dialog open={instructionsOpen} onOpenChange={setInstructionsOpen}>
               <DialogTrigger className={styles.trigger} data-variant="primary">
-                <DownloadIcon />
                 Download
-                <span className={styles.hotkeys}>
-                  <kbd data-variant="dark">⌘</kbd>
-                  <kbd data-variant="dark">D</kbd>
-                </span>
               </DialogTrigger>
               <DialogContent>
                 <SnippetsIcon aria-hidden size={24} />
@@ -1007,7 +1019,20 @@ export default function Home() {
                   </DialogClose>
                 </div>
               </DialogContent>
-            </Dialog>
+            </Dialog> */}
+
+            <a
+              href={`raycastdebug://snippets/import?${makeQueryString()}`}
+              className={styles.trigger}
+              data-variant="primary"
+            >
+              <RaycastLogoIcon />
+              Add to Raycast
+              <span className={styles.hotkeys}>
+                <kbd data-variant="dark">⌘</kbd>
+                <kbd data-variant="dark">⏎</kbd>
+              </span>
+            </a>
 
             <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
               <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
@@ -1023,11 +1048,7 @@ export default function Home() {
                   </span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem
-                    onSelect={(event) => {
-                      setInstructionsOpen(true);
-                    }}
-                  >
+                  <DropdownMenuItem onSelect={() => setInstructionsOpen(true)}>
                     <DownloadIcon /> Download
                     <span className={styles.hotkeys}>
                       <kbd>⌘</kbd>
