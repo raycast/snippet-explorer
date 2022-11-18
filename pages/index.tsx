@@ -9,7 +9,7 @@ import {
   CogIcon,
   DownloadIcon,
   LinkIcon,
-  RaycastLogo,
+  RaycastLogoIcon,
   SnippetsIcon,
 } from "../components/Icons";
 import { useRouter } from "next/router";
@@ -1050,7 +1050,7 @@ export default function Home() {
                     </span>
                   </DropdownMenuItem>
                   <DropdownMenuItem disabled>
-                    <RaycastLogo /> Add to Raycast
+                    <RaycastLogoIcon /> Add to Raycast
                   </DropdownMenuItem>
 
                   <DropdownMenuSeparator />

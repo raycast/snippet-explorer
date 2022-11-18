@@ -46,9 +46,6 @@ export const SelectItem = React.forwardRef<
   return (
     <SelectPrimitive.Item {...props} ref={forwardedRef} className={styles.item}>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-      <SelectPrimitive.ItemIndicator>
-        {/* <CheckIcon /> */}
-      </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>
   );
 });

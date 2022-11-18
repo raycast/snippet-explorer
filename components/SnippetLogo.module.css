@@ -6,4 +6,27 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
+  position: relative;
+
+  svg {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-icon="raycast"] {
+    opacity: 0;
+    transform: scale(0.8) rotate(-45deg);
+    position: absolute;
+  }
+
+  &:hover {
+    [data-icon="snippets"] {
+      opacity: 0;
+      transform: scale(0.8) rotate(45deg);
+    }
+
+    [data-icon="raycast"] {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
 }
