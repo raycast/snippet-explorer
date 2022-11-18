@@ -10,12 +10,10 @@ import {
   DownloadIcon,
   LinkIcon,
   RaycastLogoIcon,
-  SnippetsIcon,
 } from "../components/Icons";
 import { useRouter } from "next/router";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
@@ -746,7 +744,6 @@ export default function Home() {
   const [startMod, setStartMod] = React.useState(":");
   const [endMod, setEndMod] = React.useState(":");
   const [actionsOpen, setActionsOpen] = React.useState(false);
-  const [instructionsOpen, setInstructionsOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const [sharedSnippetsInURL, setSharedSnippetsInURL] = React.useState([]);
 
@@ -852,7 +849,7 @@ export default function Home() {
 
       if (selectedSnippetsConfig.length === 0) return;
 
-      if (key === "k" && metaKey && !instructionsOpen) {
+      if (key === "k" && metaKey) {
         setActionsOpen((prevOpen) => {
           return !prevOpen;
         });
@@ -860,7 +857,7 @@ export default function Home() {
 
       if (key === "d" && metaKey) {
         event.preventDefault();
-        setInstructionsOpen((prevOpen) => !prevOpen);
+        handleDownload();
       }
 
       if (key === "c" && metaKey && !shiftKey) {
@@ -888,7 +885,6 @@ export default function Home() {
     handleCopyData,
     handleDownload,
     handleCopyUrl,
-    instructionsOpen,
   ]);
 
   React.useEffect(() => {
@@ -978,48 +974,6 @@ export default function Home() {
               {selectedSnippetsConfig.length > 1 ? "Snippets" : "Snippet"}{" "}
               Selected
             </p>
-            {/* <Dialog open={instructionsOpen} onOpenChange={setInstructionsOpen}>
-              <DialogTrigger className={styles.trigger} data-variant="primary">
-                Download
-              </DialogTrigger>
-              <DialogContent>
-                <SnippetsIcon aria-hidden size={24} />
-                <div style={{ marginBottom: 24 }} />
-                <DialogTitle className={styles.dialogTitle}>
-                  Download Instructions
-                </DialogTitle>
-                <DialogDescription className={styles.dialogDescription}>
-                  After downloading your Snippets, you&apos;ll need to import
-                  them into Raycast. To do this, follow the steps below:
-                </DialogDescription>
-                <ol className={styles.dialogDescription}>
-                  <li>Open Raycast</li>
-                  <li>
-                    Use the <code>Import Snippets</code> Command
-                  </li>
-                  <li>Select your file</li>
-                </ol>
-                <div className={styles.dialogButtons}>
-                  <button
-                    type="button"
-                    className={styles.trigger}
-                    data-variant="primary"
-                    onClick={handleDownload}
-                  >
-                    <DownloadIcon />
-                    Download
-                    <span />
-                  </button>
-                  <DialogClose
-                    className={styles.trigger}
-                    data-variant="secondary"
-                  >
-                    Close
-                    <span />
-                  </DialogClose>
-                </div>
-              </DialogContent>
-            </Dialog> */}
 
             <a
               href={`raycastdebug://snippets/import?${makeQueryString()}`}
@@ -1048,7 +1002,7 @@ export default function Home() {
                   </span>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onSelect={() => setInstructionsOpen(true)}>
+                  <DropdownMenuItem onSelect={() => handleDownload()}>
                     <DownloadIcon /> Download
                     <span className={styles.hotkeys}>
                       <kbd>⌘</kbd>
