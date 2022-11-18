@@ -818,6 +818,8 @@ export default function Home() {
   React.useEffect(() => {
     if (router.query.snippet) {
       setSharedSnippetsInURL(formatURLSnippet(router.query.snippet));
+    } else {
+      setSharedSnippetsInURL([]);
     }
   }, [router.query]);
 
