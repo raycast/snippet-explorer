@@ -823,23 +823,21 @@ export default function Home() {
   }, [makeSnippetImportData]);
 
   const handleCopyUrl = React.useCallback(() => {
-    // const queryString = selectedSnippetsConfig
-    //   .map((snippet) => {
-    //     const { name, text, type } = snippet;
-    //     const keyword = addModifiersToKeyword({
-    //       keyword: snippet.keyword,
-    //       start: startMod,
-    //       end: endMod,
-    //     });
-    //     return `snippet=${encodeURIComponent(
-    //       JSON.stringify({ name, text, keyword, type })
-    //     )}`;
-    //   })
-    //   .join("&");
-
     copy(`${window.location.origin}?${makeQueryString()}`);
     setCopied(true);
   }, [makeQueryString]);
+
+  const handleCopyText = React.useCallback(() => {
+    const textStrings = selectedSnippetsConfig
+      .map((snippet) => {
+        const { text } = snippet;
+        return text;
+      })
+      .join(" ");
+
+    copy(textStrings);
+    setCopied(true);
+  }, [selectedSnippetsConfig]);
 
   React.useEffect(() => {
     if (router.query.snippet) {
@@ -851,7 +849,7 @@ export default function Home() {
 
   React.useEffect(() => {
     const down = (event) => {
-      const { key, metaKey, shiftKey } = event;
+      const { key, keyCode, metaKey, shiftKey, altKey } = event;
 
       if (selectedSnippetsConfig.length === 0) return;
 
@@ -876,6 +874,14 @@ export default function Home() {
         handleCopyUrl();
         setActionsOpen(false);
       }
+      console.log(metaKey, altKey);
+
+      // key === "c" doesn't work when using alt key, so we use keCode instead
+      if (keyCode === 67 && metaKey && altKey) {
+        event.preventDefault();
+        handleCopyText();
+        setActionsOpen(false);
+      }
 
       if (key === "," && metaKey && shiftKey) {
         event.preventDefault();
@@ -891,6 +897,7 @@ export default function Home() {
     handleCopyData,
     handleDownload,
     handleCopyUrl,
+    handleCopyText,
   ]);
 
   React.useEffect(() => {
@@ -1030,8 +1037,13 @@ export default function Home() {
                       <kbd>C</kbd>
                     </span>
                   </DropdownMenuItem>
-                  <DropdownMenuItem disabled>
-                    <RaycastLogoIcon /> Add to Raycast
+                  <DropdownMenuItem onSelect={() => handleCopyText()}>
+                    <ClipboardIcon /> Copy Text{" "}
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>⌥</kbd>
+                      <kbd>C</kbd>
+                    </span>
                   </DropdownMenuItem>
 
                   <DropdownMenuSeparator />
