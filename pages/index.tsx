@@ -31,6 +31,12 @@ import Link from "next/link";
 import { Toast, ToastTitle } from "../components/Toast";
 import { ScrollArea } from "../components/ScrollArea";
 
+const raycastProtocolForEnvironments = {
+  development: "raycastdebug",
+  production: "raycastdebug",
+};
+const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
+
 const arrows = [
   {
     id: nanoid(),
@@ -976,7 +982,7 @@ export default function Home() {
             </p>
 
             <a
-              href={`raycastdebug://snippets/import?${makeQueryString()}`}
+              href={`${raycastProtocol}://snippets/import?${makeQueryString()}`}
               className={styles.trigger}
               data-variant="primary"
             >
