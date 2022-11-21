@@ -893,6 +893,7 @@ export default function Home() {
 
       if (key === "," && metaKey && shiftKey) {
         event.preventDefault();
+        setActionsOpen(false);
         setSettingsOpen((prevOpen) => !prevOpen);
       }
     };
@@ -906,6 +907,7 @@ export default function Home() {
     handleDownload,
     handleCopyUrl,
     handleCopyText,
+    handleAddToRaycast,
   ]);
 
   React.useEffect(() => {
