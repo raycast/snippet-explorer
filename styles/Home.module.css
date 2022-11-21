@@ -181,6 +181,7 @@
 
 .checkbox {
   opacity: 0;
+  inset: 0;
   pointer-events: none;
   position: absolute;
 }
@@ -213,16 +214,16 @@
   padding: 24px;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 24px;
   border: 1px solid hsla(0, 0%, 100%, 0.2);
   box-shadow: 0 4px 16px 0 rgb(0 0 0 / 60%);
   pointer-events: all;
   width: calc(100% - 20vw);
   flex-wrap: wrap;
 
-  @media (min-width: 768px) {
+  @media (min-width: 640px) {
     flex-wrap: nowrap;
-    width: 560px;
+    width: 620px;
   }
 }
 
@@ -230,8 +231,13 @@
   font-weight: 500;
   font-size: 14px;
   text-align: left;
-  width: 420px;
-  color: hsla(0, 0%, 100%, 0.4);
+  margin-right: auto;
+}
+
+.checkoutActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .trigger {
@@ -259,10 +265,10 @@
     color: #fff;
     background: rgba(255, 99, 99, 0.15);
     color: #ff6363;
-    &:hover {
+    &:not(:disabled):hover {
       background: rgba(255, 99, 99, 0.3);
     }
-    &:focus {
+    &:not(:disabled):focus {
       box-shadow: 0 0 0 2px #191919, 0 0 0 4px rgba(255, 99, 99, 0.2);
     }
   }
@@ -270,13 +276,17 @@
   &[data-variant="secondary"] {
     color: hsla(0, 0%, 100%, 0.6);
 
-    &:hover,
+    &:not(:disabled):hover,
     &[aria-expanded="true"] {
       background-color: hsla(0, 0%, 100%, 0.1);
     }
-    &:focus {
+    &:not(:disabled):focus {
       box-shadow: 0 0 0 2px #191919, 0 0 0 4px hsla(0, 0%, 100%, 0.1);
     }
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 }
 
