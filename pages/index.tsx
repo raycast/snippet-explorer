@@ -795,11 +795,14 @@ export default function Home() {
     const queryString = selectedSnippetsConfig
       .map((snippet) => {
         const { name, text, type } = snippet;
-        const keyword = addModifiersToKeyword({
-          keyword: snippet.keyword,
-          start: startMod,
-          end: endMod,
-        });
+        const keyword =
+          snippet.isShared || snippet.type === "spelling"
+            ? snippet.keyword
+            : addModifiersToKeyword({
+                keyword: snippet.keyword,
+                start: startMod,
+                end: endMod,
+              });
         return `snippet=${encodeURIComponent(
           JSON.stringify({ name, text, keyword, type })
         )}`;
@@ -839,8 +842,13 @@ export default function Home() {
     setCopied(true);
   }, [selectedSnippetsConfig]);
 
-  const handleAddToRaycast = () =>
-    router.replace(`${raycastProtocol}://snippets/import?${makeQueryString()}`);
+  const handleAddToRaycast = React.useCallback(
+    () =>
+      router.replace(
+        `${raycastProtocol}://snippets/import?${makeQueryString()}`
+      ),
+    [router, makeQueryString]
+  );
 
   React.useEffect(() => {
     if (router.query.snippet) {
@@ -882,7 +890,6 @@ export default function Home() {
         handleCopyUrl();
         setActionsOpen(false);
       }
-      console.log(metaKey, altKey);
 
       // key === "c" doesn't work when using alt key, so we use keCode instead
       if (keyCode === 67 && metaKey && altKey) {
