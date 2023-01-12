@@ -1,11 +1,11 @@
 .logo {
-  background-image: linear-gradient(135deg, #ff6363, #d72a2a);
+  background-image: linear-gradient(135deg, #FF6363, #D72A2A);
   display: inline-flex;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 6px;
   position: relative;
 
   svg {

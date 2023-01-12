@@ -1,0 +1,15 @@
+.buttonGroup {
+  display: flex;
+  align-items: center;
+
+  & > *:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  & > * ~ * {
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

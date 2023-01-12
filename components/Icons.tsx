@@ -144,3 +144,21 @@ export const CloseIcon = ({ size = 16 }) => (
     ></path>
   </svg>
 );
+
+export const PlusCircle = ({ size = 16 }) => (
+  <svg
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+  >
+    <path
+      d="M8 14.25a6.25 6.25 0 1 0 0-12.5 6.25 6.25 0 0 0 0 12.5ZM10.75 8H8M5.25 8H8m0 0V5.25M8 8v2.75"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></path>
+  </svg>
+);

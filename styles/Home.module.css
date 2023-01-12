@@ -1,32 +1,67 @@
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 64px 24px 192px;
+.main {
+  padding-left: 320px;
+  position: relative;
+}
 
-  @media (min-width: 768px) {
+.sidebar {
+  position: fixed;
+  width: 320px;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  height: calc(100vh - 50px);
+  padding: 24px;
+}
+
+.sidebarInner {
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  height: 100%;
+  border-radius: 12px;
+}
+
+.container {
+  position: relative;
+  top: 50px;
+  padding: 32px 16px 32px 0;
+
+  /* @media (min-width: 768px) {
     padding-left: 48px;
     padding-right: 48px;
-  }
+  } */
 }
 
 .nav {
-  margin-bottom: 64px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
+  padding: 0 16px;
+  height: 50px;
+  background-color: #111;
+}
+
+.navControls {
+  display: flex;
+  gap: 16px;
 }
 
 .subtitle {
-  font-size: 18px;
-  margin-bottom: 24px;
+  font-size: 13px;
+  margin-bottom: 16px;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .snippets {
   display: grid;
-  gap: 24px;
+  gap: 16px;
   margin-bottom: 64px;
   position: relative;
   z-index: 1;
@@ -47,6 +82,18 @@
       grid-template-columns: repeat(4, 1fr);
     }
   }
+
+  @media (min-width: 960px) {
+    &[data-grid="5"] {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    &[data-grid="6"] {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
 }
 
 .divider {
@@ -58,86 +105,34 @@
 }
 
 .item {
-  padding: 24px;
-  background-color: rgba(31, 31, 31, 1);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
+  padding: 16px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  align-items: center;
+  gap: 16px;
+  align-items: start;
   position: relative;
   transition: all 0.2s;
 }
 
 .item:hover {
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 99, 99, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 99, 99, 0.2);
 }
 
 .item:has(:focus) {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(255, 99, 99, 0.3);
 }
 
 .item:has(:checked) {
-  background-color: rgba(31, 31, 31, 1);
+  background-color: rgba(255, 99, 99, 0.15);
   user-select: none;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
-}
-
-.item:before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border: 2px solid transparent;
-  background: linear-gradient(
-      33.333deg,
-      #27061a,
-      #ff6363 29.69%,
-      #9b4dff 52.6%,
-      #100321 98.44%
-    )
-    border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: destination-out;
-  mask-composite: exclude;
-  z-index: -1;
-  border-radius: 12px;
-  backdrop-filter: overlay;
-  opacity: 0;
-  will-change: opacity;
-  transition: opacity 0.2s;
-}
-
-.item:has(:checked):before {
-  opacity: 1;
-}
-
-.item:after {
-  content: "";
-  position: absolute;
-  inset: 0px;
-  background: conic-gradient(
-    from 147.14deg at 50% 50%,
-    #0294fe -55.68deg,
-    #ff2136 113.23deg,
-    #9b4dff 195deg,
-    #0294fe 304.32deg,
-    #ff2136 473.23deg
-  );
-  border-radius: inherit;
-  filter: blur(10px);
-  opacity: 0;
-  z-index: -2;
-  transition: opacity 0.2s;
-  will-change: opacity;
-}
-
-.item:has(:checked):after {
-  opacity: 0.1;
+  box-shadow: inset 0 0 0 2px solid rgba(255, 99, 99, 0.15);
 }
 
 .name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   text-align: center;
 }
@@ -158,8 +153,11 @@
 
 .snippet {
   background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
+  border-radius: 6px;
   max-height: 320px;
+  width: 100%;
+  text-align: center;
+  flex: 1;
 }
 
 .template {
@@ -167,16 +165,18 @@
   font-size: 13px;
   line-height: 1.6;
   white-space: pre-wrap;
+  text-align: left;
 }
 
 .keyword {
   font-family: JetBrains Mono;
   display: inline-block;
-  padding: 4px 8px;
-  border: 1px solid hsl(195, 5%, 25%);
-  color: rgba(255, 255, 255, 0.6);
-  border-radius: 5px;
+  padding: 4px 6px;
+  color: #cf2f98;
+  background-color: rgba(207, 47, 152, 0.15);
+  border-radius: 6px;
   font-size: 11px;
+  font-weight: 500;
 }
 
 .checkbox {

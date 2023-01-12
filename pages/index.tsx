@@ -2,13 +2,14 @@
 import React from "react";
 import copy from "copy-to-clipboard";
 import { nanoid } from "nanoid";
-import styles from "../styles/Home.module.css";
 import { Select, SelectItem } from "../components/Select";
 import {
+  ChevronDownIcon,
   ClipboardIcon,
   CogIcon,
   DownloadIcon,
   LinkIcon,
+  PlusCircle,
   RaycastLogoIcon,
 } from "../components/Icons";
 import { useRouter } from "next/router";
@@ -31,8 +32,12 @@ import Link from "next/link";
 import { Toast, ToastTitle } from "../components/Toast";
 import { ScrollArea } from "../components/ScrollArea";
 
+import styles from "../styles/Home.module.css";
+import { Button } from "../components/Button";
+import { ButtonGroup } from "../components/ButtonGroup";
+
 const raycastProtocolForEnvironments = {
-  development: "raycastdebug",
+  development: "raycastinternal",
   production: "raycastdebug",
 };
 const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
@@ -97,7 +102,7 @@ const arrows = [
   {
     id: nanoid(),
     text: "⟶",
-    name: "Arrow Lon -Right",
+    name: "Arrow Long Right",
     keyword: "long-right",
     type: "symbol",
   },
@@ -478,12 +483,14 @@ const feedback = [
 Thanks for taking the time to give us your feedback.
     
 {cursor}`,
+    keyword: "feedback-thanks",
     type: "template",
   },
   {
     name: "Feedback Resolved",
     id: nanoid(),
     text: `Glad to know it is resolved. Feel free to reach out for any further clarifications.`,
+    keyword: "feedback-resolved",
     type: "template",
   },
 ];
@@ -502,6 +509,7 @@ const coding = [
     text: `export default function Command() {
   return {cursor}
 }`,
+    keyword: "ray-vc",
     type: "template",
   },
   {
@@ -521,6 +529,7 @@ const coding = [
   align-items: center;
   justify-content: center;
 }`,
+    keyword: "css-ac",
     type: "template",
   },
 ];
@@ -725,12 +734,12 @@ const unicodes = [
 ];
 
 const snippets = [
-  { name: "Coding", gridCols: 2, snippets: coding },
-  { name: "Feedback", gridCols: 2, snippets: feedback },
+  { name: "Coding", gridCols: 4, snippets: coding },
+  { name: "Feedback", gridCols: 4, snippets: feedback },
   { name: "GitHub", gridCols: 2, snippets: github },
-  { name: "Spelling", gridCols: 3, snippets: spelling },
+  { name: "Spelling", gridCols: 4, snippets: spelling },
   // { name: "Project", gridCols: 2, snippets: project },
-  { name: "Arrows", gridCols: 4, snippets: arrows },
+  { name: "Arrows", gridCols: 6, snippets: arrows },
   { name: "Technical", gridCols: 4, snippets: technical },
   { name: "Bullets & Stars", gridCols: 4, snippets: bulletsAndStars },
   { name: "Maths", gridCols: 4, snippets: maths },
@@ -747,8 +756,8 @@ export default function Home() {
   const [selectedSnippets, setSelectedSnippets] = React.useState({});
   const [copied, setCopied] = React.useState(false);
 
-  const [startMod, setStartMod] = React.useState(":");
-  const [endMod, setEndMod] = React.useState(":");
+  const [startMod, setStartMod] = React.useState("!");
+  const [endMod, setEndMod] = React.useState("empty");
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const [sharedSnippetsInURL, setSharedSnippetsInURL] = React.useState([]);
@@ -926,75 +935,128 @@ export default function Home() {
   }, [copied]);
 
   return (
-    <div className={styles.container}>
+    <div>
       <div className={styles.nav}>
         <Link href="/">
           <SnippetLogo />
         </Link>
-
-        <Toast open={copied} onOpenChange={setCopied}>
-          <ToastTitle className={styles.toastTitle}>
-            <ClipboardIcon /> Copied to clipboard
-          </ToastTitle>
-        </Toast>
+        <div className={styles.navControls}>
+          <Button>
+            <CogIcon /> Configure Modifiers
+          </Button>
+          <ButtonGroup>
+            <Button
+              variant="red"
+              disabled={selectedSnippetsConfig.length === 0}
+              onClick={() => handleAddToRaycast()}
+            >
+              <PlusCircle /> Add to Raycast
+            </Button>
+            <Button
+              variant="red"
+              disabled={selectedSnippetsConfig.length === 0}
+            >
+              <ChevronDownIcon />
+            </Button>
+          </ButtonGroup>
+        </div>
       </div>
 
-      {allSnippets.map((snippetGroup) => {
-        return (
-          <div key={snippetGroup.name}>
-            <h2 className={styles.subtitle}>{snippetGroup.name}</h2>
-            <div className={styles.snippets} data-grid={snippetGroup.gridCols}>
-              {snippetGroup.snippets.map((snippet) => {
-                const keyword =
-                  snippet.isShared || snippet.type === "spelling"
-                    ? snippet.keyword
-                    : addModifiersToKeyword({
-                        keyword: snippet.keyword,
-                        start: startMod,
-                        end: endMod,
-                      });
+      <Toast open={copied} onOpenChange={setCopied}>
+        <ToastTitle className={styles.toastTitle}>
+          <ClipboardIcon /> Copied to clipboard
+        </ToastTitle>
+      </Toast>
 
-                return (
-                  <label className={styles.item} key={snippet.id}>
-                    <input
-                      className={styles.checkbox}
-                      type="checkbox"
-                      name="snipet"
-                      checked={selectedSnippets[snippet.id]?.checked || false}
-                      onChange={() =>
-                        setSelectedSnippets((prevState) => ({
-                          ...prevState,
-                          [snippet.id]: {
-                            ...snippet,
-                            checked: !prevState[snippet.id]?.checked,
-                          },
-                        }))
-                      }
-                    />
-                    <span className={styles.name}>{snippet.name}</span>
-                    <div className={styles.snippet}>
-                      {snippet.type === "template" ||
-                      snippet.type === "spelling" ? (
-                        <ScrollArea>
-                          <pre className={styles.template}>{snippet.text}</pre>
-                        </ScrollArea>
-                      ) : (
-                        <span className={styles.text} data-type={snippet.type}>
-                          {snippet.text}
-                        </span>
-                      )}
-                    </div>
-                    {snippet.keyword && (
-                      <span className={styles.keyword}>{keyword}</span>
-                    )}
-                  </label>
-                );
-              })}
-            </div>
-            {snippetGroup.gridCols === 1 && <hr className={styles.divider} />}
+      <div className={styles.main}>
+        <div className={styles.sidebar}>
+          <div className={styles.sidebarInner}>
+            {selectedSnippetsConfig.length > 0 && (
+              <div>
+                <p>
+                  {selectedSnippetsConfig.length}{" "}
+                  {selectedSnippetsConfig.length > 1 ? "Snippets" : "Snippet"}{" "}
+                  Selected
+                </p>
+                {selectedSnippetsConfig.map((snippet, index) => (
+                  <div key={snippet.name + index}>{snippet.name}</div>
+                ))}
+              </div>
+            )}
           </div>
-        );
-      })}
+        </div>
+
+        <div className={styles.container}>
+          {allSnippets.map((snippetGroup) => {
+            return (
+              <div key={snippetGroup.name}>
+                <h2 className={styles.subtitle}>{snippetGroup.name}</h2>
+                <div
+                  className={styles.snippets}
+                  data-grid={snippetGroup.gridCols}
+                >
+                  {snippetGroup.snippets.map((snippet) => {
+                    const keyword =
+                      snippet.isShared || snippet.type === "spelling"
+                        ? snippet.keyword
+                        : addModifiersToKeyword({
+                            keyword: snippet.keyword,
+                            start: startMod,
+                            end: endMod,
+                          });
+
+                    return (
+                      <label className={styles.item} key={snippet.id}>
+                        <input
+                          className={styles.checkbox}
+                          type="checkbox"
+                          name="snipet"
+                          checked={
+                            selectedSnippets[snippet.id]?.checked || false
+                          }
+                          onChange={() =>
+                            setSelectedSnippets((prevState) => ({
+                              ...prevState,
+                              [snippet.id]: {
+                                ...snippet,
+                                checked: !prevState[snippet.id]?.checked,
+                              },
+                            }))
+                          }
+                        />
+                        <div className={styles.snippet}>
+                          {snippet.type === "template" ||
+                          snippet.type === "spelling" ? (
+                            <ScrollArea>
+                              <pre className={styles.template}>
+                                {snippet.text}
+                              </pre>
+                            </ScrollArea>
+                          ) : (
+                            <span
+                              className={styles.text}
+                              data-type={snippet.type}
+                            >
+                              {snippet.text}
+                            </span>
+                          )}
+                        </div>
+                        <span className={styles.name}>{snippet.name}</span>
+                        {snippet.keyword && (
+                          <span className={styles.keyword}>{keyword}</span>
+                        )}
+                      </label>
+                    );
+                  })}
+                </div>
+                {snippetGroup.gridCols === 1 && (
+                  <hr className={styles.divider} />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
       {
         <div className={styles.checkoutViewport}>
