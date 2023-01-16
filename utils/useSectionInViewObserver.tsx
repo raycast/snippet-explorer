@@ -117,15 +117,15 @@ export function useSectionInViewObserver({ headerHeight }: Config) {
       const restoredScrollTop = getScrollHistory(key);
 
       if (shouldRestore && restoredScrollTop) {
-        // window.scrollTo({ top: 0 });
-        // window.scrollTo({ top: restoredScrollTop });
+        window.scrollTo({ top: 0 });
+        window.scrollTo({ top: restoredScrollTop });
         return;
       }
 
       if (section) {
         // 1. If current section is the first section, this is the final scroll position we want.
         // 2. If not, we still need to reset scroll to top so that native scroll restoration doesn't mess things up.
-        // window.scrollTo({ top: 0 });
+        window.scrollTo({ top: 0 });
 
         const firstSection = document.querySelector("[data-section-slug]");
 
@@ -148,10 +148,10 @@ export function useSectionInViewObserver({ headerHeight }: Config) {
           // Is it less than half of the viewport height remaining to scroll?
           // If so, scroll to a place where section top will meet the root margin top
           if (fh + remainingScroll < 0.5 * ch) {
-            // window.scrollTo({ top: sh - ch - remainingScroll });
+            window.scrollTo({ top: sh - ch - remainingScroll });
           } else {
             // But in most cases, we scroll to the section top minus some padding
-            // window.scrollTo({ top: sectionTop - 50 });
+            window.scrollTo({ top: sectionTop - 80 });
           }
         }
       }
