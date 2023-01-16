@@ -240,9 +240,45 @@ export default function Home() {
           <SnippetLogo />
         </Link>
         <div className={styles.navControls}>
-          <Button>
-            <CogIcon /> Configure Modifiers
-          </Button>
+          <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
+            <DialogTrigger asChild>
+              <Button>
+                <CogIcon /> Configure Modifiers
+              </Button>
+            </DialogTrigger>
+            <DialogContent showCloseButton>
+              <DialogTitle className={styles.dialogTitle}>
+                Configure Modifiers
+              </DialogTitle>
+              <DialogDescription className={styles.dialogDescription}>
+                Modifiers are used as prefixes and suffixes for your snippets'
+                keyword. If you wish to customize them, you can do so below.
+              </DialogDescription>
+              <div className={styles.modifierControls}>
+                <span className={styles.modifierInput}>
+                  Start Modifier
+                  <Select value={startMod} onValueChange={setStartMod}>
+                    {modifiders.map((mod) => (
+                      <SelectItem key={mod} value={mod}>
+                        {mod}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </span>
+                <span className={styles.modifierInput}>
+                  End Modifier
+                  <Select value={endMod} onValueChange={setEndMod}>
+                    {modifiders.map((mod) => (
+                      <SelectItem key={mod} value={mod}>
+                        {mod}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </span>
+              </div>
+            </DialogContent>
+          </Dialog>
+
           <ButtonGroup>
             <Button
               variant="red"
@@ -251,12 +287,63 @@ export default function Home() {
             >
               <PlusCircle /> Add to Raycast
             </Button>
-            <Button
-              variant="red"
-              disabled={selectedSnippetsConfig.length === 0}
-            >
-              <ChevronDownIcon />
-            </Button>
+
+            <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="red"
+                  disabled={selectedSnippetsConfig.length === 0}
+                >
+                  <ChevronDownIcon />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem
+                  disabled={selectedSnippetsConfig.length === 0}
+                  onSelect={() => handleDownload()}
+                >
+                  <DownloadIcon /> Download
+                  <span className={styles.hotkeys}>
+                    <kbd>⌘</kbd>
+                    <kbd>D</kbd>
+                  </span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  disabled={selectedSnippetsConfig.length === 0}
+                  onSelect={() => handleCopyData()}
+                >
+                  <ClipboardIcon /> Copy JSON{" "}
+                  <span className={styles.hotkeys}>
+                    <kbd>⌘</kbd>
+                    <kbd>C</kbd>
+                  </span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  disabled={selectedSnippetsConfig.length === 0}
+                  onSelect={() => handleCopyUrl()}
+                >
+                  <LinkIcon /> Share URL{" "}
+                  <span className={styles.hotkeys}>
+                    <kbd>⌘</kbd>
+                    <kbd>⇧</kbd>
+                    <kbd>C</kbd>
+                  </span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  disabled={selectedSnippetsConfig.length === 0}
+                  onSelect={() => handleCopyText()}
+                >
+                  <ClipboardIcon /> Copy Text{" "}
+                  <span className={styles.hotkeys}>
+                    <kbd>⌘</kbd>
+                    <kbd>⌥</kbd>
+                    <kbd>C</kbd>
+                  </span>
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator />
+              </DropdownMenuContent>
+            </DropdownMenu>
           </ButtonGroup>
         </div>
       </div>
@@ -449,140 +536,6 @@ export default function Home() {
           })}
         </div>
       </div>
-
-      {
-        <div className={styles.checkoutViewport}>
-          <div className={styles.checkout}>
-            <div className={styles.checkoutActions}>
-              <button
-                className={styles.trigger}
-                data-variant="primary"
-                disabled={selectedSnippetsConfig.length === 0}
-                onClick={() => handleAddToRaycast()}
-              >
-                <RaycastLogoIcon />
-                Add to Raycast
-                <span className={styles.hotkeys}>
-                  <kbd data-variant="dark">⌘</kbd>
-                  <kbd data-variant="dark">⏎</kbd>
-                </span>
-              </button>
-
-              <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
-                <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
-                  <DropdownMenuTrigger
-                    ref={dropdownTriggerRef}
-                    className={styles.trigger}
-                    data-variant="secondary"
-                  >
-                    Actions
-                    <span className={styles.hotkeys}>
-                      <kbd>⌘</kbd>
-                      <kbd>K</kbd>
-                    </span>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem
-                      disabled={selectedSnippetsConfig.length === 0}
-                      onSelect={() => handleDownload()}
-                    >
-                      <DownloadIcon /> Download
-                      <span className={styles.hotkeys}>
-                        <kbd>⌘</kbd>
-                        <kbd>D</kbd>
-                      </span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      disabled={selectedSnippetsConfig.length === 0}
-                      onSelect={() => handleCopyData()}
-                    >
-                      <ClipboardIcon /> Copy JSON{" "}
-                      <span className={styles.hotkeys}>
-                        <kbd>⌘</kbd>
-                        <kbd>C</kbd>
-                      </span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      disabled={selectedSnippetsConfig.length === 0}
-                      onSelect={() => handleCopyUrl()}
-                    >
-                      <LinkIcon /> Share URL{" "}
-                      <span className={styles.hotkeys}>
-                        <kbd>⌘</kbd>
-                        <kbd>⇧</kbd>
-                        <kbd>C</kbd>
-                      </span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      disabled={selectedSnippetsConfig.length === 0}
-                      onSelect={() => handleCopyText()}
-                    >
-                      <ClipboardIcon /> Copy Text{" "}
-                      <span className={styles.hotkeys}>
-                        <kbd>⌘</kbd>
-                        <kbd>⌥</kbd>
-                        <kbd>C</kbd>
-                      </span>
-                    </DropdownMenuItem>
-
-                    <DropdownMenuSeparator />
-
-                    <DialogTrigger asChild>
-                      <DropdownMenuItem>
-                        <CogIcon /> Configure Modifiers
-                        <span className={styles.hotkeys}>
-                          <kbd>⌘</kbd>
-                          <kbd>⇧</kbd>
-                          <kbd>,</kbd>
-                        </span>
-                      </DropdownMenuItem>
-                    </DialogTrigger>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-                <DialogContent
-                  showCloseButton
-                  onCloseAutoFocus={(event) => {
-                    // focus dropdown trigger for accessibility so user doesn't lose their place in the document
-                    dropdownTriggerRef.current.focus();
-                    event.preventDefault();
-                  }}
-                >
-                  <DialogTitle className={styles.dialogTitle}>
-                    Configure Modifiers
-                  </DialogTitle>
-                  <DialogDescription className={styles.dialogDescription}>
-                    Modifiers are used as prefixes and suffixes for your
-                    snippets' keyword. If you wish to customize them, you can do
-                    so below.
-                  </DialogDescription>
-                  <div className={styles.modifierControls}>
-                    <span className={styles.modifierInput}>
-                      Start Modifier
-                      <Select value={startMod} onValueChange={setStartMod}>
-                        {modifiders.map((mod) => (
-                          <SelectItem key={mod} value={mod}>
-                            {mod}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    </span>
-                    <span className={styles.modifierInput}>
-                      End Modifier
-                      <Select value={endMod} onValueChange={setEndMod}>
-                        {modifiders.map((mod) => (
-                          <SelectItem key={mod} value={mod}>
-                            {mod}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    </span>
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </div>
-          </div>
-        </div>
-      }
     </div>
   );
 }

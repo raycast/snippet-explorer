@@ -1,10 +1,22 @@
 import React from "react";
 import styles from "./Button.module.css";
 
-export function Button({ children, variant = "gray", ...props }) {
-  return (
-    <button className={styles.button} data-variant={variant} {...props}>
+type ButtonProps = React.ComponentPropsWithoutRef<"button"> & {
+  variant?: "gray" | "red";
+};
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, variant = "gray", ...props }, forwardedRef) => (
+    <button
+      type="button"
+      className={styles.button}
+      data-variant={variant}
+      {...props}
+      ref={forwardedRef}
+    >
       {children}
     </button>
-  );
-}
+  )
+);
+
+Button.displayName = "Button";

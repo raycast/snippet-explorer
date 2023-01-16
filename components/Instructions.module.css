@@ -4,4 +4,79 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0px 8px 24px -12px #000000;
   border-radius: 6px;
+  text-align: center;
+  line-height: 17px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 13px;
+  margin-bottom: 24px;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  & strong {
+    color: #ff6363;
+    font-weight: 500;
+  }
+}
+
+.skeletons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.skeleton {
+  position: relative;
+  width: 40px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+
+  &[data-selected="true"] {
+    background: rgba(255, 99, 99, 0.1);
+    border: 1px solid rgba(255, 99, 99, 0.3);
+  }
+}
+
+.skeletonPrimary {
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+
+  [data-selected="true"] > & {
+    background: rgba(255, 99, 99, 0.2);
+  }
+}
+
+.skeletonSecondary {
+  width: 24px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+
+  [data-selected="true"] > & {
+    background: rgba(255, 99, 99, 0.2);
+  }
+}
+
+.skeletonCursor {
+  position: absolute;
+  bottom: -10px;
+  right: 0;
 }
