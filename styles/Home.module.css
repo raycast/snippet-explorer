@@ -37,6 +37,9 @@
   font-weight: 500;
   color: rgba(255, 255, 255, 0.4);
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sidebarNav {

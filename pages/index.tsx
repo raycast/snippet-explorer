@@ -42,6 +42,10 @@ import { snippets } from "../data/snippets";
 
 import styles from "../styles/Home.module.css";
 import { Instructions } from "../components/Instructions";
+import {
+  useSectionInView,
+  useSectionInViewObserver,
+} from "../utils/useSectionInViewObserver";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
@@ -51,8 +55,13 @@ const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
 
 const modifiders = [":", "!", "_", "__", "-", "@", ";", "empty"];
 
+const ROOT_MARGIN = "72px";
+
 export default function Home() {
+  useSectionInViewObserver({ headerHeight: 50 });
+  const activeSection = useSectionInView();
   const router = useRouter();
+  console.log(activeSection);
 
   const [selectedSnippets, setSelectedSnippets] = React.useState([]);
   const [copied, setCopied] = React.useState(false);
@@ -62,9 +71,7 @@ export default function Home() {
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const [sharedSnippetsInURL, setSharedSnippetsInURL] = React.useState([]);
-
-  const dropdownTriggerRef =
-    React.useRef<React.ElementRef<typeof DropdownMenuTrigger | null>>(null);
+  // const [activeSection, setActiveSection] = React.useState(null);
 
   const hasSharedSnippets = sharedSnippetsInURL.length > 0;
 
@@ -74,6 +81,7 @@ export default function Home() {
     isTemplate: true,
     isShared: true,
     snippets: sharedSnippetsInURL,
+    slug: "shared",
   };
 
   const allSnippets = hasSharedSnippets
@@ -158,6 +166,92 @@ export default function Home() {
     [router, makeQueryString]
   );
 
+  // React.useEffect(() => {
+  //   const pageHeader = document.querySelector("header");
+  //   const sections = Array.from(document.querySelectorAll("[data-section]"));
+
+  //   const DOWN = "DOWN";
+  //   const UP = "UP";
+
+  //   const options = {
+  //     // rootMargin: `${pageHeader.offsetHeight * -1}px 0px 0px 0px`,
+  //     threshold: 1,
+  //   };
+
+  //   let prevScrollTop = 0;
+
+  //   function getScrollDirection() {
+  //     const { scrollTop } = document.documentElement;
+  //     const direction = prevScrollTop < scrollTop ? DOWN : UP;
+  //     prevScrollTop = scrollTop;
+
+  //     if (!prevScrollTop) {
+  //       return null;
+  //     }
+
+  //     return direction;
+  //   }
+
+  //   function getNextCategory(entry) {
+  //     const index = sections.findIndex((section) => section == entry.target);
+  //     return sections[index + 1];
+  //   }
+
+  //   function getLastIntersectedSection(entries) {
+  //     // const intersectedSections = entries.filter(
+  //     //   (entry) => entry.isIntersecting
+  //     // );
+  //     // const lastIntersectedSection = intersectedSections.pop();
+  //     // console.log(entries);
+  //     // return lastIntersectedSection.target;
+  //   }
+
+  //   function shouldUpdate(entry, direction) {
+  //     return (
+  //       (direction === DOWN && !entry.isIntersecting) ||
+  //       (direction === UP && entry.isIntersecting)
+  //     );
+  //   }
+
+  //   function onObserve(entries) {
+  //     // console.log(entries);
+  //     entries.forEach((entry) => {
+  //       // console.log("oioi");
+  //       console.log(
+  //         entry.isIntersecting,
+  //         entry.target.getAttribute("data-section")
+  //       );
+
+  //       const direction = getScrollDirection();
+  //       // console.log({ direction });
+
+  //       // if (!direction) {
+  //       //   setActiveSection(entries[0].target.getAttribute("data-section"));
+  //       // }
+
+  //       if (shouldUpdate(entry, direction)) {
+  //         const target =
+  //           direction === DOWN
+  //             ? getLastIntersectedSection(entries)
+  //             : entry.target;
+  //         // console.log(entry);
+
+  //         // const activeCategory = target.getAttribute("data-section");
+  //         // pageHeader.setAttribute("data-active-section", activeCategory);
+  //         // setActiveSection(activeCategory);
+  //       }
+  //     });
+  //   }
+
+  //   const observer = new IntersectionObserver(onObserve, options);
+
+  //   sections.forEach((section) => {
+  //     observer.observe(section);
+  //   });
+
+  //   return () => observer.disconnect();
+  // }, []);
+
   React.useEffect(() => {
     if (router.query.snippet) {
       setSharedSnippetsInURL(formatURLSnippet(router.query.snippet));
@@ -235,7 +329,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className={styles.nav}>
+      <header className={styles.nav}>
         <Link href="/">
           <SnippetLogo />
         </Link>
@@ -346,7 +440,7 @@ export default function Home() {
             </DropdownMenu>
           </ButtonGroup>
         </div>
-      </div>
+      </header>
 
       <Toast open={copied} onOpenChange={setCopied}>
         <ToastTitle className={styles.toastTitle}>
@@ -360,34 +454,29 @@ export default function Home() {
             <ScrollArea>
               <div className={styles.sidebarContent}>
                 <div className={styles.sidebarNav}>
-                  <p className={styles.sidebarTitle}>Categories</p>
-
-                  <NextLink
-                    className={styles.sidebarNavItem}
-                    href="/"
-                    data-active
-                  >
-                    <SnippetsIcon /> All Snippets
+                  <p className={styles.sidebarTitle}>
+                    Categories{" "}
                     <span className={styles.badge}>
                       {allSnippets.reduce(
                         (acc, curr) => acc + curr.snippets.length,
                         0
                       )}
                     </span>
-                  </NextLink>
+                  </p>
 
                   {allSnippets.map((snippetGroup) => (
-                    <NextLink
+                    <a
                       key={snippetGroup.name}
                       className={styles.sidebarNavItem}
-                      href={`/${snippetGroup.name}`}
+                      href={`#${snippetGroup.slug}`}
+                      data-active={activeSection === snippetGroup.slug}
                     >
                       <SnippetsIcon />
                       {snippetGroup.name}
                       <span className={styles.badge}>
                         {snippetGroup.snippets.length}
                       </span>
-                    </NextLink>
+                    </a>
                   ))}
                 </div>
 
@@ -455,8 +544,9 @@ export default function Home() {
             return (
               <div
                 key={snippetGroup.name}
-                id={snippetGroup.name}
-                style={{ scrollMarginTop: 72 }}
+                id={snippetGroup.slug}
+                style={{ scrollMarginTop: ROOT_MARGIN }}
+                data-section-slug={snippetGroup.slug}
               >
                 <h2 className={styles.subtitle}>{snippetGroup.name}</h2>
                 <div
