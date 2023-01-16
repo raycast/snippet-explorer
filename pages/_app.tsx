@@ -3,8 +3,11 @@ import "../styles/globals.css";
 
 import type { AppProps } from "next/app";
 import { ToastProvider, ToastViewport } from "../components/Toast";
+import { useSectionInViewObserver } from "../utils/useSectionInViewObserver";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useSectionInViewObserver({ headerHeight: 50 });
+
   return (
     <>
       <Head>
