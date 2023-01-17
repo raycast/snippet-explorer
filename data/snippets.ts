@@ -705,7 +705,7 @@ export const snippets = [
   { name: "Symbols", slug: "symbols", gridCols: 4, snippets: symbols },
   { name: "Coding", slug: "coding", gridCols: 4, snippets: coding },
   { name: "Feedback", slug: "feedback", gridCols: 4, snippets: feedback },
-  { name: "GitHub", slug: "gitHub", gridCols: 2, snippets: github },
+  { name: "GitHub", slug: "github", gridCols: 2, snippets: github },
   { name: "Spelling", slug: "spelling", gridCols: 4, snippets: spelling },
 
   { name: "Unicode", slug: "unicode", gridCols: 4, snippets: unicodes },

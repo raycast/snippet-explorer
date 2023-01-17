@@ -6,7 +6,7 @@ import { ToastProvider, ToastViewport } from "../components/Toast";
 import { useSectionInViewObserver } from "../utils/useSectionInViewObserver";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useSectionInViewObserver({ headerHeight: 50 });
+  useSectionInViewObserver({ headerHeight: 72 });
 
   return (
     <>

@@ -42,10 +42,7 @@ import { snippets } from "../data/snippets";
 
 import styles from "../styles/Home.module.css";
 import { Instructions } from "../components/Instructions";
-import {
-  useSectionInView,
-  useSectionInViewObserver,
-} from "../utils/useSectionInViewObserver";
+import { useSectionInView } from "../utils/useSectionInViewObserver";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
@@ -56,8 +53,6 @@ const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
 const modifiders = [":", "!", "_", "__", "-", "@", ";", "empty"];
 
 export default function Home() {
-  const activeSection = useSectionInView();
-
   const router = useRouter();
 
   const [selectedSnippets, setSelectedSnippets] = React.useState([]);
@@ -192,7 +187,7 @@ export default function Home() {
         handleAddToRaycast();
       }
 
-      if (key === "c" && metaKey && !shiftKey) {
+      if (key === "c" && metaKey && altKey) {
         handleCopyData();
         setActionsOpen(false);
       }
@@ -203,8 +198,8 @@ export default function Home() {
         setActionsOpen(false);
       }
 
-      // key === "c" doesn't work when using alt key, so we use keCode instead
-      if (keyCode === 67 && metaKey && altKey) {
+      // key === "c" doesn't work when using alt key, so we use keCode instead (67)
+      if (keyCode === 67 && metaKey) {
         event.preventDefault();
         handleCopyText();
         setActionsOpen(false);
@@ -319,6 +314,7 @@ export default function Home() {
                   <ClipboardIcon /> Copy JSON{" "}
                   <span className={styles.hotkeys}>
                     <kbd>⌘</kbd>
+                    <kbd>⌥</kbd>
                     <kbd>C</kbd>
                   </span>
                 </DropdownMenuItem>
@@ -326,7 +322,7 @@ export default function Home() {
                   disabled={selectedSnippetsConfig.length === 0}
                   onSelect={() => handleCopyUrl()}
                 >
-                  <LinkIcon /> Share URL{" "}
+                  <LinkIcon /> Copy URL to share{" "}
                   <span className={styles.hotkeys}>
                     <kbd>⌘</kbd>
                     <kbd>⇧</kbd>
@@ -337,10 +333,9 @@ export default function Home() {
                   disabled={selectedSnippetsConfig.length === 0}
                   onSelect={() => handleCopyText()}
                 >
-                  <ClipboardIcon /> Copy Text{" "}
+                  <ClipboardIcon /> Copy Selected Text{" "}
                   <span className={styles.hotkeys}>
                     <kbd>⌘</kbd>
-                    <kbd>⌥</kbd>
                     <kbd>C</kbd>
                   </span>
                 </DropdownMenuItem>
@@ -367,18 +362,10 @@ export default function Home() {
                   <p className={styles.sidebarTitle}>Categories</p>
 
                   {allSnippets.map((snippetGroup) => (
-                    <a
-                      key={snippetGroup.name}
-                      className={styles.sidebarNavItem}
-                      href={`#${snippetGroup.slug}`}
-                      data-active={activeSection === snippetGroup.slug}
-                    >
-                      <SnippetsIcon />
-                      {snippetGroup.name}
-                      <span className={styles.badge}>
-                        {snippetGroup.snippets.length}
-                      </span>
-                    </a>
+                    <NavItem
+                      key={snippetGroup.slug}
+                      snippetGroup={snippetGroup}
+                    />
                   ))}
                 </div>
 
@@ -448,6 +435,7 @@ export default function Home() {
                 key={snippetGroup.name}
                 id={snippetGroup.slug}
                 data-section-slug={snippetGroup.slug}
+                style={{ scrollMarginTop: "72px" }}
               >
                 <h2 className={styles.subtitle}>{snippetGroup.name}</h2>
                 <div
@@ -528,6 +516,25 @@ export default function Home() {
         </div>
       </div>
     </div>
+  );
+}
+
+function NavItem({ snippetGroup }) {
+  const activeSection = useSectionInView();
+
+  return (
+    <NextLink
+      href={`#${snippetGroup.slug}`}
+      shallow
+      passHref
+      className={styles.sidebarNavItem}
+      data-active={activeSection === snippetGroup.slug}
+      // onClick={(event) => event.preventDefault()}
+    >
+      <SnippetsIcon />
+      {snippetGroup.name}
+      <span className={styles.badge}>{snippetGroup.snippets.length}</span>
+    </NextLink>
   );
 }
 
