@@ -1,5 +1,14 @@
 import { nanoid } from "nanoid";
-import { Shuffle } from "../components/Icons";
+import {
+  CodeBlockIcon,
+  CoinsIcon,
+  CommandIcon,
+  GitHubIcon,
+  LowercaseIcon,
+  ShuffleIcon,
+  SpeechBubbleIcon,
+  UnicodeIcon,
+} from "../components/Icons";
 
 const arrows = [
   {
@@ -563,42 +572,42 @@ Fixes #
 const spelling = [
   {
     id: nanoid(),
-    name: "Apparently",
+    name: "Apparantly → Apparently",
     text: "Apparently",
     keyword: "Apparantly",
     type: "spelling",
   },
   {
     id: nanoid(),
-    name: "Calendar",
+    name: "Calender → Calendar",
     text: "Calendar",
     keyword: "Calender",
     type: "spelling",
   },
   {
     id: nanoid(),
-    name: "Definitely",
+    name: "Definately → Definitely",
     text: "Definitely",
     keyword: "Definately",
     type: "spelling",
   },
   {
     id: nanoid(),
-    name: "Environment",
+    name: "Enviroment → Environment",
     text: "Environment",
     keyword: "Enviroment",
     type: "spelling",
   },
   {
     id: nanoid(),
-    name: "Fluorescent",
+    name: "Florescent → Fluorescent",
     text: "Fluorescent",
     keyword: "Florescent",
     type: "spelling",
   },
   {
     id: nanoid(),
-    name: "Government",
+    name: "Goverment → Government",
     text: "Government",
     keyword: "Goverment",
     type: "spelling",
@@ -698,7 +707,7 @@ export const snippets = [
     slug: "arrows",
     gridCols: 6,
     snippets: arrows,
-    icon: Shuffle,
+    icon: ShuffleIcon,
   },
   // { name: "Technical", slug: "technical", gridCols: 4, snippets: technical },
   // {
@@ -708,17 +717,54 @@ export const snippets = [
   //   snippets: bulletsAndStars,
   // },
   // { name: "Maths", slug: "maths", gridCols: 4, snippets: maths },
-  { name: "Currency", slug: "currency", gridCols: 4, snippets: currency },
+  {
+    name: "Currency",
+    slug: "currency",
+    gridCols: 4,
+    snippets: currency,
+    icon: CoinsIcon,
+  },
   {
     name: "Symbols",
     slug: "symbols",
     gridCols: 4,
     snippets: [...technical, bulletsAndStars, ...maths, ...symbols],
+    icon: CommandIcon,
   },
-  { name: "Coding", slug: "coding", gridCols: 4, snippets: coding },
-  { name: "Feedback", slug: "feedback", gridCols: 4, snippets: feedback },
-  { name: "GitHub", slug: "github", gridCols: 2, snippets: github },
-  { name: "Spelling", slug: "spelling", gridCols: 4, snippets: spelling },
+  {
+    name: "Coding",
+    slug: "coding",
+    gridCols: 4,
+    snippets: coding,
+    icon: CodeBlockIcon,
+  },
+  {
+    name: "Feedback",
+    slug: "feedback",
+    gridCols: 4,
+    snippets: feedback,
+    icon: SpeechBubbleIcon,
+  },
+  {
+    name: "GitHub",
+    slug: "github",
+    gridCols: 2,
+    snippets: github,
+    icon: GitHubIcon,
+  },
+  {
+    name: "Spelling",
+    slug: "spelling",
+    gridCols: 4,
+    snippets: spelling,
+    icon: LowercaseIcon,
+  },
 
-  { name: "Unicode", slug: "unicode", gridCols: 4, snippets: unicodes },
+  {
+    name: "Unicode",
+    slug: "unicode",
+    gridCols: 4,
+    snippets: unicodes,
+    icon: UnicodeIcon,
+  },
 ];
