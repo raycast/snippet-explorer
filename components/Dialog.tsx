@@ -3,31 +3,42 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 import styles from "./Dialog.module.css";
 import { CloseIcon } from "./Icons";
+import { ScrollArea } from "./ScrollArea";
 
 type DialogPrimitiveContentProps = React.ComponentProps<
   typeof DialogPrimitive.Content
-> & { showCloseButton?: boolean };
+> & { showCloseButton?: boolean; centered?: boolean };
 
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   DialogPrimitiveContentProps
->(({ children, showCloseButton, ...props }, forwardedRef) => (
-  <DialogPrimitive.Portal>
-    <DialogPrimitive.Overlay className={styles.overlay} />
-    <DialogPrimitive.Content
-      {...props}
-      className={styles.content}
-      ref={forwardedRef}
-    >
-      {children}
-      {showCloseButton && (
-        <DialogPrimitive.Close className={styles.close}>
-          <CloseIcon size={24} />
-        </DialogPrimitive.Close>
-      )}
-    </DialogPrimitive.Content>
-  </DialogPrimitive.Portal>
-));
+>(
+  (
+    { children, showCloseButton, centered, className, ...props },
+    forwardedRef
+  ) => (
+    <DialogPrimitive.Portal>
+      <DialogPrimitive.Overlay className={styles.overlay} />
+      <DialogPrimitive.Content
+        {...props}
+        className={styles.content + " " + className}
+        data-centered={centered}
+        ref={forwardedRef}
+      >
+        <ScrollArea>
+          <div className={styles.inner}>
+            {children}
+            {showCloseButton && (
+              <DialogPrimitive.Close className={styles.close}>
+                <CloseIcon size={24} />
+              </DialogPrimitive.Close>
+            )}
+          </div>
+        </ScrollArea>
+      </DialogPrimitive.Content>
+    </DialogPrimitive.Portal>
+  )
+);
 
 DialogContent.displayName = "Dialog";
 

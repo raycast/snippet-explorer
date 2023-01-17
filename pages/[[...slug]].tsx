@@ -84,6 +84,7 @@ export default function Home() {
   const [endMod, setEndMod] = React.useState("empty");
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const [aboutOpen, setAboutOpen] = React.useState(false);
 
   const allSnippets = snippets;
 
@@ -193,7 +194,15 @@ export default function Home() {
       if (key === "," && metaKey && shiftKey) {
         event.preventDefault();
         setActionsOpen(false);
+        setAboutOpen(false);
         setSettingsOpen((prevOpen) => !prevOpen);
+      }
+
+      if (key === "/" && metaKey) {
+        event.preventDefault();
+        setActionsOpen(false);
+        setSettingsOpen(false);
+        setAboutOpen((prevOpen) => !prevOpen);
       }
     };
 
@@ -201,6 +210,7 @@ export default function Home() {
     return () => document.removeEventListener("keydown", down);
   }, [
     setActionsOpen,
+    setAboutOpen,
     selectedSnippetsConfig,
     handleCopyData,
     handleDownload,
@@ -219,9 +229,129 @@ export default function Home() {
   return (
     <div>
       <header className={styles.nav}>
-        <Link href="/" aria-label="Home">
-          <SnippetLogo />
-        </Link>
+        <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
+          <DialogTrigger asChild>
+            <button style={{ all: "unset" }}>
+              <SnippetLogo />
+            </button>
+          </DialogTrigger>
+          <DialogContent className={styles.about}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1.5fr 1fr",
+                gap: 24,
+              }}
+            >
+              <div>
+                <DialogTitle className={styles.dialogTitle}>About</DialogTitle>
+                <DialogDescription className={styles.dialogDescription}>
+                  Snippet Explorer is a tool to easily browse and import
+                  Snippets directly in <a href="https://raycast.com">Raycast</a>
+                  .
+                </DialogDescription>
+                <p className={styles.dialogDescription}>
+                  Select the Snippets you want to import, and click the “Add to
+                  Raycast” button. You can also download the Snippets as a JSON
+                  file, or copy the URL to share with others.
+                </p>
+              </div>
+              <div>
+                <h4 className={styles.dialogTitle}>Shortcuts</h4>
+                <ul className={styles.shortcuts}>
+                  <li>
+                    Add to Raycast
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>⏎</kbd>
+                    </span>
+                  </li>
+                  <li>
+                    Toggle Export Menu
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>K</kbd>
+                    </span>
+                  </li>
+                  <li>
+                    Configure Hotkeys
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>⇧</kbd>
+                      <kbd>,</kbd>
+                    </span>
+                  </li>
+                  <li>
+                    Download JSON
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>D</kbd>
+                    </span>
+                  </li>
+                  <li>
+                    Copy JSON
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>⌥</kbd>
+                      <kbd>C</kbd>
+                    </span>
+                  </li>
+                  <li>
+                    Copy URL to share
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>⇧</kbd>
+                      <kbd>C</kbd>
+                    </span>
+                  </li>
+                  <li>
+                    Toggle this view
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>/</kbd>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <h4 className={styles.dialogTitle}>Contribute</h4>
+            <p className={styles.dialogDescription}>
+              This project is Open Source and{" "}
+              <a
+                href="https://github.com/raycast/snippet-explorer"
+                title="Snippet Explorer on GitHub"
+              >
+                available on GitHub
+              </a>
+              . We welcome contributions!
+              <br />
+              If you have any questions or feedback, please{" "}
+              <a href="mailto:feedback+rayso@raycast.com?subject=snippets">
+                send us an email
+              </a>
+              .
+            </p>
+
+            <p style={{ fontSize: 13, marginTop: 32 }}>
+              <a
+                href="https://raycast.com"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 6,
+                }}
+              >
+                Made by{" "}
+                <span style={{ color: "#FF6363" }}>
+                  <RaycastLogoIcon />{" "}
+                </span>
+                <span>Raycast</span>
+              </a>
+            </p>
+          </DialogContent>
+        </Dialog>
         <div className={styles.navControls}>
           <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
             <DialogTrigger asChild>
@@ -229,7 +359,7 @@ export default function Home() {
                 <CogIcon /> Configure Modifiers
               </Button>
             </DialogTrigger>
-            <DialogContent showCloseButton>
+            <DialogContent showCloseButton centered>
               <DialogTitle className={styles.dialogTitle}>
                 Configure Modifiers
               </DialogTitle>

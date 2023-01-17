@@ -284,17 +284,11 @@
       grid-template-columns: repeat(6, 1fr);
     }
   }
-
-  /* @media (min-width: 960px) {
-    &[data-grid="6"] {
-      grid-template-columns: repeat(6, 1fr);
-    }
-  } */
 }
 
 .divider {
   width: 50%;
-  margin: 120px auto 60px;
+  margin: 32px auto 24px;
   height: 1px;
   background-color: rgba(255, 255, 255, 0.15);
   border: none;
@@ -525,4 +519,29 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.about {
+  & a {
+    color: white;
+
+    &:hover {
+      color: #ff6363;
+    }
+  }
+}
+
+.shortcuts {
+  margin-bottom: 32px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    color: white;
+    margin-bottom: 8px;
+  }
 }
