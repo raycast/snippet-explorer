@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import { Shuffle } from "../components/Icons";
 
 const arrows = [
   {
@@ -692,17 +693,28 @@ const unicodes = [
 ];
 
 export const snippets = [
-  { name: "Arrows", slug: "arrows", gridCols: 6, snippets: arrows },
-  { name: "Technical", slug: "technical", gridCols: 4, snippets: technical },
   {
-    name: "Bullets & Stars",
-    slug: "bullets-stars",
-    gridCols: 4,
-    snippets: bulletsAndStars,
+    name: "Arrows",
+    slug: "arrows",
+    gridCols: 6,
+    snippets: arrows,
+    icon: Shuffle,
   },
-  { name: "Maths", slug: "maths", gridCols: 4, snippets: maths },
+  // { name: "Technical", slug: "technical", gridCols: 4, snippets: technical },
+  // {
+  //   name: "Bullets & Stars",
+  //   slug: "bullets-stars",
+  //   gridCols: 4,
+  //   snippets: bulletsAndStars,
+  // },
+  // { name: "Maths", slug: "maths", gridCols: 4, snippets: maths },
   { name: "Currency", slug: "currency", gridCols: 4, snippets: currency },
-  { name: "Symbols", slug: "symbols", gridCols: 4, snippets: symbols },
+  {
+    name: "Symbols",
+    slug: "symbols",
+    gridCols: 4,
+    snippets: [...technical, bulletsAndStars, ...maths, ...symbols],
+  },
   { name: "Coding", slug: "coding", gridCols: 4, snippets: coding },
   { name: "Feedback", slug: "feedback", gridCols: 4, snippets: feedback },
   { name: "GitHub", slug: "github", gridCols: 2, snippets: github },

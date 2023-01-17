@@ -110,6 +110,8 @@ export function useSectionInViewObserver({ headerHeight }: Config) {
         `[data-section-slug="${router.asPath}"]`
       );
 
+      console.log(router.asPath);
+
       // Focus the section so AT announces the new content after navigation.
       section?.focus({ preventScroll: true });
 
