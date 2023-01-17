@@ -435,7 +435,8 @@ export default function Home() {
                 key={snippetGroup.name}
                 id={snippetGroup.slug}
                 data-section-slug={snippetGroup.slug}
-                style={{ scrollMarginTop: "72px" }}
+                style={{ scrollMarginTop: "72px", outline: "none" }}
+                tabIndex={-1}
               >
                 <h2 className={styles.subtitle}>{snippetGroup.name}</h2>
                 <div

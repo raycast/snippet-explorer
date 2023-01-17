@@ -1,3 +1,5 @@
+// Adapted from Vlad's work for the WorkOS docs.
+
 import debounce from "lodash.debounce";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -74,7 +76,6 @@ export function useSectionInViewObserver({ headerHeight }: Config) {
       // Wait for router to be ready and avoid setting route if it hasn't changed
       if (newSlug && router.isReady && router.asPath !== newSlug) {
         const newUrl = router.basePath + "#" + newSlug;
-        router.asPath = newSlug;
 
         updateHistory(newUrl);
         dispatchEvent(
@@ -106,7 +107,7 @@ export function useSectionInViewObserver({ headerHeight }: Config) {
 
     const adjustScroll = ({ shouldRestore } = { shouldRestore: true }) => {
       const section = document.querySelector<HTMLElement>(
-        `[data-section-slug="${router.asPath}"]`
+        `[data-section-slug="${router.asPath.replace("/#", "")}"]`
       );
 
       // Focus the section so AT announces the new content after navigation.
