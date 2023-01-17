@@ -46,11 +46,32 @@ import { useSectionInView } from "../utils/useSectionInViewObserver";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
-  production: "raycastdebug",
+  production: "raycast",
 };
 const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
 
 const modifiders = [":", "!", "_", "__", "-", "@", ";", "empty"];
+
+export function getStaticPaths() {
+  const paths = snippets.map((snippet) => ({
+    params: { slug: [snippet.slug.replace("/", "")] },
+  }));
+  return {
+    paths: [
+      ...paths,
+      {
+        params: { slug: [] },
+      },
+    ],
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(context) {
+  return {
+    props: { snippet: {} },
+  };
+}
 
 export default function Home() {
   const router = useRouter();
@@ -433,10 +454,9 @@ export default function Home() {
             return (
               <div
                 key={snippetGroup.name}
-                id={snippetGroup.slug}
-                data-section-slug={`/#${snippetGroup.slug}`}
+                data-section-slug={snippetGroup.slug}
                 style={{
-                  scrollMarginTop: "72px",
+                  // scrollMarginTop: "72px",
                   outline: "none",
                 }}
                 tabIndex={-1}
@@ -528,12 +548,10 @@ function NavItem({ snippetGroup }) {
 
   return (
     <NextLink
-      href={`#${snippetGroup.slug}`}
+      href={snippetGroup.slug}
       shallow
-      passHref
       className={styles.sidebarNavItem}
-      data-active={activeSection === `/#${snippetGroup.slug}`}
-      // onClick={(event) => event.preventDefault()}
+      data-active={activeSection === snippetGroup.slug}
     >
       {snippetGroup.icon ? <snippetGroup.icon /> : <SnippetsIcon />}
 

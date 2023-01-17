@@ -223,7 +223,7 @@ export function useSectionInViewObserver({ headerHeight }: Config) {
     const adjustScrollRecursively = () => {
       // Adjust scroll every animation frame until it's cancelled
       animationFrame.current = requestAnimationFrame(() => {
-        // adjustScroll({ shouldRestore: true });
+        adjustScroll({ shouldRestore: true });
         adjustScrollRecursively();
       });
     };
@@ -252,7 +252,7 @@ export function useSectionInViewObserver({ headerHeight }: Config) {
       const shallow = window.history.state.key === historyKey.current;
       const shouldRestore = wasRecursive || !shallow;
 
-      // adjustScroll({ shouldRestore });
+      adjustScroll({ shouldRestore });
       sections = document.querySelectorAll("[data-section-slug]");
       sections?.forEach((section) => observer.current.observe(section));
 
