@@ -434,7 +434,7 @@ export default function Home() {
               <div
                 key={snippetGroup.name}
                 id={snippetGroup.slug}
-                data-section-slug={snippetGroup.slug}
+                data-section-slug={`#${snippetGroup.slug}`}
                 style={{ scrollMarginTop: "72px", outline: "none" }}
                 tabIndex={-1}
               >
@@ -529,7 +529,7 @@ function NavItem({ snippetGroup }) {
       shallow
       passHref
       className={styles.sidebarNavItem}
-      data-active={activeSection === snippetGroup.slug}
+      data-active={activeSection === `#${snippetGroup.slug}`}
       // onClick={(event) => event.preventDefault()}
     >
       <SnippetsIcon />

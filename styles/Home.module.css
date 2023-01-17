@@ -57,6 +57,7 @@
   font-weight: 500;
   color: rgba(255, 255, 255, 0.6);
   margin-bottom: 2px;
+  transition: all 300ms ease;
 
   &[data-active="true"] {
     background-color: rgba(255, 255, 255, 0.05);
