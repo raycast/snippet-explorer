@@ -158,6 +158,7 @@ export default function Home() {
       const { key, keyCode, metaKey, shiftKey, altKey } = event;
 
       if (key === "k" && metaKey) {
+        if (selectedSnippetsConfig.length === 0) return;
         setActionsOpen((prevOpen) => {
           return !prevOpen;
         });
