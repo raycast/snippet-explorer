@@ -9,6 +9,7 @@ export function Instructions() {
         <Skeleton selected />
         <Skeleton />
         <Skeleton />
+        <Cursor />
       </div>
 
       <h3 className={styles.title}>Install Snippets</h3>
@@ -33,7 +34,6 @@ function Skeleton({ selected = false }) {
     <div className={styles.skeleton} data-selected={selected}>
       <div className={styles.skeletonPrimary} />
       <div className={styles.skeletonSecondary} />
-      {selected && <Cursor />}
     </div>
   );
 }

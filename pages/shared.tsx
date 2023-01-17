@@ -1,29 +1,15 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
-import NextLink from "next/link";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import copy from "copy-to-clipboard";
 import { nanoid } from "nanoid";
-import { Select, SelectItem } from "../components/Select";
+
 import {
   ChevronDownIcon,
   ClipboardIcon,
-  CogIcon,
   DownloadIcon,
-  LinkIcon,
   PlusCircle,
-  RaycastLogoIcon,
-  SnippetsIcon,
-  Trash,
 } from "../components/Icons";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "../components/Dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,18 +17,13 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "../components/DropdownMenu";
-import { SnippetLogo } from "../components/SnippetLogo";
 import { Toast, ToastTitle } from "../components/Toast";
 import { ScrollArea } from "../components/ScrollArea";
 import { Button } from "../components/Button";
 import { ButtonGroup } from "../components/ButtonGroup";
-import * as Collapsible from "@radix-ui/react-collapsible";
-
-import { snippets } from "../data/snippets";
 
 import styles from "../styles/Home.module.css";
-import { Instructions } from "../components/Instructions";
-import { useSectionInView } from "../utils/useSectionInViewObserver";
+import buttonStyles from "../components/Button.module.css";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
@@ -50,42 +31,45 @@ const raycastProtocolForEnvironments = {
 };
 const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
 
-const modifiders = [":", "!", "_", "__", "-", "@", "@@", ";", ";;", "empty"];
-
-export function getStaticPaths() {
-  const paths = snippets.map((snippet) => ({
-    params: { slug: [snippet.slug.replace("/", "")] },
-  }));
-
-  return {
-    paths: [
-      ...paths,
-      {
-        params: { slug: [] },
-      },
-    ],
-    fallback: false,
-  };
-}
-
-export async function getStaticProps(context) {
-  return {
-    props: { snippet: {} },
-  };
-}
-
 export default function Home() {
   const router = useRouter();
 
   const [selectedSnippets, setSelectedSnippets] = React.useState([]);
   const [copied, setCopied] = React.useState(false);
 
-  const [startMod, setStartMod] = React.useState("!");
-  const [endMod, setEndMod] = React.useState("empty");
   const [actionsOpen, setActionsOpen] = React.useState(false);
-  const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const [sharedSnippetsInURL, setSharedSnippetsInURL] = React.useState([]);
 
-  const allSnippets = snippets;
+  const hasSharedSnippets = sharedSnippetsInURL.length > 0;
+
+  let gridCols = 1;
+  switch (sharedSnippetsInURL.length) {
+    case 2:
+      gridCols = 2;
+      break;
+    case 3:
+      gridCols = 3;
+      break;
+    case 4:
+    case 5:
+    case 6:
+      gridCols = 4;
+      break;
+    default:
+      gridCols = 4;
+      break;
+  }
+
+  const sharedSnippetGroup = {
+    name: `${sharedSnippetsInURL.length} snippets shared with you`,
+    gridCols,
+    isTemplate: true,
+    isShared: true,
+    snippets: sharedSnippetsInURL,
+    slug: "/shared",
+  };
+
+  const allSnippets = hasSharedSnippets ? [sharedSnippetGroup] : [];
 
   const selectedSnippetsConfig = selectedSnippets;
 
@@ -93,38 +77,24 @@ export default function Home() {
     return `[${selectedSnippetsConfig
       .map((snippet) => {
         const { name, text } = snippet;
-        const keyword =
-          snippet.type === "spelling"
-            ? snippet.keyword
-            : addModifiersToKeyword({
-                keyword: snippet.keyword,
-                start: startMod,
-                end: endMod,
-              });
+        const keyword = snippet.keyword;
         return JSON.stringify({ name, text, keyword });
       })
       .join(",")}]`;
-  }, [selectedSnippetsConfig, startMod, endMod]);
+  }, [selectedSnippetsConfig]);
 
   const makeQueryString = React.useCallback(() => {
     const queryString = selectedSnippetsConfig
       .map((snippet) => {
         const { name, text, type } = snippet;
-        const keyword =
-          snippet.type === "spelling"
-            ? snippet.keyword
-            : addModifiersToKeyword({
-                keyword: snippet.keyword,
-                start: startMod,
-                end: endMod,
-              });
+        const keyword = snippet.keyword;
         return `snippet=${encodeURIComponent(
           JSON.stringify({ name, text, keyword, type })
         )}`;
       })
       .join("&");
     return queryString;
-  }, [selectedSnippetsConfig, startMod, endMod]);
+  }, [selectedSnippetsConfig]);
 
   const handleDownload = React.useCallback(() => {
     const encodedSnippetsData = encodeURIComponent(makeSnippetImportData());
@@ -140,11 +110,6 @@ export default function Home() {
     setCopied(true);
   }, [makeSnippetImportData]);
 
-  const handleCopyUrl = React.useCallback(() => {
-    copy(`${window.location.origin}/shared?${makeQueryString()}`);
-    setCopied(true);
-  }, [makeQueryString]);
-
   const handleAddToRaycast = React.useCallback(
     () =>
       router.replace(
@@ -154,10 +119,19 @@ export default function Home() {
   );
 
   React.useEffect(() => {
+    if (router.query.snippet) {
+      setSharedSnippetsInURL(formatURLSnippet(router.query.snippet));
+    } else {
+      setSharedSnippetsInURL([]);
+    }
+  }, [router.query]);
+
+  React.useEffect(() => {
     const down = (event) => {
-      const { key, keyCode, metaKey, shiftKey, altKey } = event;
+      const { key, keyCode, metaKey, altKey } = event;
 
       if (key === "k" && metaKey) {
+        if (selectedSnippetsConfig.length === 0) return;
         setActionsOpen((prevOpen) => {
           return !prevOpen;
         });
@@ -182,18 +156,6 @@ export default function Home() {
         handleCopyData();
         setActionsOpen(false);
       }
-
-      if (key === "c" && metaKey && shiftKey) {
-        event.preventDefault();
-        handleCopyUrl();
-        setActionsOpen(false);
-      }
-
-      if (key === "," && metaKey && shiftKey) {
-        event.preventDefault();
-        setActionsOpen(false);
-        setSettingsOpen((prevOpen) => !prevOpen);
-      }
     };
 
     document.addEventListener("keydown", down);
@@ -203,7 +165,6 @@ export default function Home() {
     selectedSnippetsConfig,
     handleCopyData,
     handleDownload,
-    handleCopyUrl,
     handleAddToRaycast,
   ]);
 
@@ -218,49 +179,20 @@ export default function Home() {
   return (
     <div>
       <header className={styles.nav}>
-        <Link href="/" aria-label="Home">
-          <SnippetLogo />
+        <Link
+          href="/"
+          aria-label="Home"
+          style={{ display: "flex", alignItems: "center", gap: 12 }}
+        >
+          <span
+            className={buttonStyles.button}
+            style={{ fontWeight: 500, fontSize: 13 }}
+            data-variant="gray"
+          >
+            ← See all Snippets
+          </span>
         </Link>
         <div className={styles.navControls}>
-          <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
-            <DialogTrigger asChild>
-              <Button>
-                <CogIcon /> Configure Modifiers
-              </Button>
-            </DialogTrigger>
-            <DialogContent showCloseButton>
-              <DialogTitle className={styles.dialogTitle}>
-                Configure Modifiers
-              </DialogTitle>
-              <DialogDescription className={styles.dialogDescription}>
-                Modifiers are used as prefixes and suffixes for your snippets'
-                keyword. If you wish to customize them, you can do so below.
-              </DialogDescription>
-              <div className={styles.modifierControls}>
-                <span className={styles.modifierInput}>
-                  Start Modifier
-                  <Select value={startMod} onValueChange={setStartMod}>
-                    {modifiders.map((mod) => (
-                      <SelectItem key={mod} value={mod}>
-                        {mod}
-                      </SelectItem>
-                    ))}
-                  </Select>
-                </span>
-                <span className={styles.modifierInput}>
-                  End Modifier
-                  <Select value={endMod} onValueChange={setEndMod}>
-                    {modifiders.map((mod) => (
-                      <SelectItem key={mod} value={mod}>
-                        {mod}
-                      </SelectItem>
-                    ))}
-                  </Select>
-                </span>
-              </div>
-            </DialogContent>
-          </Dialog>
-
           <ButtonGroup>
             <Button
               variant="red"
@@ -302,18 +234,6 @@ export default function Home() {
                     <kbd>C</kbd>
                   </span>
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  disabled={selectedSnippetsConfig.length === 0}
-                  onSelect={() => handleCopyUrl()}
-                >
-                  <LinkIcon /> Copy URL to share{" "}
-                  <span className={styles.hotkeys}>
-                    <kbd>⌘</kbd>
-                    <kbd>⇧</kbd>
-                    <kbd>C</kbd>
-                  </span>
-                </DropdownMenuItem>
-
                 <DropdownMenuSeparator />
               </DropdownMenuContent>
             </DropdownMenu>
@@ -327,81 +247,7 @@ export default function Home() {
         </ToastTitle>
       </Toast>
 
-      <div className={styles.main}>
-        <div className={styles.sidebar}>
-          <div className={styles.sidebarInner}>
-            <ScrollArea>
-              <div className={styles.sidebarContent}>
-                <div className={styles.sidebarNav}>
-                  <p className={styles.sidebarTitle}>Categories</p>
-
-                  {allSnippets.map((snippetGroup) => (
-                    <NavItem
-                      key={snippetGroup.slug}
-                      snippetGroup={snippetGroup}
-                    />
-                  ))}
-                </div>
-
-                {selectedSnippetsConfig.length === 0 && <Instructions />}
-
-                {selectedSnippetsConfig.length > 0 && (
-                  <div>
-                    <p className={styles.sidebarTitle}>Add to Raycast</p>
-
-                    <Collapsible.Root>
-                      <Collapsible.Trigger asChild>
-                        <button className={styles.summaryTrigger}>
-                          {selectedSnippetsConfig.length}{" "}
-                          {selectedSnippetsConfig.length > 1
-                            ? "Snippets"
-                            : "Snippet"}{" "}
-                          selected
-                          <ChevronDownIcon />
-                        </button>
-                      </Collapsible.Trigger>
-
-                      <Collapsible.Content className={styles.summaryContent}>
-                        {selectedSnippetsConfig.map((snippet, index) => (
-                          <div
-                            key={snippet.name + index}
-                            className={styles.summaryItem}
-                          >
-                            {snippet.name}
-                            <button
-                              className={styles.summaryItemButton}
-                              onClick={() => {
-                                setSelectedSnippets(
-                                  selectedSnippets.filter(
-                                    (selectedSnippet) =>
-                                      selectedSnippet.id !== snippet.id
-                                  )
-                                );
-                              }}
-                            >
-                              <Trash />
-                            </button>
-                          </div>
-                        ))}
-                      </Collapsible.Content>
-                    </Collapsible.Root>
-
-                    <div className={styles.summaryControls}>
-                      <Button onClick={handleAddToRaycast} variant="red">
-                        Add to Raycast
-                      </Button>
-
-                      <Button onClick={() => setSelectedSnippets([])}>
-                        Clear selected
-                      </Button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </ScrollArea>
-          </div>
-        </div>
-
+      <div>
         <div className={styles.container}>
           {allSnippets.map((snippetGroup) => {
             return (
@@ -419,14 +265,7 @@ export default function Home() {
                   data-grid={snippetGroup.gridCols}
                 >
                   {snippetGroup.snippets.map((snippet) => {
-                    const keyword =
-                      snippet.type === "spelling"
-                        ? snippet.keyword
-                        : addModifiersToKeyword({
-                            keyword: snippet.keyword,
-                            start: startMod,
-                            end: endMod,
-                          });
+                    const keyword = snippet.keyword;
 
                     return (
                       <label className={styles.item} key={snippet.id}>
@@ -483,9 +322,6 @@ export default function Home() {
                     );
                   })}
                 </div>
-                {snippetGroup.gridCols === 1 && (
-                  <hr className={styles.divider} />
-                )}
               </div>
             );
           })}
@@ -493,31 +329,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
-
-function NavItem({ snippetGroup }) {
-  const activeSection = useSectionInView();
-
-  return (
-    <NextLink
-      href={snippetGroup.slug}
-      shallow
-      className={styles.sidebarNavItem}
-      data-active={activeSection === snippetGroup.slug}
-    >
-      {snippetGroup.icon ? <snippetGroup.icon /> : <SnippetsIcon />}
-
-      {snippetGroup.name}
-      <span className={styles.badge}>{snippetGroup.snippets.length}</span>
-    </NextLink>
-  );
-}
-
-function addModifiersToKeyword({ keyword, start, end }) {
-  if (!keyword) return keyword;
-  return `${start === "empty" ? "" : start}${keyword}${
-    end === "empty" ? "" : end
-  }`;
 }
 
 function formatURLSnippet(snippetQueryString) {

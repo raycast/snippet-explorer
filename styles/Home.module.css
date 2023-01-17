@@ -3,6 +3,10 @@
 
   @media (min-width: 768px) {
     padding-left: 320px;
+
+    & .container {
+      padding-left: 0;
+    }
   }
 }
 
@@ -43,7 +47,7 @@
 .sidebarTitle {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -205,10 +209,6 @@
   position: relative;
   top: 50px;
   padding: 32px 16px;
-
-  @media (min-width: 768px) {
-    padding-left: 0;
-  }
 }
 
 .nav {
@@ -236,7 +236,7 @@
   font-size: 13px;
   margin-bottom: 16px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .snippets {
@@ -352,8 +352,10 @@
   border-radius: 6px;
   max-height: 320px;
   width: 100%;
-  text-align: center;
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .template {
@@ -369,7 +371,7 @@
   font-family: JetBrains Mono;
   display: inline-block;
   padding: 4px 6px;
-  color: #cf2f98;
+  color: #f800a2;
   background-color: rgba(207, 47, 152, 0.15);
   border-radius: 6px;
   font-size: 11px;
@@ -490,7 +492,7 @@
 }
 
 .dialogTitle {
-  color: hsla(0, 0%, 100%, 0.4);
+  color: hsla(0, 0%, 100%, 0.5);
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 24px;
