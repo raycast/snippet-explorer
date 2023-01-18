@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import SelectionArea, { SelectionEvent } from "@viselect/react";
 import { useRouter } from "next/router";
 import copy from "copy-to-clipboard";
 import { nanoid } from "nanoid";
@@ -9,6 +10,7 @@ import {
   ClipboardIcon,
   DownloadIcon,
   PlusCircle,
+  SnippetsIcon,
 } from "../components/Icons";
 import {
   DropdownMenu,
@@ -40,7 +42,7 @@ export default function Home() {
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [sharedSnippetsInURL, setSharedSnippetsInURL] = React.useState([]);
 
-  const hasSharedSnippets = sharedSnippetsInURL.length > 0;
+  // const hasSharedSnippets = sharedSnippetsInURL.length > 0;
 
   let gridCols = 1;
   switch (sharedSnippetsInURL.length) {
@@ -67,11 +69,58 @@ export default function Home() {
     isShared: true,
     snippets: sharedSnippetsInURL,
     slug: "/shared",
+    icon: SnippetsIcon,
   };
 
-  const allSnippets = hasSharedSnippets ? [sharedSnippetGroup] : [];
+  const allSnippets = [sharedSnippetGroup];
 
   const selectedSnippetsConfig = selectedSnippets;
+
+  const extractIds = (els: Element[]) =>
+    els.map((v) => v.getAttribute("data-key"));
+
+  const onStart = ({ event, selection }: SelectionEvent) => {
+    if (!event?.ctrlKey && !event?.metaKey) {
+      selection.clearSelection();
+      setSelectedSnippets([]);
+    }
+  };
+
+  const onMove = ({
+    store: {
+      changed: { added, removed },
+    },
+  }: SelectionEvent) => {
+    const addedIds = extractIds(added);
+    const removedIds = extractIds(removed);
+
+    const addedSnippets = addedIds.map((id) => {
+      const [slug, index] = id.split("-");
+      const snippetCategory = allSnippets.find(
+        (snippet) => snippet.slug === slug
+      );
+
+      return snippetCategory.snippets[index];
+    });
+
+    addedSnippets.forEach((snippet) => {
+      setSelectedSnippets((prevSnippets) => [...prevSnippets, snippet]);
+    });
+
+    const removedSnippets = removedIds.map((id) => {
+      const [slug, index] = id.split("-");
+      const snippetCategory = allSnippets.find(
+        (snippet) => snippet.slug === slug
+      );
+      return snippetCategory.snippets[index];
+    });
+
+    removedSnippets.forEach((snippet) => {
+      setSelectedSnippets((prevSnippets) => {
+        return prevSnippets.filter((s) => s?.id !== snippet?.id);
+      });
+    });
+  };
 
   const makeSnippetImportData = React.useCallback(() => {
     return `[${selectedSnippetsConfig
@@ -156,11 +205,17 @@ export default function Home() {
         handleCopyData();
         setActionsOpen(false);
       }
+
+      if (key === "a" && metaKey) {
+        event.preventDefault();
+        setSelectedSnippets([...sharedSnippetsInURL]);
+      }
     };
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
   }, [
+    sharedSnippetsInURL,
     setActionsOpen,
     selectedSnippetsConfig,
     handleCopyData,
@@ -175,6 +230,10 @@ export default function Home() {
       }, 2000);
     }
   }, [copied]);
+
+  if (sharedSnippetsInURL.length === 0) {
+    return;
+  }
 
   return (
     <div>
@@ -249,82 +308,72 @@ export default function Home() {
 
       <div>
         <div className={styles.container}>
-          {allSnippets.map((snippetGroup) => {
-            return (
-              <div
-                key={snippetGroup.name}
-                data-section-slug={snippetGroup.slug}
-                style={{
-                  outline: "none",
-                }}
-                tabIndex={-1}
-              >
-                <h2 className={styles.subtitle}>{snippetGroup.name}</h2>
+          <SelectionArea
+            className="container"
+            onStart={onStart}
+            onMove={onMove}
+            selectables=".selectable"
+          >
+            {allSnippets.map((snippetGroup) => {
+              return (
                 <div
-                  className={styles.snippets}
-                  data-grid={snippetGroup.gridCols}
+                  key={snippetGroup.name}
+                  data-section-slug={snippetGroup.slug}
+                  style={{ outline: "none" }}
+                  tabIndex={-1}
                 >
-                  {snippetGroup.snippets.map((snippet) => {
-                    const keyword = snippet.keyword;
+                  <h2 className={styles.subtitle}>
+                    <snippetGroup.icon /> {snippetGroup.name}
+                  </h2>
+                  <div
+                    className={styles.snippets}
+                    data-grid={snippetGroup.gridCols}
+                  >
+                    {snippetGroup.snippets.map((snippet, index) => {
+                      const keyword = snippet.keyword;
 
-                    return (
-                      <label className={styles.item} key={snippet.id}>
-                        <input
-                          className={styles.checkbox}
-                          type="checkbox"
-                          name="snippet"
-                          checked={selectedSnippets.some(
+                      return (
+                        <div
+                          className={`${styles.item} selectable`}
+                          key={snippet.id}
+                          data-selected={selectedSnippets.some(
                             (selectedSnippet) =>
-                              selectedSnippet.id === snippet.id
+                              selectedSnippet?.id === snippet.id
                           )}
-                          onChange={() => {
-                            const isSelected = selectedSnippets.some(
-                              (selectedSnippet) =>
-                                selectedSnippet.id === snippet.id
-                            );
-                            if (isSelected) {
-                              setSelectedSnippets(
-                                selectedSnippets.filter(
-                                  (selectedSnippet) =>
-                                    selectedSnippet.id !== snippet.id
-                                )
-                              );
-                            } else {
-                              setSelectedSnippets((snippets: any) => [
-                                ...snippets,
-                                snippet,
-                              ]);
-                            }
-                          }}
-                        />
-                        <div className={styles.snippet}>
-                          {snippet.type === "template" ||
-                          snippet.type === "spelling" ? (
-                            <ScrollArea>
-                              <pre className={styles.template}>
+                          data-key={`${snippetGroup.slug}-${index}`}
+                        >
+                          <div className={styles.snippet}>
+                            {snippet.type === "template" ||
+                            snippet.type === "spelling" ? (
+                              <ScrollArea>
+                                <pre className={styles.template}>
+                                  {snippet.text}
+                                </pre>
+                              </ScrollArea>
+                            ) : (
+                              <span
+                                className={styles.text}
+                                data-type={snippet.type}
+                              >
                                 {snippet.text}
-                              </pre>
-                            </ScrollArea>
-                          ) : (
-                            <span
-                              className={styles.text}
-                              data-type={snippet.type}
-                            >
-                              {snippet.text}
-                            </span>
+                              </span>
+                            )}
+                          </div>
+                          <span className={styles.name}>{snippet.name}</span>
+                          {snippet.keyword && (
+                            <span className={styles.keyword}>{keyword}</span>
                           )}
                         </div>
-                        <span className={styles.name}>{snippet.name}</span>
-                        {snippet.keyword && (
-                          <span className={styles.keyword}>{keyword}</span>
-                        )}
-                      </label>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
+                  {snippetGroup.gridCols === 1 && (
+                    <hr className={styles.divider} />
+                  )}
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </SelectionArea>
         </div>
       </div>
     </div>

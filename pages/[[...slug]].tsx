@@ -248,6 +248,10 @@ export default function Home() {
         setSettingsOpen(false);
         setAboutOpen((prevOpen) => !prevOpen);
       }
+
+      if (key === "a" && metaKey) {
+        event.preventDefault();
+      }
     };
 
     document.addEventListener("keydown", down);
@@ -579,50 +583,9 @@ export default function Home() {
         <div className={styles.container}>
           <SelectionArea
             className="container"
-            onBeforeStart={() => {}}
             onStart={onStart}
             onMove={onMove}
             selectables=".selectable"
-            behaviour={{
-              // Specifies what should be done if already selected elements get selected again.
-              //   invert: Invert selection for elements which were already selected
-              //   keep: Keep selected elements (use clearSelection() to remove those)
-              //   drop: Remove stored elements after they have been touched
-              overlap: "drop",
-
-              // On which point an element should be selected.
-              // Available modes are cover (cover the entire element), center (touch the center) or
-              // the default mode is touch (just touching it).
-              intersect: "touch",
-
-              // px, how many pixels the point should move before starting the selection (combined distance).
-              // Or specifiy the threshold for each axis by passing an object like {x: <number>, y: <number>}.
-              startThreshold: 10,
-
-              // Scroll configuration.
-              scrolling: {
-                // On scrollable areas the number on px per frame is devided by this amount.
-                // Default is 10 to provide a enjoyable scroll experience.
-                speedDivider: 10,
-
-                // Browsers handle mouse-wheel events differently, this number will be used as
-                // numerator to calculate the mount of px while scrolling manually: manualScrollSpeed / scrollSpeedDivider.
-                manualSpeed: 750,
-
-                // This property defines the virtual inset margins from the borders of the container
-                // component that, when crossed by the mouse/touch, trigger the scrolling. Useful for
-                // fullscreen containers.
-                startScrollMargins: { x: 0, y: 0 },
-              },
-            }}
-            features={{
-              touch: false,
-              range: true,
-              singleTap: {
-                allow: true,
-                intersect: "native",
-              },
-            }}
           >
             {allSnippets.map((snippetGroup) => {
               return (
@@ -653,7 +616,6 @@ export default function Home() {
 
                       return (
                         <div
-                          // tabIndex={-1}
                           className={`${styles.item} selectable`}
                           key={snippet.id}
                           data-selected={selectedSnippets.some(
@@ -662,34 +624,6 @@ export default function Home() {
                           )}
                           data-key={`${snippetGroup.slug}-${index}`}
                         >
-                          {/* <input
-                            className={styles.checkbox}
-                            type="checkbox"
-                            name="snippet"
-                            checked={selectedSnippets.some(
-                              (selectedSnippet) =>
-                                selectedSnippet.id === snippet.id
-                            )}
-                            onChange={() => {
-                              const isSelected = selectedSnippets.some(
-                                (selectedSnippet) =>
-                                  selectedSnippet.id === snippet.id
-                              );
-                              if (isSelected) {
-                                setSelectedSnippets(
-                                  selectedSnippets.filter(
-                                    (selectedSnippet) =>
-                                      selectedSnippet.id !== snippet.id
-                                  )
-                                );
-                              } else {
-                                setSelectedSnippets((snippets: any) => [
-                                  ...snippets,
-                                  snippet,
-                                ]);
-                              }
-                            }}
-                          /> */}
                           <div className={styles.snippet}>
                             {snippet.type === "template" ||
                             snippet.type === "spelling" ? (

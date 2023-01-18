@@ -6,7 +6,6 @@
 
     & .container {
       padding-left: 0;
-      user-select: none;
     }
   }
 }
@@ -210,6 +209,7 @@
   position: relative;
   top: 50px;
   padding: 32px 16px;
+  user-select: none;
 }
 
 .nav {
