@@ -310,7 +310,7 @@
   transition: all 30ms;
 
   &:hover {
-    background-color: rgba(255, 99, 99, 0.05);
+    background-color: rgba(255, 99, 99, 0.03);
     box-shadow: inset 0 0 0 1px rgba(255, 99, 99, 0.2);
   }
 
