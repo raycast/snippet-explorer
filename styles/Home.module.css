@@ -537,6 +537,15 @@
   }
 }
 
+.aboutTopContent {
+  display: grid;
+  gap: 24px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1.5fr 1fr;
+  }
+}
+
 .aboutGlow {
   position: absolute;
   bottom: 0;

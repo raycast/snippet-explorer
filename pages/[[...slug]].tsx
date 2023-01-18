@@ -280,13 +280,7 @@ export default function Home() {
             </button>
           </DialogTrigger>
           <DialogContent className={styles.about}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1.5fr 1fr",
-                gap: 24,
-              }}
-            >
+            <div className={styles.aboutTopContent}>
               <div>
                 <DialogTitle className={styles.dialogTitle}>About</DialogTitle>
                 <DialogDescription className={styles.dialogDescription}>
@@ -295,9 +289,13 @@ export default function Home() {
                   .
                 </DialogDescription>
                 <p className={styles.dialogDescription}>
-                  Select the Snippets you want to import, and click the “Add to
-                  Raycast” button. You can also download the Snippets as a JSON
-                  file, or copy the URL to share with others.
+                  Select the Snippets by clicking on them. To select multiple,
+                  hold <kbd>⌘</kbd> or select them with your mouse.
+                </p>
+                <p className={styles.dialogDescription}>
+                  Then, click the “Add to Raycast” button. You can also download
+                  the Snippets as a JSON file, or copy the URL to share with
+                  others.
                 </p>
               </div>
               <div>

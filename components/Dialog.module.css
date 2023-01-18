@@ -12,6 +12,7 @@
   top: 50px;
   left: 20px;
   width: 640px;
+  max-width: 90vw;
   height: fit-content;
   max-height: 80vh;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
