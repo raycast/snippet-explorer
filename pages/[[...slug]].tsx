@@ -4,7 +4,6 @@ import NextLink from "next/link";
 import SelectionArea, { SelectionEvent } from "@viselect/react";
 import { useRouter } from "next/router";
 import copy from "copy-to-clipboard";
-import { nanoid } from "nanoid";
 import { Select, SelectItem } from "../components/Select";
 import {
   ChevronDownIcon,
@@ -38,7 +37,7 @@ import { Button } from "../components/Button";
 import { ButtonGroup } from "../components/ButtonGroup";
 import * as Collapsible from "@radix-ui/react-collapsible";
 
-import { snippets } from "../data/snippets";
+import { snippetGroups } from "../data/snippets";
 
 import styles from "../styles/Home.module.css";
 import { Instructions } from "../components/Instructions";
@@ -50,10 +49,33 @@ const raycastProtocolForEnvironments = {
 };
 const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
 
-const modifiders = [":", "!", "_", "__", "-", "@", "@@", ";", ";;", "empty"];
+type Modifiers =
+  | "!"
+  | ":"
+  | "_"
+  | "__"
+  | "-"
+  | "@"
+  | "@@"
+  | ";"
+  | ";;"
+  | "none";
+
+const modifiders: Modifiers[] = [
+  "!",
+  ":",
+  "_",
+  "__",
+  "-",
+  "@",
+  "@@",
+  ";",
+  ";;",
+  "none",
+];
 
 export function getStaticPaths() {
-  const paths = snippets.map((snippet) => ({
+  const paths = snippetGroups.map((snippet) => ({
     params: { slug: [snippet.slug.replace("/", "")] },
   }));
 
@@ -68,7 +90,7 @@ export function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   return {
     props: { snippet: {} },
   };
@@ -80,13 +102,12 @@ export default function Home() {
   const [selectedSnippets, setSelectedSnippets] = React.useState([]);
   const [copied, setCopied] = React.useState(false);
 
-  const [startMod, setStartMod] = React.useState("!");
-  const [endMod, setEndMod] = React.useState("empty");
+  const [startMod, setStartMod] = React.useState<Modifiers>("!");
+  const [endMod, setEndMod] = React.useState<Modifiers>("none");
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const [aboutOpen, setAboutOpen] = React.useState(false);
 
-  const allSnippets = snippets;
   const selectedSnippetsConfig = selectedSnippets;
 
   const extractIds = (els: Element[]) =>
@@ -109,7 +130,7 @@ export default function Home() {
 
     const addedSnippets = addedIds.map((id) => {
       const [slug, index] = id.split("-");
-      const snippetCategory = allSnippets.find(
+      const snippetCategory = snippetGroups.find(
         (snippet) => snippet.slug === slug
       );
       return snippetCategory.snippets[index];
@@ -121,7 +142,7 @@ export default function Home() {
 
     const removedSnippets = removedIds.map((id) => {
       const [slug, index] = id.split("-");
-      const snippetCategory = allSnippets.find(
+      const snippetCategory = snippetGroups.find(
         (snippet) => snippet.slug === slug
       );
       return snippetCategory.snippets[index];
@@ -417,7 +438,12 @@ export default function Home() {
               <div className={styles.modifierControls}>
                 <span className={styles.modifierInput}>
                   Start Modifier
-                  <Select value={startMod} onValueChange={setStartMod}>
+                  <Select
+                    value={startMod}
+                    onValueChange={(newValue: Modifiers) =>
+                      setStartMod(newValue)
+                    }
+                  >
                     {modifiders.map((mod) => (
                       <SelectItem key={mod} value={mod}>
                         {mod}
@@ -427,7 +453,12 @@ export default function Home() {
                 </span>
                 <span className={styles.modifierInput}>
                   End Modifier
-                  <Select value={endMod} onValueChange={setEndMod}>
+                  <Select
+                    value={endMod}
+                    onValueChange={(newValue: Modifiers) =>
+                      setStartMod(newValue)
+                    }
+                  >
                     {modifiders.map((mod) => (
                       <SelectItem key={mod} value={mod}>
                         {mod}
@@ -513,7 +544,7 @@ export default function Home() {
                 <div className={styles.sidebarNav}>
                   <p className={styles.sidebarTitle}>Categories</p>
 
-                  {allSnippets.map((snippetGroup) => (
+                  {snippetGroups.map((snippetGroup) => (
                     <NavItem
                       key={snippetGroup.slug}
                       snippetGroup={snippetGroup}
@@ -587,7 +618,7 @@ export default function Home() {
             onMove={onMove}
             selectables=".selectable"
           >
-            {allSnippets.map((snippetGroup) => {
+            {snippetGroups.map((snippetGroup) => {
               return (
                 <div
                   key={snippetGroup.name}
@@ -680,23 +711,17 @@ function NavItem({ snippetGroup }) {
   );
 }
 
-function addModifiersToKeyword({ keyword, start, end }) {
+function addModifiersToKeyword({
+  keyword,
+  start,
+  end,
+}: {
+  keyword: string;
+  start: Modifiers;
+  end: Modifiers;
+}) {
   if (!keyword) return keyword;
-  return `${start === "empty" ? "" : start}${keyword}${
-    end === "empty" ? "" : end
+  return `${start === "none" ? "" : start}${keyword}${
+    end === "none" ? "" : end
   }`;
-}
-
-function formatURLSnippet(snippetQueryString) {
-  let snippets;
-  if (Array.isArray(snippetQueryString)) {
-    snippets = snippetQueryString;
-  } else {
-    snippets = [snippetQueryString];
-  }
-  return snippets.map((snippet) => ({
-    ...JSON.parse(snippet),
-    id: nanoid(),
-    isShared: true,
-  }));
 }

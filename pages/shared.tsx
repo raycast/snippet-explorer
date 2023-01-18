@@ -4,7 +4,6 @@ import SelectionArea, { SelectionEvent } from "@viselect/react";
 import { useRouter } from "next/router";
 import copy from "copy-to-clipboard";
 import { nanoid } from "nanoid";
-
 import {
   ChevronDownIcon,
   ClipboardIcon,
@@ -42,8 +41,6 @@ export default function Home() {
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [sharedSnippetsInURL, setSharedSnippetsInURL] = React.useState([]);
 
-  // const hasSharedSnippets = sharedSnippetsInURL.length > 0;
-
   let gridCols = 1;
   switch (sharedSnippetsInURL.length) {
     case 2:
@@ -62,17 +59,17 @@ export default function Home() {
       break;
   }
 
-  const sharedSnippetGroup = {
-    name: `${sharedSnippetsInURL.length} snippets shared with you`,
-    gridCols,
-    isTemplate: true,
-    isShared: true,
-    snippets: sharedSnippetsInURL,
-    slug: "/shared",
-    icon: SnippetsIcon,
-  };
-
-  const allSnippets = [sharedSnippetGroup];
+  const sharedSnippetGroup = [
+    {
+      name: `${sharedSnippetsInURL.length} snippets shared with you`,
+      gridCols,
+      isTemplate: true,
+      isShared: true,
+      snippets: sharedSnippetsInURL,
+      slug: "/shared",
+      icon: SnippetsIcon,
+    },
+  ];
 
   const selectedSnippetsConfig = selectedSnippets;
 
@@ -96,7 +93,7 @@ export default function Home() {
 
     const addedSnippets = addedIds.map((id) => {
       const [slug, index] = id.split("-");
-      const snippetCategory = allSnippets.find(
+      const snippetCategory = sharedSnippetGroup.find(
         (snippet) => snippet.slug === slug
       );
 
@@ -109,7 +106,7 @@ export default function Home() {
 
     const removedSnippets = removedIds.map((id) => {
       const [slug, index] = id.split("-");
-      const snippetCategory = allSnippets.find(
+      const snippetCategory = sharedSnippetGroup.find(
         (snippet) => snippet.slug === slug
       );
       return snippetCategory.snippets[index];
@@ -314,7 +311,7 @@ export default function Home() {
             onMove={onMove}
             selectables=".selectable"
           >
-            {allSnippets.map((snippetGroup) => {
+            {sharedSnippetGroup.map((snippetGroup) => {
               return (
                 <div
                   key={snippetGroup.name}

@@ -701,7 +701,7 @@ const unicodes = [
   },
 ];
 
-export const snippets = [
+export const snippetGroups = [
   {
     name: "Arrows",
     slug: "/arrows",
@@ -709,14 +709,6 @@ export const snippets = [
     snippets: arrows,
     icon: ShuffleIcon,
   },
-  // { name: "Technical", slug: "/technical", gridCols: 4, snippets: technical },
-  // {
-  //   name: "Bullets & Stars",
-  //   slug: "/bullets-stars",
-  //   gridCols: 4,
-  //   snippets: bulletsAndStars,
-  // },
-  // { name: "Maths", slug: "/maths", gridCols: 4, snippets: maths },
   {
     name: "Currency",
     slug: "/currency",
