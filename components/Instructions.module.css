@@ -1,11 +1,26 @@
 .root {
-  padding: 24px;
+  padding: 24px 0;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0px 8px 24px -12px #000000;
   border-radius: 6px;
   text-align: center;
   line-height: 17px;
+  transform: translateY(50%);
+  opacity: 0;
+  animation: showInstructions 500ms 200ms ease-out forwards;
+
+  & button {
+    width: calc(100% - 24px - 24px);
+    justify-content: center;
+  }
+}
+
+@keyframes showInstructions {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .title {
@@ -15,8 +30,10 @@
 }
 
 .description {
-  font-size: 13px;
+  font-size: 14px;
   margin-bottom: 24px;
+  line-height: 18px;
+  padding: 0 16px;
 
   color: rgba(255, 255, 255, 0.6);
 

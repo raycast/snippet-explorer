@@ -17,6 +17,7 @@
     "@radix-ui/react-scroll-area": "^1.0.2",
     "@radix-ui/react-select": "^1.1.1",
     "@radix-ui/react-toast": "^1.1.1",
+    "@viselect/react": "^3.2.4",
     "autoprefixer": "^10.4.11",
     "copy-to-clipboard": "^3.3.2",
     "lodash.debounce": "^4.0.8",

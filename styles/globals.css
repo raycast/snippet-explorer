@@ -73,9 +73,12 @@ kbd {
   background-color: hsla(0, 0%, 100%, 0.1);
   color: hsla(0, 0%, 100%, 0.6);
 
-  &[data-variant="dark"] {
-    background-color: hsla(0, 0%, 0%, 0.4);
-    color: hsla(0, 100%, 80%, 0.7);
+  &[data-variant="small"] {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    background-color: hsla(0, 0%, 100%, 0.3);
+    color: hsla(0, 0%, 100%, 0.9);
   }
 }
 
@@ -87,4 +90,10 @@ kbd {
     color: white;
     background: black;
   }
+}
+
+.selection-area {
+  background: rgba(86, 194, 255, 0.15);
+  border: 1px solid #56c2ff;
+  border-radius: 2px;
 }

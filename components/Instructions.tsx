@@ -14,15 +14,12 @@ export function Instructions() {
 
       <h3 className={styles.title}>Install Snippets</h3>
       <p className={styles.description}>
-        Select one or more snippets and then click{" "}
-        <strong>Add to Raycast</strong> to import to the app.
+        Select a Snippet by clicking on it. Hold{" "}
+        <kbd data-variant="small">⌘</kbd> to select multiple. Click{" "}
+        <strong>Add to Raycast</strong> to import them directly.
       </p>
 
-      <Button
-        variant="red"
-        disabled
-        style={{ width: "100%", justifyContent: "center" }}
-      >
+      <Button variant="red" disabled>
         Add to Raycast
       </Button>
     </div>
