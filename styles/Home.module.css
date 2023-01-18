@@ -548,9 +548,17 @@
   );
   filter: blur(60px);
   border-radius: 80%;
-  transform: translateY(50%);
-  opacity: 0.5;
+  transform: translateY(100%) scale(0.5);
+  opacity: 0.3;
   z-index: -1;
+  animation: showGlow 1000ms ease-out forwards;
+}
+
+@keyframes showGlow {
+  to {
+    opacity: 0.5;
+    transform: translateY(50%) scale(1);
+  }
 }
 
 .shortcuts {
