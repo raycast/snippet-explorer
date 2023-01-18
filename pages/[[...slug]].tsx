@@ -350,6 +350,7 @@ export default function Home() {
                 <span>Raycast</span>
               </a>
             </p>
+            <div className={styles.aboutGlow} />
           </DialogContent>
         </Dialog>
         <div className={styles.navControls}>

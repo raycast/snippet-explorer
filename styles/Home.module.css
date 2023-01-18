@@ -524,11 +524,33 @@
 .about {
   & a {
     color: white;
+    transition: color 150ms ease;
 
     &:hover {
       color: #ff6363;
     }
   }
+}
+
+.aboutGlow {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 100px;
+  background: conic-gradient(
+    from 147.14deg at 50% 50%,
+    #0294fe -55.68deg,
+    #ff2136 113.23deg,
+    #9b4dff 195deg,
+    #0294fe 304.32deg,
+    #ff2136 473.23deg
+  );
+  filter: blur(60px);
+  border-radius: 80%;
+  transform: translateY(50%);
+  opacity: 0.5;
+  z-index: -1;
 }
 
 .shortcuts {
