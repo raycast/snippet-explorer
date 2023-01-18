@@ -545,7 +545,9 @@ export default function Home() {
                 }}
                 tabIndex={-1}
               >
-                <h2 className={styles.subtitle}>{snippetGroup.name}</h2>
+                <h2 className={styles.subtitle}>
+                  <snippetGroup.icon /> {snippetGroup.name}
+                </h2>
                 <div
                   className={styles.snippets}
                   data-grid={snippetGroup.gridCols}
