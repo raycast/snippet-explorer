@@ -310,72 +310,82 @@ export default function Home() {
 
       <div>
         <div className={styles.container}>
-          <SelectionArea
-            className="container"
-            onStart={onStart}
-            onMove={onMove}
-            selectables=".selectable"
-          >
-            {sharedSnippetGroup.map((snippetGroup) => {
-              return (
-                <div
-                  key={snippetGroup.name}
-                  data-section-slug={snippetGroup.slug}
-                  style={{ outline: "none" }}
-                  tabIndex={-1}
-                >
-                  <h2 className={styles.subtitle}>
-                    <snippetGroup.icon /> {snippetGroup.name}
-                  </h2>
+          {!isTouch && (
+            <SelectionArea
+              className="container"
+              onStart={onStart}
+              onMove={onMove}
+              selectables=".selectable"
+              features={{
+                // Disable support for touch devices
+                touch: isTouch ? false : true,
+                range: true,
+                singleTap: {
+                  allow: true,
+                  intersect: "native",
+                },
+              }}
+            >
+              {sharedSnippetGroup.map((snippetGroup) => {
+                return (
                   <div
-                    className={styles.snippets}
-                    data-grid={snippetGroup.gridCols}
+                    key={snippetGroup.name}
+                    data-section-slug={snippetGroup.slug}
+                    style={{ outline: "none" }}
                   >
-                    {snippetGroup.snippets.map((snippet, index) => {
-                      const keyword = snippet.keyword;
+                    <h2 className={styles.subtitle}>
+                      <snippetGroup.icon /> {snippetGroup.name}
+                    </h2>
+                    <div
+                      className={styles.snippets}
+                      data-grid={snippetGroup.gridCols}
+                    >
+                      {snippetGroup.snippets.map((snippet, index) => {
+                        const keyword = snippet.keyword;
 
-                      return (
-                        <div
-                          className={`${styles.item} selectable`}
-                          key={snippet.id}
-                          data-selected={selectedSnippets.some(
-                            (selectedSnippet) =>
-                              selectedSnippet?.id === snippet.id
-                          )}
-                          data-key={`${snippetGroup.slug}-${index}`}
-                        >
-                          <div className={styles.snippet}>
-                            {snippet.type === "template" ||
-                            snippet.type === "spelling" ? (
-                              <ScrollArea>
-                                <pre className={styles.template}>
+                        return (
+                          <div
+                            className={`${styles.item} selectable`}
+                            key={snippet.id}
+                            data-selected={selectedSnippets.some(
+                              (selectedSnippet) =>
+                                selectedSnippet?.id === snippet.id
+                            )}
+                            data-key={`${snippetGroup.slug}-${index}`}
+                          >
+                            <div className={styles.snippet}>
+                              {snippet.type === "template" ||
+                              snippet.type === "spelling" ? (
+                                <ScrollArea>
+                                  <pre className={styles.template}>
+                                    {snippet.text}
+                                  </pre>
+                                </ScrollArea>
+                              ) : (
+                                <span
+                                  className={styles.text}
+                                  data-type={snippet.type}
+                                >
                                   {snippet.text}
-                                </pre>
-                              </ScrollArea>
-                            ) : (
-                              <span
-                                className={styles.text}
-                                data-type={snippet.type}
-                              >
-                                {snippet.text}
-                              </span>
+                                </span>
+                              )}
+                            </div>
+                            <span className={styles.name}>{snippet.name}</span>
+                            {snippet.keyword && (
+                              <span className={styles.keyword}>{keyword}</span>
                             )}
                           </div>
-                          <span className={styles.name}>{snippet.name}</span>
-                          {snippet.keyword && (
-                            <span className={styles.keyword}>{keyword}</span>
-                          )}
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
+                    {snippetGroup.gridCols === 1 && (
+                      <hr className={styles.divider} />
+                    )}
                   </div>
-                  {snippetGroup.gridCols === 1 && (
-                    <hr className={styles.divider} />
-                  )}
-                </div>
-              );
-            })}
-          </SelectionArea>
+                );
+              })}
+            </SelectionArea>
+          )}
         </div>
       </div>
     </div>

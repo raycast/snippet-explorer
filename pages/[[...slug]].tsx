@@ -703,9 +703,7 @@ export default function Home() {
                                 </span>
                               )}
                             </div>
-                            <span className={styles.name} tabIndex={-1}>
-                              {snippet.name}
-                            </span>
+                            <span className={styles.name}>{snippet.name}</span>
                             {snippet.keyword && (
                               <span className={styles.keyword}>{keyword}</span>
                             )}

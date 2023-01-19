@@ -3,7 +3,6 @@
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  index: 9;
 }
 
 .content {
@@ -16,7 +15,6 @@
   max-width: calc(100vw - 20px);
   max-height: 80vh;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 10;
 
   &:focus {
     outline: none;
