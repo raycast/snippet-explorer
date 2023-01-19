@@ -36,6 +36,7 @@ import { ScrollArea } from "../components/ScrollArea";
 import { Button } from "../components/Button";
 import { ButtonGroup } from "../components/ButtonGroup";
 import * as Collapsible from "@radix-ui/react-collapsible";
+import { isTouchDevice } from "../utils/isTouchDevice";
 
 import { snippetGroups } from "../data/snippets";
 
@@ -107,6 +108,7 @@ export default function Home() {
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const [aboutOpen, setAboutOpen] = React.useState(false);
+  const [isTouch, setIsTouch] = React.useState(null);
 
   const selectedSnippetsConfig = selectedSnippets;
 
@@ -114,7 +116,7 @@ export default function Home() {
     els.map((v) => v.getAttribute("data-key"));
 
   const onStart = ({ event, selection }: SelectionEvent) => {
-    if (!event?.ctrlKey && !event?.metaKey) {
+    if (!isTouch && !event?.ctrlKey && !event?.metaKey) {
       selection.clearSelection();
       setSelectedSnippets([]);
     }
@@ -220,6 +222,10 @@ export default function Home() {
   );
 
   React.useEffect(() => {
+    setIsTouch(isTouchDevice());
+  }, [isTouch, setIsTouch]);
+
+  React.useEffect(() => {
     const down = (event) => {
       const { key, keyCode, metaKey, shiftKey, altKey } = event;
 
@@ -323,63 +329,65 @@ export default function Home() {
                   others.
                 </p>
               </div>
-              <div>
-                <h4 className={styles.dialogTitle}>Shortcuts</h4>
-                <ul className={styles.shortcuts}>
-                  <li>
-                    Add to Raycast
-                    <span className={styles.hotkeys}>
-                      <kbd>⌘</kbd>
-                      <kbd>⏎</kbd>
-                    </span>
-                  </li>
-                  <li>
-                    Toggle Export Menu
-                    <span className={styles.hotkeys}>
-                      <kbd>⌘</kbd>
-                      <kbd>K</kbd>
-                    </span>
-                  </li>
-                  <li>
-                    Configure Hotkeys
-                    <span className={styles.hotkeys}>
-                      <kbd>⌘</kbd>
-                      <kbd>⇧</kbd>
-                      <kbd>,</kbd>
-                    </span>
-                  </li>
-                  <li>
-                    Download JSON
-                    <span className={styles.hotkeys}>
-                      <kbd>⌘</kbd>
-                      <kbd>D</kbd>
-                    </span>
-                  </li>
-                  <li>
-                    Copy JSON
-                    <span className={styles.hotkeys}>
-                      <kbd>⌘</kbd>
-                      <kbd>⌥</kbd>
-                      <kbd>C</kbd>
-                    </span>
-                  </li>
-                  <li>
-                    Copy URL to share
-                    <span className={styles.hotkeys}>
-                      <kbd>⌘</kbd>
-                      <kbd>⇧</kbd>
-                      <kbd>C</kbd>
-                    </span>
-                  </li>
-                  <li>
-                    Toggle this view
-                    <span className={styles.hotkeys}>
-                      <kbd>⌘</kbd>
-                      <kbd>/</kbd>
-                    </span>
-                  </li>
-                </ul>
-              </div>
+              {!isTouch && (
+                <div>
+                  <h4 className={styles.dialogTitle}>Shortcuts</h4>
+                  <ul className={styles.shortcuts}>
+                    <li>
+                      Add to Raycast
+                      <span className={styles.hotkeys}>
+                        <kbd>⌘</kbd>
+                        <kbd>⏎</kbd>
+                      </span>
+                    </li>
+                    <li>
+                      Toggle Export Menu
+                      <span className={styles.hotkeys}>
+                        <kbd>⌘</kbd>
+                        <kbd>K</kbd>
+                      </span>
+                    </li>
+                    <li>
+                      Configure Hotkeys
+                      <span className={styles.hotkeys}>
+                        <kbd>⌘</kbd>
+                        <kbd>⇧</kbd>
+                        <kbd>,</kbd>
+                      </span>
+                    </li>
+                    <li>
+                      Download JSON
+                      <span className={styles.hotkeys}>
+                        <kbd>⌘</kbd>
+                        <kbd>D</kbd>
+                      </span>
+                    </li>
+                    <li>
+                      Copy JSON
+                      <span className={styles.hotkeys}>
+                        <kbd>⌘</kbd>
+                        <kbd>⌥</kbd>
+                        <kbd>C</kbd>
+                      </span>
+                    </li>
+                    <li>
+                      Copy URL to share
+                      <span className={styles.hotkeys}>
+                        <kbd>⌘</kbd>
+                        <kbd>⇧</kbd>
+                        <kbd>C</kbd>
+                      </span>
+                    </li>
+                    <li>
+                      Toggle this view
+                      <span className={styles.hotkeys}>
+                        <kbd>⌘</kbd>
+                        <kbd>/</kbd>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
 
             <h4 className={styles.dialogTitle}>Contribute</h4>
@@ -420,113 +428,126 @@ export default function Home() {
             <div className={styles.aboutGlow} />
           </DialogContent>
         </Dialog>
-        <div className={styles.navControls}>
-          <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
-            <DialogTrigger asChild>
-              <Button>
-                <CogIcon /> Configure Modifiers
-              </Button>
-            </DialogTrigger>
-            <DialogContent showCloseButton centered>
-              <DialogTitle className={styles.dialogTitle}>
-                Configure Modifiers
-              </DialogTitle>
-              <DialogDescription className={styles.dialogDescription}>
-                Modifiers are used as prefixes and suffixes for your snippets'
-                keyword. If you wish to customize them, you can do so below.
-              </DialogDescription>
-              <div className={styles.modifierControls}>
-                <span className={styles.modifierInput}>
-                  Start Modifier
-                  <Select
-                    value={startMod}
-                    onValueChange={(newValue: Modifiers) =>
-                      setStartMod(newValue)
-                    }
-                  >
-                    {modifiders.map((mod) => (
-                      <SelectItem key={mod} value={mod}>
-                        {mod}
-                      </SelectItem>
-                    ))}
-                  </Select>
-                </span>
-                <span className={styles.modifierInput}>
-                  End Modifier
-                  <Select
-                    value={endMod}
-                    onValueChange={(newValue: Modifiers) =>
-                      setStartMod(newValue)
-                    }
-                  >
-                    {modifiders.map((mod) => (
-                      <SelectItem key={mod} value={mod}>
-                        {mod}
-                      </SelectItem>
-                    ))}
-                  </Select>
-                </span>
-              </div>
-            </DialogContent>
-          </Dialog>
 
-          <ButtonGroup>
+        <div className={styles.navControls}>
+          {!isTouch && (
+            <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
+              <DialogTrigger asChild>
+                <Button>
+                  <CogIcon /> Configure Modifiers
+                </Button>
+              </DialogTrigger>
+              <DialogContent showCloseButton centered>
+                <DialogTitle className={styles.dialogTitle}>
+                  Configure Modifiers
+                </DialogTitle>
+                <DialogDescription className={styles.dialogDescription}>
+                  Modifiers are used as prefixes and suffixes for your snippets'
+                  keyword. If you wish to customize them, you can do so below.
+                </DialogDescription>
+                <div className={styles.modifierControls}>
+                  <span className={styles.modifierInput}>
+                    Start Modifier
+                    <Select
+                      value={startMod}
+                      onValueChange={(newValue: Modifiers) =>
+                        setStartMod(newValue)
+                      }
+                    >
+                      {modifiders.map((mod) => (
+                        <SelectItem key={mod} value={mod}>
+                          {mod}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  </span>
+                  <span className={styles.modifierInput}>
+                    End Modifier
+                    <Select
+                      value={endMod}
+                      onValueChange={(newValue: Modifiers) =>
+                        setEndMod(newValue)
+                      }
+                    >
+                      {modifiders.map((mod) => (
+                        <SelectItem key={mod} value={mod}>
+                          {mod}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  </span>
+                </div>
+              </DialogContent>
+            </Dialog>
+          )}
+
+          {!isTouch ? (
+            <ButtonGroup>
+              <Button
+                variant="red"
+                disabled={selectedSnippetsConfig.length === 0}
+                onClick={() => handleAddToRaycast()}
+              >
+                <PlusCircle /> Add to Raycast
+              </Button>
+
+              <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="red"
+                    disabled={selectedSnippetsConfig.length === 0}
+                    aria-label="Export options"
+                  >
+                    <ChevronDownIcon />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem
+                    disabled={selectedSnippetsConfig.length === 0}
+                    onSelect={() => handleDownload()}
+                  >
+                    <DownloadIcon /> Download JSON
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>D</kbd>
+                    </span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    disabled={selectedSnippetsConfig.length === 0}
+                    onSelect={() => handleCopyData()}
+                  >
+                    <ClipboardIcon /> Copy JSON{" "}
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>⌥</kbd>
+                      <kbd>C</kbd>
+                    </span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    disabled={selectedSnippetsConfig.length === 0}
+                    onSelect={() => handleCopyUrl()}
+                  >
+                    <LinkIcon /> Copy URL to share{" "}
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>⇧</kbd>
+                      <kbd>C</kbd>
+                    </span>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuSeparator />
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </ButtonGroup>
+          ) : (
             <Button
               variant="red"
               disabled={selectedSnippetsConfig.length === 0}
-              onClick={() => handleAddToRaycast()}
+              onClick={() => handleCopyUrl()}
             >
-              <PlusCircle /> Add to Raycast
+              <LinkIcon /> Copy URL to share
             </Button>
-
-            <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="red"
-                  disabled={selectedSnippetsConfig.length === 0}
-                  aria-label="Export options"
-                >
-                  <ChevronDownIcon />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem
-                  disabled={selectedSnippetsConfig.length === 0}
-                  onSelect={() => handleDownload()}
-                >
-                  <DownloadIcon /> Download JSON
-                  <span className={styles.hotkeys}>
-                    <kbd>⌘</kbd>
-                    <kbd>D</kbd>
-                  </span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  disabled={selectedSnippetsConfig.length === 0}
-                  onSelect={() => handleCopyData()}
-                >
-                  <ClipboardIcon /> Copy JSON{" "}
-                  <span className={styles.hotkeys}>
-                    <kbd>⌘</kbd>
-                    <kbd>⌥</kbd>
-                    <kbd>C</kbd>
-                  </span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  disabled={selectedSnippetsConfig.length === 0}
-                  onSelect={() => handleCopyUrl()}
-                >
-                  <LinkIcon /> Copy URL to share{" "}
-                  <span className={styles.hotkeys}>
-                    <kbd>⌘</kbd>
-                    <kbd>⇧</kbd>
-                    <kbd>C</kbd>
-                  </span>
-                </DropdownMenuItem>
-
-                <DropdownMenuSeparator />
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </ButtonGroup>
+          )}
         </div>
       </header>
 
@@ -612,81 +633,94 @@ export default function Home() {
         </div>
 
         <div className={styles.container}>
-          <SelectionArea
-            className="container"
-            onStart={onStart}
-            onMove={onMove}
-            selectables=".selectable"
-          >
-            {snippetGroups.map((snippetGroup) => {
-              return (
-                <div
-                  key={snippetGroup.name}
-                  data-section-slug={snippetGroup.slug}
-                  style={{
-                    outline: "none",
-                  }}
-                  tabIndex={-1}
-                >
-                  <h2 className={styles.subtitle}>
-                    <snippetGroup.icon /> {snippetGroup.name}
-                  </h2>
+          {isTouch !== null && (
+            <SelectionArea
+              className="container"
+              onStart={onStart}
+              onMove={onMove}
+              selectables=".selectable"
+              features={{
+                // Disable support for touch devices
+                touch: isTouch ? false : true,
+                range: true,
+                singleTap: {
+                  allow: true,
+                  intersect: "native",
+                },
+              }}
+            >
+              {snippetGroups.map((snippetGroup) => {
+                return (
                   <div
-                    className={styles.snippets}
-                    data-grid={snippetGroup.gridCols}
+                    key={snippetGroup.name}
+                    data-section-slug={snippetGroup.slug}
+                    style={{
+                      outline: "none",
+                    }}
+                    tabIndex={-1}
                   >
-                    {snippetGroup.snippets.map((snippet, index) => {
-                      const keyword =
-                        snippet.type === "spelling"
-                          ? snippet.keyword
-                          : addModifiersToKeyword({
-                              keyword: snippet.keyword,
-                              start: startMod,
-                              end: endMod,
-                            });
+                    <h2 className={styles.subtitle}>
+                      <snippetGroup.icon /> {snippetGroup.name}
+                    </h2>
+                    <div
+                      className={styles.snippets}
+                      data-grid={snippetGroup.gridCols}
+                    >
+                      {snippetGroup.snippets.map((snippet, index) => {
+                        const keyword =
+                          snippet.type === "spelling"
+                            ? snippet.keyword
+                            : addModifiersToKeyword({
+                                keyword: snippet.keyword,
+                                start: startMod,
+                                end: endMod,
+                              });
 
-                      return (
-                        <div
-                          className={`${styles.item} selectable`}
-                          key={snippet.id}
-                          data-selected={selectedSnippets.some(
-                            (selectedSnippet) =>
-                              selectedSnippet.id === snippet.id
-                          )}
-                          data-key={`${snippetGroup.slug}-${index}`}
-                        >
-                          <div className={styles.snippet}>
-                            {snippet.type === "template" ||
-                            snippet.type === "spelling" ? (
-                              <ScrollArea>
-                                <pre className={styles.template}>
+                        return (
+                          <div
+                            className={`${styles.item} selectable`}
+                            key={snippet.id}
+                            data-selected={selectedSnippets.some(
+                              (selectedSnippet) =>
+                                selectedSnippet.id === snippet.id
+                            )}
+                            data-key={`${snippetGroup.slug}-${index}`}
+                          >
+                            <div className={styles.snippet}>
+                              {snippet.type === "template" ||
+                              snippet.type === "spelling" ? (
+                                <ScrollArea>
+                                  <pre className={styles.template}>
+                                    {snippet.text}
+                                  </pre>
+                                </ScrollArea>
+                              ) : (
+                                <span
+                                  className={styles.text}
+                                  data-type={snippet.type}
+                                >
                                   {snippet.text}
-                                </pre>
-                              </ScrollArea>
-                            ) : (
-                              <span
-                                className={styles.text}
-                                data-type={snippet.type}
-                              >
-                                {snippet.text}
-                              </span>
+                                </span>
+                              )}
+                            </div>
+                            <span className={styles.name} tabIndex={-1}>
+                              {snippet.name}
+                            </span>
+                            {snippet.keyword && (
+                              <span className={styles.keyword}>{keyword}</span>
                             )}
                           </div>
-                          <span className={styles.name}>{snippet.name}</span>
-                          {snippet.keyword && (
-                            <span className={styles.keyword}>{keyword}</span>
-                          )}
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
+                    {snippetGroup.gridCols === 1 && (
+                      <hr className={styles.divider} />
+                    )}
                   </div>
-                  {snippetGroup.gridCols === 1 && (
-                    <hr className={styles.divider} />
-                  )}
-                </div>
-              );
-            })}
-          </SelectionArea>
+                );
+              })}
+            </SelectionArea>
+          )}
         </div>
       </div>
     </div>

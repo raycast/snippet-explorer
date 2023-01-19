@@ -703,6 +703,13 @@ const unicodes = [
 
 export const snippetGroups = [
   {
+    name: "Symbols",
+    slug: "/symbols",
+    gridCols: 4,
+    snippets: [...technical, ...bulletsAndStars, ...maths, ...symbols],
+    icon: CommandIcon,
+  },
+  {
     name: "Arrows",
     slug: "/arrows",
     gridCols: 6,
@@ -710,18 +717,25 @@ export const snippetGroups = [
     icon: ShuffleIcon,
   },
   {
+    name: "Unicode",
+    slug: "/unicode",
+    gridCols: 4,
+    snippets: unicodes,
+    icon: UnicodeIcon,
+  },
+  {
+    name: "Spelling",
+    slug: "/spelling",
+    gridCols: 4,
+    snippets: spelling,
+    icon: LowercaseIcon,
+  },
+  {
     name: "Currency",
     slug: "/currency",
     gridCols: 4,
     snippets: currency,
     icon: CoinsIcon,
-  },
-  {
-    name: "Symbols",
-    slug: "/symbols",
-    gridCols: 4,
-    snippets: [...technical, ...bulletsAndStars, ...maths, ...symbols],
-    icon: CommandIcon,
   },
   {
     name: "Coding",
@@ -743,20 +757,5 @@ export const snippetGroups = [
     gridCols: 2,
     snippets: github,
     icon: GitHubIcon,
-  },
-  {
-    name: "Spelling",
-    slug: "/spelling",
-    gridCols: 4,
-    snippets: spelling,
-    icon: LowercaseIcon,
-  },
-
-  {
-    name: "Unicode",
-    slug: "/unicode",
-    gridCols: 4,
-    snippets: unicodes,
-    icon: UnicodeIcon,
   },
 ];

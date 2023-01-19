@@ -22,7 +22,7 @@ import { Toast, ToastTitle } from "../components/Toast";
 import { ScrollArea } from "../components/ScrollArea";
 import { Button } from "../components/Button";
 import { ButtonGroup } from "../components/ButtonGroup";
-
+import { isTouchDevice } from "../utils/isTouchDevice";
 import styles from "../styles/Home.module.css";
 import buttonStyles from "../components/Button.module.css";
 
@@ -40,6 +40,7 @@ export default function Home() {
 
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [sharedSnippetsInURL, setSharedSnippetsInURL] = React.useState([]);
+  const [isTouch, setIsTouch] = React.useState(null);
 
   let gridCols = 1;
   switch (sharedSnippetsInURL.length) {
@@ -163,6 +164,10 @@ export default function Home() {
       ),
     [router, makeQueryString]
   );
+
+  React.useEffect(() => {
+    setIsTouch(isTouchDevice());
+  }, [isTouch, setIsTouch]);
 
   React.useEffect(() => {
     if (router.query.snippet) {
