@@ -1,26 +1,30 @@
 # Snippet Explorer
 
-A collection of useful, fun and time-saving [Raycast](https://raycast.com) Snippets.
+Snippet Explorer is a tool to easily browse and import Snippets directly in Raycast.
+
+Select the Snippets by clicking on them. To select multiple, hold ⌘ or select them with your mouse.
+
+Then, click the “Add to Raycast” button. You can also download the Snippets as a JSON file, or copy the URL to share with others.
 
 ---
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Contributing
 
-## Getting Started
+This is a [Next.js](https://nextjs.org/). If you're unfamiliar with it, check out the [Next.js Documentation](https://nextjs.org/docs).
 
-First, run the development server:
+Download the repo and run the development server:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Snippets
 
-## Learn More
+We welcome contribition to the Snippets data. Here's how you can contribute:
+- Open `./data/snippets.ts`
+- Add your snippet to relevant category
+  - Ensure it includes all fields, and that they're unique within its category
+- Create a Pull Request 🚀
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
