@@ -682,7 +682,7 @@ const unicodes = [
     id: nanoid(),
     name: "Putting Table Back Unicode",
     text: "┳━┳ ヽ(ಠل͜ಠ)ﾉ",
-    keyword: "flipping-table",
+    keyword: "putting-table",
     type: "unicode",
   },
   {
