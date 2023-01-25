@@ -888,6 +888,13 @@ const misc = [
     keyword: "tg",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Excel No.",
+    text: "No.\n=ROW()-ROW($A$1)",
+    keyword: "xl-no",
+    type: "template",
+  },
 ];
 
 export const snippetGroups = [
