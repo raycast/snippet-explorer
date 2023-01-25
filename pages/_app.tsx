@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
 
 import type { AppProps } from "next/app";
@@ -46,6 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         <ToastViewport />
       </ToastProvider>
+      <Analytics />
     </>
   );
 }
