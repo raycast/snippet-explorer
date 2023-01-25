@@ -749,6 +749,13 @@ const unicodes = [
     keyword: "lenny",
     type: "unicode",
   },
+  {
+    id: nanoid(),
+    name: "Noggles",
+    text: "⌐◨-◨",
+    keyword: "noggles",
+    type: "unicode",
+  },
 ];
 
 const date = [
