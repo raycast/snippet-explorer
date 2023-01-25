@@ -760,6 +760,20 @@ const date = [
     keyword: "nwk",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "YYYYMMDD",
+    text: '{date "yyyyMMdd"}',
+    keyword: "yyyyMMdd",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "YYYY-MM-DD",
+    text: '{date "yyyy-MM-dd"}',
+    keyword: "yyyy-MM-dd",
+    type: "template",
+  },
 ];
 
 const misc = [
