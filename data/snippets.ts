@@ -569,6 +569,16 @@ Fixes #
     keyword: "gh-pr",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Github Table",
+    text: `| Title1 | Title2 |
+| ------- | ------- |
+| Content1 | Content2 |
+  `,
+    keyword: "gh-table",
+    type: "template",
+  },
 ];
 
 const spelling = [
