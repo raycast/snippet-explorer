@@ -45,56 +45,56 @@ const arrows = [
     id: nanoid(),
     text: "↖",
     name: "Arrow Up Left",
-    keyword: "up-left",
+    keyword: "upleft",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↗︎",
     name: "Arrow Up Right",
-    keyword: "up-right",
+    keyword: "upright",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↙",
     name: "Arrow Down Left",
-    keyword: "down-left",
+    keyword: "downleft",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↘",
     name: "Arrow Down Right",
-    keyword: "down-right",
+    keyword: "downright",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "⟶",
     name: "Arrow Long Right",
-    keyword: "long-right",
+    keyword: "longright",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "⟵",
     name: "Arrow Long Left",
-    keyword: "long-left",
+    keyword: "longleft",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↩",
     name: "Arrow Left Hook",
-    keyword: "left-hook",
+    keyword: "lefthook",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↪",
     name: "Arrow Right Hook",
-    keyword: "right-hook",
+    keyword: "righthook",
     type: "symbol",
   },
   {
@@ -140,6 +140,13 @@ const bulletsAndStars = [
     text: "☆",
     name: "Star Outline",
     keyword: "star-outline",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "✦",
+    name: "Sparkle",
+    keyword: "sparkle",
     type: "symbol",
   },
   {
@@ -245,6 +252,27 @@ const technical = [
   },
   {
     id: nanoid(),
+    text: "⎋",
+    name: "Escape",
+    keyword: "esc",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⇥",
+    name: "Tab",
+    keyword: "tab",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⏎",
+    name: "Return",
+    keyword: "return",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
     text: "",
     name: "Apple",
     keyword: "apple",
@@ -279,6 +307,13 @@ const currency = [
     text: "$",
     name: "Dollar",
     keyword: "usd",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₹",
+    name: "Indian Rupee",
+    keyword: "inr",
     type: "symbol",
   },
 ];
@@ -451,7 +486,7 @@ const feedback = [
     text: `Hi 👋
 
 Thanks for taking the time to give us your feedback.
-    
+
 {cursor}`,
     keyword: "feedback-thanks",
     type: "template",
@@ -503,6 +538,20 @@ const coding = [
     type: "template",
   },
   {
+    name: "SQL Select",
+    id: nanoid(),
+    text: `SELECT * FROM {cursor} where id = `,
+    keyword: "sql-select",
+    type: "template",
+  },
+  {
+    name: "Get Name of Current Branch",
+    id: nanoid(),
+    text: "git branch --show-current",
+    keyword: "git-current-branch",
+    type: "template",
+  },
+  {
     name: "AppleScript Dialog",
     id: nanoid(),
     text: `try
@@ -520,8 +569,7 @@ end try`,
     text: `set theResponse to (choose from list {"Option 1", "Option 2", "Option 3"} with title "Title" with prompt "{cursor}" default items {"Option 2"} OK button name "Continue" cancel button name "Cancel" without multiple selections allowed and empty selection allowed)
 return theResponse`,
     keyword: "as-chls",
-    type: "template",
-  },
+  }
 ];
 
 const project = [
@@ -553,13 +601,13 @@ const project = [
 const github = [
   {
     id: nanoid(),
-    name: "Github Issue Template",
+    name: "GitHub Issue Template",
     text: `## Expected Behavior
 
 ## Actual Behavior
 
 ## Steps to Reproduce the Problem
-  
+
   1.
   1.
   1.
@@ -575,9 +623,9 @@ const github = [
   },
   {
     id: nanoid(),
-    name: "Github Pull Request Template",
+    name: "GitHub Pull Request Template",
     text: `<!-- Thanks for opening a PR! Your contribution is much appreciated.-->
-    
+
 Fixes #
 
 ## Proposed Changes
@@ -587,6 +635,26 @@ Fixes #
   -
 `,
     keyword: "gh-pr",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Table",
+    text: `| Title1 | Title2 |
+| ------- | ------- |
+| Content1 | Content2 |
+  `,
+    keyword: "gh-table",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Details",
+    text: `<details>
+<summary>Title</summary>
+{cursor}
+</details>`,
+    keyword: "gh-details",
     type: "template",
   },
 ];
@@ -721,6 +789,13 @@ const unicodes = [
     keyword: "lenny",
     type: "unicode",
   },
+  {
+    id: nanoid(),
+    name: "Noggles",
+    text: "⌐◨-◨",
+    keyword: "noggles",
+    type: "unicode",
+  },
 ];
 
 const date = [
@@ -825,6 +900,13 @@ const misc = [
     keyword: "cal",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Telegram Link",
+    text: "https://t.me/yournickname",
+    keyword: "tg",
+    type: "template",
+  },
 ];
 
 export const snippetGroups = [
@@ -857,7 +939,7 @@ export const snippetGroups = [
     icon: CalendarIcon,
   },
   {
-    name: "Misceallenous",
+    name: "Miscellaneous",
     slug: "/misc",
     gridCols: 2,
     snippets: misc,
