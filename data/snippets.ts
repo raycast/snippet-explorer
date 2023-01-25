@@ -887,7 +887,7 @@ const misc = [
     text: "https://t.me/yournickname",
     keyword: "tg",
     type: "template",
-  }
+  },
 ];
 
 export const snippetGroups = [
@@ -920,7 +920,7 @@ export const snippetGroups = [
     icon: CalendarIcon,
   },
   {
-    name: "Misceallenous",
+    name: "Miscellaneous",
     slug: "/misc",
     gridCols: 2,
     snippets: misc,
