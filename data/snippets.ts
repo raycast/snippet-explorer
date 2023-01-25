@@ -144,6 +144,13 @@ const bulletsAndStars = [
   },
   {
     id: nanoid(),
+    text: "✦",
+    name: "Sparkle",
+    keyword: "sparkle",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
     text: "❖",
     name: "Diamond",
     keyword: "diamond",
@@ -300,6 +307,13 @@ const currency = [
     text: "$",
     name: "Dollar",
     keyword: "usd",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₹",
+    name: "Indian Rupee",
+    keyword: "inr",
     type: "symbol",
   },
 ];
@@ -920,6 +934,13 @@ transform: translate(-50%, -50%);`,
     keyword: "sql-select",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Get Name of Current Branch",
+    text: "git branch --show-current",
+    keyword: "git-current-branch",
+    type: "template",
+  },
 ];
 
 const project = [
@@ -1139,6 +1160,13 @@ const unicodes = [
     keyword: "lenny",
     type: "unicode",
   },
+  {
+    id: nanoid(),
+    name: "Noggles",
+    text: "⌐◨-◨",
+    keyword: "noggles",
+    type: "unicode",
+  },
 ];
 
 const date = [
@@ -1243,6 +1271,13 @@ const misc = [
     keyword: "cal",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Telegram Link",
+    text: "https://t.me/yournickname",
+    keyword: "tg",
+    type: "template",
+  }
 ];
 
 export const snippetGroups = [
