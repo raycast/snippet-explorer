@@ -543,7 +543,7 @@ const coding = [
     text: "git branch --contains | cut -d \" \" -f 2",
     keyword: "git-current-branch",
     type: "template",
-  }
+  },
 ];
 
 const project = [
@@ -880,7 +880,7 @@ const misc = [
     text: "https://t.me/yournickname",
     keyword: "tg",
     type: "template",
-  },
+  }
 ];
 
 export const snippetGroups = [
