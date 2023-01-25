@@ -144,6 +144,13 @@ const bulletsAndStars = [
   },
   {
     id: nanoid(),
+    text: "✦",
+    name: "Sparkle",
+    keyword: "sparkle",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
     text: "❖",
     name: "Diamond",
     keyword: "diamond",
@@ -533,7 +540,7 @@ const coding = [
   {
     id: nanoid(),
     name: "Get Name of Current Branch",
-    text: "git branch --contains | cut -d \" \" -f 2",
+    text: 'git branch --contains | cut -d " " -f 2',
     keyword: "git-current-branch",
     type: "template",
   },
@@ -873,7 +880,7 @@ const misc = [
     text: "https://t.me/yournickname",
     keyword: "tg",
     type: "template",
-  }
+  },
 ];
 
 export const snippetGroups = [
