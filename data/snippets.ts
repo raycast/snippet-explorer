@@ -309,6 +309,13 @@ const currency = [
     keyword: "usd",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "₹",
+    name: "Indian Rupee",
+    keyword: "inr",
+    type: "symbol",
+  },
 ];
 
 const maths = [
