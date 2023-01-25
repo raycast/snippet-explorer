@@ -540,7 +540,7 @@ const coding = [
   {
     id: nanoid(),
     name: "Get Name of Current Branch",
-    text: "git branch --contains | cut -d \" \" -f 2",
+    text: "git branch --show-current",
     keyword: "git-current-branch",
     type: "template",
   },
