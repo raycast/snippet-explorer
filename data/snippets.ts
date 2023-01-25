@@ -45,56 +45,56 @@ const arrows = [
     id: nanoid(),
     text: "↖",
     name: "Arrow Up Left",
-    keyword: "up-left",
+    keyword: "upleft",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↗︎",
     name: "Arrow Up Right",
-    keyword: "up-right",
+    keyword: "upright",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↙",
     name: "Arrow Down Left",
-    keyword: "down-left",
+    keyword: "downleft",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↘",
     name: "Arrow Down Right",
-    keyword: "down-right",
+    keyword: "downright",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "⟶",
     name: "Arrow Long Right",
-    keyword: "long-right",
+    keyword: "longright",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "⟵",
     name: "Arrow Long Left",
-    keyword: "long-left",
+    keyword: "longleft",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↩",
     name: "Arrow Left Hook",
-    keyword: "left-hook",
+    keyword: "lefthook",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↪",
     name: "Arrow Right Hook",
-    keyword: "right-hook",
+    keyword: "righthook",
     type: "symbol",
   },
   {
@@ -241,6 +241,27 @@ const technical = [
     text: "⌫",
     name: "Backspace",
     keyword: "backspace",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⎋",
+    name: "Escape",
+    keyword: "esc",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⇥",
+    name: "Tab",
+    keyword: "tab",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⏎",
+    name: "Return",
+    keyword: "return",
     type: "symbol",
   },
   {
@@ -503,11 +524,17 @@ const coding = [
     type: "template",
   },
   {
+    name: "SQL Select",
+    id: nanoid(),
+    text: `SELECT * FROM {cursor} where id = `,
+    keyword: "sql-select",
+    type: "template",
+  },
+  {
     id: nanoid(),
     name: "Get Name of Current Branch",
     text: "git branch --contains | cut -d \" \" -f 2",
     keyword: "git-current-branch",
-    type: "template",
   },
 ];
 
@@ -540,7 +567,7 @@ const project = [
 const github = [
   {
     id: nanoid(),
-    name: "Github Issue Template",
+    name: "GitHub Issue Template",
     text: `## Expected Behavior
 
 ## Actual Behavior
@@ -562,7 +589,7 @@ const github = [
   },
   {
     id: nanoid(),
-    name: "Github Pull Request Template",
+    name: "GitHub Pull Request Template",
     text: `<!-- Thanks for opening a PR! Your contribution is much appreciated.-->
     
 Fixes #
@@ -574,6 +601,26 @@ Fixes #
   -
 `,
     keyword: "gh-pr",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Table",
+    text: `| Title1 | Title2 |
+| ------- | ------- |
+| Content1 | Content2 |
+  `,
+    keyword: "gh-table",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Details",
+    text: `<details>
+<summary>Title</summary>
+{cursor}
+</details>`,
+    keyword: "gh-details",
     type: "template",
   },
 ];
@@ -706,6 +753,13 @@ const unicodes = [
     name: "Lenny Unicode",
     text: "( ͡° ͜ʖ ͡°)",
     keyword: "lenny",
+    type: "unicode",
+  },
+  {
+    id: nanoid(),
+    name: "Noggles",
+    text: "⌐◨-◨",
+    keyword: "noggles",
     type: "unicode",
   },
 ];
