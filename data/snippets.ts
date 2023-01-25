@@ -503,10 +503,10 @@ const coding = [
     type: "template",
   },
   {
-    name: "SQL Select"
+    name: "SQL Select",
     id: nanoid(),
     text: `SELECT * FROM {cursor} where id = `,
-    keyword: "sql-select"
+    keyword: "sql-select",
     type: "template",
   },
 ];
