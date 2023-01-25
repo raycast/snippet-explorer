@@ -477,6 +477,13 @@ const symbols = [
     keyword: "horizontal-ellipsis",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "▲",
+    name: "Triangle",
+    keyword: "triangle",
+    type: "symbol",
+  },
 ];
 
 const feedback = [
