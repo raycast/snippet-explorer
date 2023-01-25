@@ -533,7 +533,7 @@ const project = [
 const github = [
   {
     id: nanoid(),
-    name: "Github Issue Template",
+    name: "GitHub Issue Template",
     text: `## Expected Behavior
 
 ## Actual Behavior
@@ -555,7 +555,7 @@ const github = [
   },
   {
     id: nanoid(),
-    name: "Github Pull Request Template",
+    name: "GitHub Pull Request Template",
     text: `<!-- Thanks for opening a PR! Your contribution is much appreciated.-->
     
 Fixes #
@@ -571,7 +571,7 @@ Fixes #
   },
   {
     id: nanoid(),
-    name: "Github Table",
+    name: "GitHub Table",
     text: `| Title1 | Title2 |
 | ------- | ------- |
 | Content1 | Content2 |
@@ -581,7 +581,7 @@ Fixes #
   },
   {
     id: nanoid(),
-    name: "Github Details",
+    name: "GitHub Details",
     text: `<details>
 <summary>Title</summary>
 {cursor}
