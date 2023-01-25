@@ -579,6 +579,16 @@ Fixes #
     keyword: "gh-table",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Github Details",
+    text: `<details>
+<summary>Title</summary>
+{cursor}
+</details>`,
+    keyword: "gh-details",
+    type: "template",
+  },
 ];
 
 const spelling = [
