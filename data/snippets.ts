@@ -144,6 +144,13 @@ const bulletsAndStars = [
   },
   {
     id: nanoid(),
+    text: "✦",
+    name: "Sparkle",
+    keyword: "sparkle",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
     text: "❖",
     name: "Diamond",
     keyword: "diamond",
