@@ -1,3 +1,4 @@
+import React from "react";
 import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
@@ -7,7 +8,8 @@ import { ToastProvider, ToastViewport } from "../components/Toast";
 import { useSectionInViewObserver } from "../utils/useSectionInViewObserver";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useSectionInViewObserver({ headerHeight: 72 });
+  const [enableViewObserver, setEnableViewObserver] = React.useState(false);
+  useSectionInViewObserver({ headerHeight: 72, enabled: enableViewObserver });
 
   return (
     <>
@@ -44,7 +46,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <ToastProvider swipeDirection="down">
-        <Component {...pageProps} />
+        <Component
+          {...pageProps}
+          onTouchReady={() => setEnableViewObserver(true)}
+        />
         <ToastViewport />
       </ToastProvider>
       <Analytics />

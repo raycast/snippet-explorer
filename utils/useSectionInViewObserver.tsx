@@ -6,9 +6,13 @@ import * as React from "react";
 
 interface Config {
   headerHeight: number;
+  enabled: boolean;
 }
 
-export function useSectionInViewObserver({ headerHeight }: Config) {
+export function useSectionInViewObserver({
+  headerHeight,
+  enabled = false,
+}: Config) {
   const defaultRootMargin = `-${headerHeight}px 0% -50% 0%`;
   const router = useRouter();
   const historyKey = React.useRef("");
@@ -242,7 +246,7 @@ export function useSectionInViewObserver({ headerHeight }: Config) {
       isPageReload.current = navigationEntry?.type === "reload";
     }
 
-    if (router.isReady) {
+    if (router.isReady && enabled) {
       // Cancel the last scheduled scroll adjustment
       cancelAnimationFrame(animationFrame.current);
 

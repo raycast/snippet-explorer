@@ -97,7 +97,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home() {
+export default function Home({ onTouchReady }) {
   const router = useRouter();
 
   const [selectedSnippets, setSelectedSnippets] = React.useState([]);
@@ -223,7 +223,8 @@ export default function Home() {
 
   React.useEffect(() => {
     setIsTouch(isTouchDevice());
-  }, [isTouch, setIsTouch]);
+    onTouchReady();
+  }, [isTouch, setIsTouch, onTouchReady]);
 
   React.useEffect(() => {
     const down = (event) => {
