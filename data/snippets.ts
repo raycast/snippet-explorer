@@ -472,7 +472,7 @@ const feedback = [
     text: `Hi 👋
 
 Thanks for taking the time to give us your feedback.
-    
+
 {cursor}`,
     keyword: "feedback-thanks",
     type: "template",
@@ -567,7 +567,7 @@ const github = [
 ## Actual Behavior
 
 ## Steps to Reproduce the Problem
-  
+
   1.
   1.
   1.
@@ -585,7 +585,7 @@ const github = [
     id: nanoid(),
     name: "GitHub Pull Request Template",
     text: `<!-- Thanks for opening a PR! Your contribution is much appreciated.-->
-    
+
 Fixes #
 
 ## Proposed Changes
@@ -860,6 +860,13 @@ const misc = [
     keyword: "cal",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Telegram Link",
+    text: "https://t.me/yournickname",
+    keyword: "tg",
+    type: "template",
+  }
 ];
 
 export const snippetGroups = [
