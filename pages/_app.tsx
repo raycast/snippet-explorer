@@ -17,11 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" type="image/x-icon" href={`/favicon.png`} />
         <title>Snippet Explorer by Raycast</title>
 
-        {/* <meta
+        <meta
           property="og:image"
-          content="https://icon.ray.so/og-image.png"
+          content="https://snippets.ray.so/og-image.png"
           key="og-image"
-        /> */}
+        />
 
         <meta
           property="og:title"
