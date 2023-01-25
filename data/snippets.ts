@@ -523,6 +523,13 @@ const coding = [
     keyword: "css-ac",
     type: "template",
   },
+  {
+    name: "SQL Select",
+    id: nanoid(),
+    text: `SELECT * FROM {cursor} where id = `,
+    keyword: "sql-select",
+    type: "template",
+  },
 ];
 
 const project = [
