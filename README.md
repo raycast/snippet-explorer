@@ -1,10 +1,25 @@
-# Snippet Explorer
+<!-- TEXT_SECTION:header:START -->
+<p align="center">
+  <a href="https://snippets.ray.so" target="_blank" rel="noopener noreferrer">
+    <img width="1024" src="https://snippets.ray.so/og-image.png" alt="Snippet Explorer">
+  </a> 
+</p>
+<h1 align="center">
+  Snippet Explorer
+</h1>
+<h3 align="center">
+  snippets.ray.so
+</h3>
+<p align="center">
+  A tool to easily browse and import Snippets directly in Raycast.
+</p>
+<p align="center">
+  Then, click the “Add to Raycast” button. You can also download the Snippets as a JSON file, or copy the URL to share with others.
+</p>
 
-Snippet Explorer is a tool to easily browse and import Snippets directly in Raycast.
+<!-- TEXT_SECTION:header:END -->
 
-Select the Snippets by clicking on them. To select multiple, hold ⌘ or select them with your mouse.
 
-Then, click the “Add to Raycast” button. You can also download the Snippets as a JSON file, or copy the URL to share with others.
 
 ---
 
