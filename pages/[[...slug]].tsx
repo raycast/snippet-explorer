@@ -139,7 +139,12 @@ export default function Home({ onTouchReady }) {
     });
 
     addedSnippets.forEach((snippet) => {
-      setSelectedSnippets((prevSnippets) => [...prevSnippets, snippet]);
+      setSelectedSnippets((prevSnippets) => {
+        if (prevSnippets.find((s) => s.id === snippet.id)) {
+          return prevSnippets;
+        }
+        return [...prevSnippets, snippet];
+      });
     });
 
     const removedSnippets = removedIds.map((id) => {
