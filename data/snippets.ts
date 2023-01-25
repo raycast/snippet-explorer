@@ -528,6 +528,30 @@ const project = [
     name: "Project Spec",
     type: "template",
   },
+  {
+    id: nanoid(),
+    text: `gm :sparkles: :unicorn_face: :rainbow:
+
+*:arrow_backward: Last week:*
+- {cursor}
+
+*:no_good: Didn’t do:*
+- 
+
+*:arrow_forward: This week:*
+- 
+
+*:double_vertical_bar: Blockers:*
+- 
+
+*:bulb: Highlights:*
+- 
+
+*:fire: Fires:*
+- `,
+    name: "Weekly Standup Template",
+    type: "template",
+  },
 ];
 
 const github = [
