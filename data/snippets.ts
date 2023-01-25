@@ -451,7 +451,7 @@ const feedback = [
     text: `Hi 👋
 
 Thanks for taking the time to give us your feedback.
-    
+
 {cursor}`,
     keyword: "feedback-thanks",
     type: "template",
@@ -539,7 +539,7 @@ const github = [
 ## Actual Behavior
 
 ## Steps to Reproduce the Problem
-  
+
   1.
   1.
   1.
@@ -557,7 +557,7 @@ const github = [
     id: nanoid(),
     name: "Github Pull Request Template",
     text: `<!-- Thanks for opening a PR! Your contribution is much appreciated.-->
-    
+
 Fixes #
 
 ## Proposed Changes
@@ -768,6 +768,13 @@ const misc = [
     name: "Email Address",
     text: "your@email.com",
     keyword: "email",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Telegram Link",
+    text: "https://t.me/yournickname",
+    keyword: "tg",
     type: "template",
   },
   {
