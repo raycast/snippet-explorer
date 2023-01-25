@@ -772,13 +772,6 @@ const misc = [
   },
   {
     id: nanoid(),
-    name: "Telegram Link",
-    text: "https://t.me/yournickname",
-    keyword: "tg",
-    type: "template",
-  },
-  {
-    id: nanoid(),
     name: "Address",
     text: "123 Quebec Road, Montreal, QC, H3A 2B2",
     keyword: "address",
@@ -812,6 +805,13 @@ const misc = [
     keyword: "cal",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Telegram Link",
+    text: "https://t.me/yournickname",
+    keyword: "tg",
+    type: "template",
+  }
 ];
 
 export const snippetGroups = [
