@@ -506,7 +506,7 @@ const coding = [
     name: "AppleScript Dialog",
     id: nanoid(),
     text: `try
-  set theResponse to (display dialog "Message text" default answer "Placeholder input" buttons {"Option 1", "Option 2", "Cancel"} default button 1 cancel button 3 with title "My Dialog" with icon note giving up after 1800 without hidden answer)
+  set theResponse to (display dialog "{cursor}" default answer "Placeholder input" buttons {"Option 1", "Option 2", "Cancel"} default button 1 cancel button 3 with title "My Dialog" with icon note giving up after 1800 without hidden answer)
   return theResponse
 on error
   return "Canceled!"
@@ -517,7 +517,7 @@ end try`,
   {
     name: "AppleScript Notification",
     id: nanoid(),
-    text: `display notification "Message text" with title "Title" subtitle "Subtitle" sound name "Tink"`,
+    text: `display notification "{cursor}" with title "Title" subtitle "Subtitle" sound name "Tink"`,
     keyword: "as-noti",
     type: "template",
   },
@@ -525,7 +525,7 @@ end try`,
     name: "AppleScript Alert",
     id: nanoid(),
     text: `try
-  set theResponse to (display alert "Message text" as warning buttons {"Option 1", "Option 2", "Cancel"} default button 1 cancel button 3 giving up after 1800)
+  set theResponse to (display alert "{cursor}" as warning buttons {"Option 1", "Option 2", "Cancel"} default button 1 cancel button 3 giving up after 1800)
   return theResponse
 on error
   return "Canceled!"
@@ -536,7 +536,7 @@ end try`,
   {
     name: "AppleScript Choose From List",
     id: nanoid(),
-    text: `set theResponse to (choose from list {"Option 1", "Option 2", "Option 3"} with title "Title" with prompt "Prompt" default items {"Option 2"} OK button name "Continue" cancel button name "Cancel" without multiple selections allowed and empty selection allowed)
+    text: `set theResponse to (choose from list {"Option 1", "Option 2", "Option 3"} with title "Title" with prompt "{cursor}" default items {"Option 2"} OK button name "Continue" cancel button name "Cancel" without multiple selections allowed and empty selection allowed)
 return theResponse`,
     keyword: "as-chls",
     type: "template",
@@ -545,7 +545,7 @@ return theResponse`,
     name: "AppleScript Choose Folder",
     id: nanoid(),
     text: `try
-  set theResponse to (choose folder with prompt "Prompt" default location "/" with multiple selections allowed without invisibles and showing package contents)
+  set theResponse to (choose folder with prompt "{cursor}" default location "/" with multiple selections allowed without invisibles and showing package contents)
   return theResponse
 on error
   return "Canceled!"
@@ -557,7 +557,7 @@ end try`,
     name: "AppleScript Choose File Name",
     id: nanoid(),
     text: `try
-  set theResponse to (choose file name with prompt "Prompt" default name "Example.txt" default location "/")
+  set theResponse to (choose file name with prompt "{cursor}" default name "Example.txt" default location "/")
   return theResponse
 on error
   return "Canceled!"
@@ -569,7 +569,7 @@ end try`,
     name: "AppleScript Choose File",
     id: nanoid(),
     text: `try
-  set theResponse to (choose file with prompt "Prompt" of type {"pdf"} default location "/" with multiple selections allowed without invisibles and showing package contents)
+  set theResponse to (choose file with prompt "{cursor}" of type {"pdf"} default location "/" with multiple selections allowed without invisibles and showing package contents)
   return theResponse
 on error
   return "Canceled!"
@@ -581,7 +581,7 @@ end try`,
     name: "AppleScript Choose Application",
     id: nanoid(),
     text: `try
-  set theResponse to (choose application with title "Title" with prompt "Prompt" as alias without multiple selections allowed)
+  set theResponse to (choose application with title "Title" with prompt "{cursor}" as alias without multiple selections allowed)
   return theResponse
 on error
   return "Canceled!"
