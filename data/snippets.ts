@@ -550,6 +550,7 @@ const project = [
 *:fire: Fires:*
 - `,
     name: "Weekly Standup Template",
+    keyword: "standup",
     type: "template",
   },
 ];
