@@ -502,6 +502,13 @@ const coding = [
     keyword: "css-ac",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Get Name of Current Branch",
+    text: "git branch --contains | cut -d \" \" -f 2",
+    keyword: "git-current-branch",
+    type: "template",
+  },
 ];
 
 const project = [
@@ -803,13 +810,6 @@ const misc = [
     name: "Cal.com Invite Link",
     text: "https://cal.com/username/30min",
     keyword: "cal",
-    type: "template",
-  },
-  {
-    id: nanoid(),
-    name: "Get Name of Current Branch",
-    text: "git branch --contains | cut -d \" \" -f 2",
-    keyword: "git-current-branch",
     type: "template",
   },
 ];
