@@ -743,8 +743,8 @@ const date = [
     id: nanoid(),
     name: "4 Days from Today",
     text: "4 days from today will be {day +4d}.",
-    keyword: "day",
-    type: "day+4",
+    keyword: "day+4",
+    type: "template",
   },
   {
     id: nanoid(),
