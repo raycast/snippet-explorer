@@ -1,11 +1,13 @@
 import { nanoid } from "nanoid";
 import {
+  CalendarIcon,
   CodeBlockIcon,
   CoinsIcon,
   CommandIcon,
   GitHubIcon,
   LowercaseIcon,
   ShuffleIcon,
+  SnippetsIcon,
   SpeechBubbleIcon,
   UnicodeIcon,
 } from "../components/Icons";
@@ -701,6 +703,110 @@ const unicodes = [
   },
 ];
 
+const date = [
+  {
+    id: nanoid(),
+    name: "Current Date",
+    text: "The date is {date}.",
+    keyword: "date",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Current Time",
+    text: "The current time is {time}.",
+    keyword: "time",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Current Date and Time",
+    text: "The current date and time is {datetime}.",
+    keyword: "datetime",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Weekday",
+    text: "Today is {weekday}.",
+    keyword: "day",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "1 Year from Today",
+    text: "1 year from today will be {weekday +1y}.",
+    keyword: "nextyear",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "4 Days from Today",
+    text: "4 days from today will be {day +4d}.",
+    keyword: "day",
+    type: "day+4",
+  },
+  {
+    id: nanoid(),
+    name: "Week Number",
+    text: 'This week number is {date "w"}.',
+    keyword: "wn",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Next Week Number",
+    text: 'Next week number is {date +7d "w"}.',
+    keyword: "nwk",
+    type: "template",
+  },
+];
+
+const misc = [
+  {
+    id: nanoid(),
+    name: "Email Address",
+    text: "your@email.com",
+    keyword: "email",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Address",
+    text: "123 Quebec Road, Montreal, QC, H3A 2B2",
+    keyword: "address",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "IBAN",
+    text: "NL88INGB7356737620",
+    keyword: "iban",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "VAT Number",
+    text: "GB 943182327",
+    keyword: "vat",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Crypto Wallet Address",
+    text: "0x0000000000000000000000000000000000000000",
+    keyword: "wa",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Cal.com Invite Link",
+    text: "https://cal.com/username/30min",
+    keyword: "cal",
+    type: "template",
+  },
+];
+
 export const snippetGroups = [
   {
     name: "Symbols",
@@ -722,6 +828,20 @@ export const snippetGroups = [
     gridCols: 4,
     snippets: unicodes,
     icon: UnicodeIcon,
+  },
+  {
+    name: "Date & Time",
+    slug: "/dates",
+    gridCols: 3,
+    snippets: date,
+    icon: CalendarIcon,
+  },
+  {
+    name: "Misceallenous",
+    slug: "/misc",
+    gridCols: 2,
+    snippets: misc,
+    icon: SnippetsIcon,
   },
   {
     name: "Spelling",
