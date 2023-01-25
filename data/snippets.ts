@@ -874,6 +874,13 @@ const misc = [
     keyword: "tg",
     type: "template",
   }
+  {
+    id: nanoid(),
+    name: "Clearbit Logo API",
+    text: "https://logo.clearbit.com/:domain",
+    keyword: "logo",
+    type: "template",
+  }
 ];
 
 export const snippetGroups = [
