@@ -245,6 +245,27 @@ const technical = [
   },
   {
     id: nanoid(),
+    text: "⎋",
+    name: "Escape",
+    keyword: "esc",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⇥",
+    name: "Tab",
+    keyword: "tab",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⏎",
+    name: "Return",
+    keyword: "return",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
     text: "",
     name: "Apple",
     keyword: "apple",
