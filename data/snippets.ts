@@ -649,7 +649,7 @@ const unicodes = [
     id: nanoid(),
     name: "Wink Unicode",
     text: "◕‿↼",
-    keyword: "tears-of-joy",
+    keyword: "wink",
     type: "unicode",
   },
   {
