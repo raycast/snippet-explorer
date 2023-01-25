@@ -530,6 +530,13 @@ const coding = [
     keyword: "sql-select",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Get Name of Current Branch",
+    text: "git branch --contains | cut -d \" \" -f 2",
+    keyword: "git-current-branch",
+    type: "template",
+  },
 ];
 
 const project = [
