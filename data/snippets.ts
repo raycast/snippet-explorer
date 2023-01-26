@@ -553,6 +553,13 @@ const coding = [
     keyword: "css-ac",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Make a New Folder and Open it in VS Code",
+    text: "mkdir {clipboard} && code -r {clipboard}",
+    keyword: "vscd-init",
+    type: "template",
+  },
 ];
 
 const project = [
