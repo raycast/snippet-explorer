@@ -477,6 +477,13 @@ const symbols = [
     keyword: "horizontal-ellipsis",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "▲",
+    name: "Triangle",
+    keyword: "triangle",
+    type: "symbol",
+  },
 ];
 
 const feedback = [
@@ -496,6 +503,15 @@ Thanks for taking the time to give us your feedback.
     id: nanoid(),
     text: `Glad to know it is resolved. Feel free to reach out for any further clarifications.`,
     keyword: "feedback-resolved",
+    type: "template",
+  },
+  {
+    name: "LinkedIn Feedback",
+    id: nanoid(),
+    text: `Hey {cursor},
+
+I'm thrilled about the opportunity. Unfortunately, I'm currently not available to accept new offers. However, I hope we can stay connected for future positions if you don't mind. Thank you again and hope to talk to you soon.`,
+    keyword: "feedback-lkdn",
     type: "template",
   },
 ];
@@ -898,7 +914,14 @@ const misc = [
     text: "https://t.me/yournickname",
     keyword: "tg",
     type: "template",
-  }
+  },
+  {
+    id: nanoid(),
+    name: "Excel No.",
+    text: "No.\n=ROW()-ROW($A$1)",
+    keyword: "xl-no",
+    type: "template",
+  },
 ];
 
 export const snippetGroups = [
@@ -931,7 +954,7 @@ export const snippetGroups = [
     icon: CalendarIcon,
   },
   {
-    name: "Misceallenous",
+    name: "Miscellaneous",
     slug: "/misc",
     gridCols: 2,
     snippets: misc,
