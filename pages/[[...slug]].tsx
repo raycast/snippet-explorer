@@ -58,6 +58,7 @@ type Modifiers =
   | "-"
   | "@"
   | "@@"
+  | "$"
   | ";"
   | ";;"
   | "none";
@@ -70,6 +71,7 @@ const modifiders: Modifiers[] = [
   "-",
   "@",
   "@@",
+  "$",
   ";",
   ";;",
   "none",

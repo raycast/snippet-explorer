@@ -144,6 +144,13 @@ const bulletsAndStars = [
   },
   {
     id: nanoid(),
+    text: "✦",
+    name: "Sparkle",
+    keyword: "sparkle",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
     text: "❖",
     name: "Diamond",
     keyword: "diamond",
@@ -245,6 +252,27 @@ const technical = [
   },
   {
     id: nanoid(),
+    text: "⎋",
+    name: "Escape",
+    keyword: "esc",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⇥",
+    name: "Tab",
+    keyword: "tab",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⏎",
+    name: "Return",
+    keyword: "return",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
     text: "",
     name: "Apple",
     keyword: "apple",
@@ -279,6 +307,13 @@ const currency = [
     text: "$",
     name: "Dollar",
     keyword: "usd",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₹",
+    name: "Indian Rupee",
+    keyword: "inr",
     type: "symbol",
   },
 ];
@@ -451,7 +486,7 @@ const feedback = [
     text: `Hi 👋
 
 Thanks for taking the time to give us your feedback.
-    
+
 {cursor}`,
     keyword: "feedback-thanks",
     type: "template",
@@ -502,6 +537,20 @@ const coding = [
     keyword: "css-ac",
     type: "template",
   },
+  {
+    name: "SQL Select",
+    id: nanoid(),
+    text: `SELECT * FROM {cursor} where id = `,
+    keyword: "sql-select",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Get Name of Current Branch",
+    text: "git branch --show-current",
+    keyword: "git-current-branch",
+    type: "template",
+  },
 ];
 
 const project = [
@@ -533,13 +582,13 @@ const project = [
 const github = [
   {
     id: nanoid(),
-    name: "Github Issue Template",
+    name: "GitHub Issue Template",
     text: `## Expected Behavior
 
 ## Actual Behavior
 
 ## Steps to Reproduce the Problem
-  
+
   1.
   1.
   1.
@@ -555,9 +604,9 @@ const github = [
   },
   {
     id: nanoid(),
-    name: "Github Pull Request Template",
+    name: "GitHub Pull Request Template",
     text: `<!-- Thanks for opening a PR! Your contribution is much appreciated.-->
-    
+
 Fixes #
 
 ## Proposed Changes
@@ -567,6 +616,26 @@ Fixes #
   -
 `,
     keyword: "gh-pr",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Table",
+    text: `| Title1 | Title2 |
+| ------- | ------- |
+| Content1 | Content2 |
+  `,
+    keyword: "gh-table",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Details",
+    text: `<details>
+<summary>Title</summary>
+{cursor}
+</details>`,
+    keyword: "gh-details",
     type: "template",
   },
 ];
@@ -701,6 +770,13 @@ const unicodes = [
     keyword: "lenny",
     type: "unicode",
   },
+  {
+    id: nanoid(),
+    name: "Noggles",
+    text: "⌐◨-◨",
+    keyword: "noggles",
+    type: "unicode",
+  },
 ];
 
 const date = [
@@ -805,6 +881,13 @@ const misc = [
     keyword: "cal",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Telegram Link",
+    text: "https://t.me/yournickname",
+    keyword: "tg",
+    type: "template",
+  },
 ];
 
 export const snippetGroups = [
@@ -837,7 +920,7 @@ export const snippetGroups = [
     icon: CalendarIcon,
   },
   {
-    name: "Misceallenous",
+    name: "Miscellaneous",
     slug: "/misc",
     gridCols: 2,
     snippets: misc,
