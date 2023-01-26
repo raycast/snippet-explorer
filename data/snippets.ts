@@ -901,13 +901,6 @@ const misc = [
   },
   {
     id: nanoid(),
-    name: "Excel No.",
-    text: "No.\n=ROW()-ROW($A$1)",
-    keyword: "xl-no",
-    type: "template",
-  },
-  {
-    id: nanoid(),
     name: "Weekly Standup Template",
     text: `Good morning ✨ 
 
