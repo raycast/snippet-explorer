@@ -574,6 +574,17 @@ const coding = [
     keyword: "git-reset-head",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Jest Testing",
+    text: `describe("{cursor}", () => {
+  it("should ", () => {
+    
+  });
+});`,
+    keyword: "jest",
+    type: "template",
+  },
 ];
 
 const project = [
