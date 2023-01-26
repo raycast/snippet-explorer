@@ -553,6 +553,9 @@ const coding = [
     keyword: "css-ac",
     type: "template",
   },
+];
+
+const project = [
   {
     name: "SQL Select",
     id: nanoid(),
@@ -583,32 +586,6 @@ const coding = [
   });
 });`,
     keyword: "jest",
-    type: "template",
-  },
-];
-
-const project = [
-  {
-    id: nanoid(),
-    text: `## Problem Statement
-
-*Why is this project important?* *What user feedback initiated it?*
-
-{cursor}
-
-## Initial Scope
-
-*What needs to be done to solve the problem? What are the constraints?*
-
-## Possible Solution
-
-*How can the scope be achieved? What are possible solutions?*
-
-## Open Questions
-
-*What is unclear and needs further investigations or discussions?*
-    `,
-    name: "Project Spec",
     type: "template",
   },
 ];
@@ -924,9 +901,24 @@ const misc = [
   },
   {
     id: nanoid(),
-    name: "Excel No.",
-    text: "No.\n=ROW()-ROW($A$1)",
-    keyword: "xl-no",
+    name: "Weekly Standup Template",
+    text: `Good morning ✨ 
+
+*Last week:*
+- {cursor}
+
+*Didn't do:*
+- 
+
+*This week:*
+- 
+
+*Blockers:*
+- 
+
+*Highlights:*
+- `,
+    keyword: "standup",
     type: "template",
   },
 ];
