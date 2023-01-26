@@ -477,6 +477,13 @@ const symbols = [
     keyword: "horizontal-ellipsis",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "▲",
+    name: "Triangle",
+    keyword: "triangle",
+    type: "symbol",
+  },
 ];
 
 const feedback = [
@@ -496,6 +503,15 @@ Thanks for taking the time to give us your feedback.
     id: nanoid(),
     text: `Glad to know it is resolved. Feel free to reach out for any further clarifications.`,
     keyword: "feedback-resolved",
+    type: "template",
+  },
+  {
+    name: "LinkedIn Feedback",
+    id: nanoid(),
+    text: `Hey {cursor},
+
+I'm thrilled about the opportunity. Unfortunately, I'm currently not available to accept new offers. However, I hope we can stay connected for future positions if you don't mind. Thank you again and hope to talk to you soon.`,
+    keyword: "feedback-lkdn",
     type: "template",
   },
 ];
@@ -570,7 +586,25 @@ end try`,
 return theResponse`,
     keyword: "as-chls",
     type: "template",    
-  }
+  },
+  {
+    id: nanoid(),
+    name: "Reset HEAD commit",
+    text: "git reset --soft HEAD~{cursor}",
+    keyword: "git-reset-head",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Jest Testing",
+    text: `describe("{cursor}", () => {
+  it("should ", () => {
+    
+  });
+});`,
+    keyword: "jest",
+    type: "template",
+  },
 ];
 
 const project = [
@@ -906,6 +940,13 @@ const misc = [
     name: "Telegram Link",
     text: "https://t.me/yournickname",
     keyword: "tg",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Excel No.",
+    text: "No.\n=ROW()-ROW($A$1)",
+    keyword: "xl-no",
     type: "template",
   },
 ];
