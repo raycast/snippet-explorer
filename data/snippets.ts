@@ -501,7 +501,7 @@ Thanks for taking the time to give us your feedback.
   {
     name: "LinkedIn Feedback",
     id: nanoid(),
-    text: `Hey {recruiter_name},
+    text: `Hey {cursor},
 
 I'm thrilled about the opportunity. Unfortunately, I'm currently not available to accept new offers. However, I hope we can stay connected for future positions if you don't mind. Thank you again and hope to talk to you soon.`,
     keyword: "feedback-lkdn",
