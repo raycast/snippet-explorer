@@ -569,6 +569,7 @@ end try`,
     text: `set theResponse to (choose from list {"Option 1", "Option 2", "Option 3"} with title "Title" with prompt "{cursor}" default items {"Option 2"} OK button name "Continue" cancel button name "Cancel" without multiple selections allowed and empty selection allowed)
 return theResponse`,
     keyword: "as-chls",
+    type: "template",    
   }
 ];
 
