@@ -551,6 +551,13 @@ const coding = [
     keyword: "git-current-branch",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Reset HEAD commit",
+    text: "git reset --soft HEAD~{cursor}",
+    keyword: "git-reset-head",
+    type: "template",
+  },
 ];
 
 const project = [
