@@ -569,6 +569,13 @@ const coding = [
   },
   {
     id: nanoid(),
+    name: "Reset HEAD commit",
+    text: "git reset --soft HEAD~{cursor}",
+    keyword: "git-reset-head",
+    type: "template",
+  },
+  {
+    id: nanoid(),
     name: "Jest Testing",
     text: `describe("{cursor}", () => {
   it("should ", () => {
