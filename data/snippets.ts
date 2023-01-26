@@ -45,56 +45,56 @@ const arrows = [
     id: nanoid(),
     text: "↖",
     name: "Arrow Up Left",
-    keyword: "up-left",
+    keyword: "upleft",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↗︎",
     name: "Arrow Up Right",
-    keyword: "up-right",
+    keyword: "upright",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↙",
     name: "Arrow Down Left",
-    keyword: "down-left",
+    keyword: "downleft",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↘",
     name: "Arrow Down Right",
-    keyword: "down-right",
+    keyword: "downright",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "⟶",
     name: "Arrow Long Right",
-    keyword: "long-right",
+    keyword: "longright",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "⟵",
     name: "Arrow Long Left",
-    keyword: "long-left",
+    keyword: "longleft",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↩",
     name: "Arrow Left Hook",
-    keyword: "left-hook",
+    keyword: "lefthook",
     type: "symbol",
   },
   {
     id: nanoid(),
     text: "↪",
     name: "Arrow Right Hook",
-    keyword: "right-hook",
+    keyword: "righthook",
     type: "symbol",
   },
   {
@@ -140,6 +140,13 @@ const bulletsAndStars = [
     text: "☆",
     name: "Star Outline",
     keyword: "star-outline",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "✦",
+    name: "Sparkle",
+    keyword: "sparkle",
     type: "symbol",
   },
   {
@@ -245,6 +252,27 @@ const technical = [
   },
   {
     id: nanoid(),
+    text: "⎋",
+    name: "Escape",
+    keyword: "esc",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⇥",
+    name: "Tab",
+    keyword: "tab",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "⏎",
+    name: "Return",
+    keyword: "return",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
     text: "",
     name: "Apple",
     keyword: "apple",
@@ -279,6 +307,13 @@ const currency = [
     text: "$",
     name: "Dollar",
     keyword: "usd",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₹",
+    name: "Indian Rupee",
+    keyword: "inr",
     type: "symbol",
   },
 ];
@@ -442,6 +477,13 @@ const symbols = [
     keyword: "horizontal-ellipsis",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "▲",
+    name: "Triangle",
+    keyword: "triangle",
+    type: "symbol",
+  },
 ];
 
 const feedback = [
@@ -451,7 +493,7 @@ const feedback = [
     text: `Hi 👋
 
 Thanks for taking the time to give us your feedback.
-    
+
 {cursor}`,
     keyword: "feedback-thanks",
     type: "template",
@@ -461,6 +503,15 @@ Thanks for taking the time to give us your feedback.
     id: nanoid(),
     text: `Glad to know it is resolved. Feel free to reach out for any further clarifications.`,
     keyword: "feedback-resolved",
+    type: "template",
+  },
+  {
+    name: "LinkedIn Feedback",
+    id: nanoid(),
+    text: `Hey {cursor},
+
+I'm thrilled about the opportunity. Unfortunately, I'm currently not available to accept new offers. However, I hope we can stay connected for future positions if you don't mind. Thank you again and hope to talk to you soon.`,
+    keyword: "feedback-lkdn",
     type: "template",
   },
 ];
@@ -502,18 +553,50 @@ const coding = [
     keyword: "css-ac",
     type: "template",
   },
+  {
+    name: "SQL Select",
+    id: nanoid(),
+    text: `SELECT * FROM {cursor} where id = `,
+    keyword: "sql-select",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Get Name of Current Branch",
+    text: "git branch --show-current",
+    keyword: "git-current-branch",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Reset HEAD commit",
+    text: "git reset --soft HEAD~{cursor}",
+    keyword: "git-reset-head",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Jest Testing",
+    text: `describe("{cursor}", () => {
+  it("should ", () => {
+    
+  });
+});`,
+    keyword: "jest",
+    type: "template",
+  },
 ];
 
 const github = [
   {
     id: nanoid(),
-    name: "Github Issue Template",
+    name: "GitHub Issue Template",
     text: `## Expected Behavior
 
 ## Actual Behavior
 
 ## Steps to Reproduce the Problem
-  
+
   1.
   1.
   1.
@@ -529,9 +612,9 @@ const github = [
   },
   {
     id: nanoid(),
-    name: "Github Pull Request Template",
+    name: "GitHub Pull Request Template",
     text: `<!-- Thanks for opening a PR! Your contribution is much appreciated.-->
-    
+
 Fixes #
 
 ## Proposed Changes
@@ -541,6 +624,26 @@ Fixes #
   -
 `,
     keyword: "gh-pr",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Table",
+    text: `| Title1 | Title2 |
+| ------- | ------- |
+| Content1 | Content2 |
+  `,
+    keyword: "gh-table",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Details",
+    text: `<details>
+<summary>Title</summary>
+{cursor}
+</details>`,
+    keyword: "gh-details",
     type: "template",
   },
 ];
@@ -675,6 +778,13 @@ const unicodes = [
     keyword: "lenny",
     type: "unicode",
   },
+  {
+    id: nanoid(),
+    name: "Noggles",
+    text: "⌐◨-◨",
+    keyword: "noggles",
+    type: "unicode",
+  },
 ];
 
 const date = [
@@ -781,6 +891,21 @@ const misc = [
   },
   {
     id: nanoid(),
+    name: "Telegram Link",
+    text: "https://t.me/yournickname",
+    keyword: "tg",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Excel No.",
+    text: "No.\n=ROW()-ROW($A$1)",
+    keyword: "xl-no",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Weekly Standup Template",
     text: `Good morning ✨ 
 
 *Last week:*
@@ -797,7 +922,6 @@ const misc = [
 
 *Highlights:*
 - `,
-    name: "Weekly Standup Template",
     keyword: "standup",
     type: "template",
   },
@@ -833,7 +957,7 @@ export const snippetGroups = [
     icon: CalendarIcon,
   },
   {
-    name: "Misceallenous",
+    name: "Miscellaneous",
     slug: "/misc",
     gridCols: 2,
     snippets: misc,
