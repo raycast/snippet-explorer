@@ -504,57 +504,6 @@ const coding = [
   },
 ];
 
-const project = [
-  {
-    id: nanoid(),
-    text: `## Problem Statement
-
-*Why is this project important?* *What user feedback initiated it?*
-
-{cursor}
-
-## Initial Scope
-
-*What needs to be done to solve the problem? What are the constraints?*
-
-## Possible Solution
-
-*How can the scope be achieved? What are possible solutions?*
-
-## Open Questions
-
-*What is unclear and needs further investigations or discussions?*
-    `,
-    name: "Project Spec",
-    type: "template",
-  },
-  {
-    id: nanoid(),
-    text: `gm :sparkles: :unicorn_face: :rainbow:
-
-*:arrow_backward: Last week:*
-- {cursor}
-
-*:no_good: Didn’t do:*
-- 
-
-*:arrow_forward: This week:*
-- 
-
-*:double_vertical_bar: Blockers:*
-- 
-
-*:bulb: Highlights:*
-- 
-
-*:fire: Fires:*
-- `,
-    name: "Weekly Standup Template",
-    keyword: "standup",
-    type: "template",
-  },
-];
-
 const github = [
   {
     id: nanoid(),
@@ -828,6 +777,28 @@ const misc = [
     name: "Cal.com Invite Link",
     text: "https://cal.com/username/30min",
     keyword: "cal",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    text: `Good morning ✨ 
+
+*Last week:*
+- {cursor}
+
+*Didn't do:*
+- 
+
+*This week:*
+- 
+
+*Blockers:*
+- 
+
+*Highlights:*
+- `,
+    name: "Weekly Standup Template",
+    keyword: "standup",
     type: "template",
   },
 ];
