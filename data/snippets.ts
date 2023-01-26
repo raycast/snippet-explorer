@@ -553,6 +553,9 @@ const coding = [
     keyword: "css-ac",
     type: "template",
   },
+];
+
+const project = [
   {
     name: "SQL Select",
     id: nanoid(),
