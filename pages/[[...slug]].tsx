@@ -324,7 +324,7 @@ export default function Home({ onTouchReady }) {
                 <DialogTitle className={styles.dialogTitle}>About</DialogTitle>
                 <DialogDescription className={styles.dialogDescription}>
                   Snippet Explorer is a tool to easily browse and import
-                  Snippets directly in <a href="https://raycast.com">Raycast</a>
+                  Snippets directly to <a href="https://raycast.com">Raycast</a>
                   .
                 </DialogDescription>
                 <p className={styles.dialogDescription}>

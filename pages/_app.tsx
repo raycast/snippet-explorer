@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta
           property="og:description"
           content="Snippet Explorer is a tool to easily browse and import
-          Snippets directly in Raycast."
+          Snippets directly to Raycast."
           key="og-description"
         />
         <meta property="og:type" content="website" key="og-type" />
@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta
           name="description"
           content="Snippet Explorer is a tool to easily browse and import
-          Snippets directly in Raycast."
+          Snippets directly to Raycast."
         />
       </Head>
       <ToastProvider swipeDirection="down">
