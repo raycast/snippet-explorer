@@ -669,6 +669,22 @@ Fixes #
     keyword: "gh-details",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "GitHub Note",
+    text: `> **Note**
+> {cursor}`,
+    keyword: "gh-note",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Warning",
+    text: `> **Warning**
+> {cursor}`,
+    keyword: "gh-warning",
+    type: "template",
+  },
 ];
 
 const spelling = [
