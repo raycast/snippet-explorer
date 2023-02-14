@@ -557,7 +557,7 @@ const coding = [
     name: "DOM Query Selector",
     id: nanoid(),
     text: `document.querySelector({cursor})`,
-    keyword: "ds",
+    keyword: "qs",
     type: "template",
   },
 ];
