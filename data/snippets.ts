@@ -609,6 +609,13 @@ const coding = [
     keyword: "css-ac",
     type: "template",
   },
+  {
+    name: "Protocol",
+    id: nanoid(),
+    text: `https://`,
+    keyword: "www",
+    type: "template",
+  },
 ];
 
 const project = [
