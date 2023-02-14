@@ -609,6 +609,13 @@ const coding = [
     keyword: "css-ac",
     type: "template",
   },
+  {
+    name: "DOM Query Selector",
+    id: nanoid(),
+    text: `document.querySelector({cursor})`,
+    keyword: "qs",
+    type: "template",
+  },
 ];
 
 const project = [
