@@ -61,9 +61,11 @@ type Modifiers =
   | "$"
   | ";"
   | ";;"
+  | "/"
+  | "//"
   | "none";
 
-const modifiders: Modifiers[] = [
+const modifiers: Modifiers[] = [
   "!",
   ":",
   "_",
@@ -74,6 +76,8 @@ const modifiders: Modifiers[] = [
   "$",
   ";",
   ";;",
+  "/",
+  "//",
   "none",
 ];
 
@@ -462,7 +466,7 @@ export default function Home({ onTouchReady }) {
                         setStartMod(newValue)
                       }
                     >
-                      {modifiders.map((mod) => (
+                      {modifiers.map((mod) => (
                         <SelectItem key={mod} value={mod}>
                           {mod}
                         </SelectItem>
@@ -477,7 +481,7 @@ export default function Home({ onTouchReady }) {
                         setEndMod(newValue)
                       }
                     >
-                      {modifiders.map((mod) => (
+                      {modifiers.map((mod) => (
                         <SelectItem key={mod} value={mod}>
                           {mod}
                         </SelectItem>
