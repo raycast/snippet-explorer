@@ -616,7 +616,7 @@ const coding = [
     keyword: "vscd-init",
     type: "template",
   },
-   {
+  {
     name: "DOM Query Selector",
     id: nanoid(),
     text: `document.querySelector({cursor})`,
