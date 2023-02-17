@@ -316,6 +316,62 @@ const currency = [
     keyword: "inr",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "₣",
+    name: "Franc",
+    keyword: "fr",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₩",
+    name: "Won",
+    keyword: "krw",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₱",
+    name: "Peso",
+    keyword: "php",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₦",
+    name: "Naira",
+    keyword: "ngn",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "฿",
+    name: "Baht",
+    keyword: "thb",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₫",
+    name: "Dong",
+    keyword: "vnd",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₿",
+    name: "Bitcoin",
+    keyword: "btc",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "Ξ",
+    name: "Ethereum",
+    keyword: "eth",
+    type: "symbol",
+  },
 ];
 
 const maths = [
@@ -560,6 +616,13 @@ const coding = [
     keyword: "vscd-init",
     type: "template",
   },
+   {
+    name: "DOM Query Selector",
+    id: nanoid(),
+    text: `document.querySelector({cursor})`,
+    keyword: "qs",
+    type: "template",
+  },
 ];
 
 const project = [
@@ -595,7 +658,7 @@ end try`,
     text: `set theResponse to (choose from list {"Option 1", "Option 2", "Option 3"} with title "Title" with prompt "{cursor}" default items {"Option 2"} OK button name "Continue" cancel button name "Cancel" without multiple selections allowed and empty selection allowed)
 return theResponse`,
     keyword: "as-chls",
-    type: "template",    
+    type: "template",
   },
   {
     id: nanoid(),
@@ -674,6 +737,22 @@ Fixes #
 {cursor}
 </details>`,
     keyword: "gh-details",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Note",
+    text: `> **Note**
+> {cursor}`,
+    keyword: "gh-note",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Warning",
+    text: `> **Warning**
+> {cursor}`,
+    keyword: "gh-warning",
     type: "template",
   },
 ];

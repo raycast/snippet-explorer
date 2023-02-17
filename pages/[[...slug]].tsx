@@ -61,9 +61,11 @@ type Modifiers =
   | "$"
   | ";"
   | ";;"
+  | "/"
+  | "//"
   | "none";
 
-const modifiders: Modifiers[] = [
+const modifiers: Modifiers[] = [
   "!",
   ":",
   "_",
@@ -74,6 +76,8 @@ const modifiders: Modifiers[] = [
   "$",
   ";",
   ";;",
+  "/",
+  "//",
   "none",
 ];
 
@@ -324,7 +328,7 @@ export default function Home({ onTouchReady }) {
                 <DialogTitle className={styles.dialogTitle}>About</DialogTitle>
                 <DialogDescription className={styles.dialogDescription}>
                   Snippet Explorer is a tool to easily browse and import
-                  Snippets directly in <a href="https://raycast.com">Raycast</a>
+                  Snippets directly to <a href="https://raycast.com">Raycast</a>
                   .
                 </DialogDescription>
                 <p className={styles.dialogDescription}>
@@ -462,7 +466,7 @@ export default function Home({ onTouchReady }) {
                         setStartMod(newValue)
                       }
                     >
-                      {modifiders.map((mod) => (
+                      {modifiers.map((mod) => (
                         <SelectItem key={mod} value={mod}>
                           {mod}
                         </SelectItem>
@@ -477,7 +481,7 @@ export default function Home({ onTouchReady }) {
                         setEndMod(newValue)
                       }
                     >
-                      {modifiders.map((mod) => (
+                      {modifiers.map((mod) => (
                         <SelectItem key={mod} value={mod}>
                           {mod}
                         </SelectItem>
