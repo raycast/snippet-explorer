@@ -610,6 +610,13 @@ const coding = [
     type: "template",
   },
   {
+    name: "Create and Open Folder in VSCode",
+    id: nanoid(),
+    text: "mkdir {clipboard} && code -r {clipboard}",
+    keyword: "vscd-init",
+    type: "template",
+  },
+  {
     name: "DOM Query Selector",
     id: nanoid(),
     text: `document.querySelector({cursor})`,
