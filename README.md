@@ -33,7 +33,7 @@ npm run dev
 
 ### Snippets
 
-We welcome contribition to the Snippets data. Here's how you can contribute:
+We welcome contribution to the Snippets data. Here's how you can contribute:
 
 - Open `./data/snippets.ts`
 - Add your snippet to relevant category
