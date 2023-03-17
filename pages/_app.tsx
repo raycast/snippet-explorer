@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "../styles/globals.css";
 
@@ -9,6 +9,7 @@ import { ToastProvider, ToastViewport } from "../components/Toast";
 import { useSectionInViewObserver } from "../utils/useSectionInViewObserver";
 
 const inter = Inter({ subsets: ["latin"] });
+const jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [enableViewObserver, setEnableViewObserver] = React.useState(false);
@@ -51,12 +52,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <ToastProvider swipeDirection="down">
-        <div className={inter.className}>
-          <Component
-            {...pageProps}
-            onTouchReady={() => setEnableViewObserver(true)}
-          />
-        </div>
+        <style jsx global>{`
+          :root {
+            --font-inter: ${inter.style.fontFamily};
+            --font-jetbrains: ${jetBrainsMono.style.fontFamily};
+          }
+        `}</style>
+        <Component
+          {...pageProps}
+          onTouchReady={() => setEnableViewObserver(true)}
+        />
         <ToastViewport />
       </ToastProvider>
       <Analytics />

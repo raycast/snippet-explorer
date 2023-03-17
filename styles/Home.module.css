@@ -360,6 +360,7 @@
 }
 
 .template {
+  font-family: var(--font-jetbrains);
   font-size: 13px;
   line-height: 1.6;
   white-space: pre-wrap;
@@ -368,6 +369,7 @@
 }
 
 .keyword {
+  font-family: var(--font-jetbrains);
   display: inline-block;
   padding: 4px 6px;
   color: #f800a2;
