@@ -360,7 +360,6 @@
 }
 
 .template {
-  font-family: JetBrains Mono;
   font-size: 13px;
   line-height: 1.6;
   white-space: pre-wrap;
@@ -369,7 +368,6 @@
 }
 
 .keyword {
-  font-family: JetBrains Mono;
   display: inline-block;
   padding: 4px 6px;
   color: #f800a2;
@@ -377,51 +375,6 @@
   border-radius: 6px;
   font-size: 11px;
   font-weight: 500;
-}
-
-.checkbox {
-  opacity: 0;
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-}
-
-.checkoutViewport {
-  position: fixed;
-  bottom: 24px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 3;
-  pointer-events: none;
-  display: none;
-}
-
-.checkout {
-  margin: 0 auto;
-  border-radius: 10px;
-  background-color: #191919;
-  padding: 24px;
-  display: inline-flex;
-  align-items: center;
-  gap: 24px;
-  border: 1px solid hsla(0, 0%, 100%, 0.2);
-  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 60%);
-  pointer-events: all;
-  width: calc(100% - 20vw);
-  flex-wrap: wrap;
-
-  @media (min-width: 640px) {
-    flex-wrap: nowrap;
-    width: 620px;
-  }
-}
-
-.checkoutActions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
 }
 
 .trigger {

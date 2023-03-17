@@ -3,6 +3,7 @@ import React from "react";
 import NextLink from "next/link";
 import SelectionArea, { SelectionEvent } from "@viselect/react";
 import { useRouter } from "next/router";
+import { JetBrains_Mono } from "next/font/google";
 import copy from "copy-to-clipboard";
 import { Select, SelectItem } from "../components/Select";
 import {
@@ -43,6 +44,8 @@ import { snippetGroups } from "../data/snippets";
 import styles from "../styles/Home.module.css";
 import { Instructions } from "../components/Instructions";
 import { useSectionInView } from "../utils/useSectionInViewObserver";
+
+const jetBrainsMono = JetBrains_Mono({ subsets: ["latin"] });
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
@@ -702,7 +705,9 @@ export default function Home({ onTouchReady }) {
                               {snippet.type === "template" ||
                               snippet.type === "spelling" ? (
                                 <ScrollArea>
-                                  <pre className={styles.template}>
+                                  <pre
+                                    className={`${styles.template} ${jetBrainsMono.className}`}
+                                  >
                                     {snippet.text}
                                   </pre>
                                 </ScrollArea>
@@ -717,7 +722,11 @@ export default function Home({ onTouchReady }) {
                             </div>
                             <span className={styles.name}>{snippet.name}</span>
                             {snippet.keyword && (
-                              <span className={styles.keyword}>{keyword}</span>
+                              <span
+                                className={`${styles.keyword} ${jetBrainsMono.className}`}
+                              >
+                                {keyword}
+                              </span>
                             )}
                           </div>
                         );
