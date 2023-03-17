@@ -466,6 +466,13 @@ const maths = [
     keyword: "3/8",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "∞",
+    name: "Infinity",
+    keyword: "infinity",
+    type: "symbol",
+  },
 ];
 
 const symbols = [
