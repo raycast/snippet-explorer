@@ -928,14 +928,14 @@ const date = [
   {
     id: nanoid(),
     name: "Weekday",
-    text: "Today is {weekday}.",
+    text: "Today is {day}.",
     keyword: "day",
     type: "template",
   },
   {
     id: nanoid(),
     name: "1 Year from Today",
-    text: "1 year from today will be {weekday +1y}.",
+    text: "1 year from today will be {day +1y}.",
     keyword: "nextyear",
     type: "template",
   },
