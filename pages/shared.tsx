@@ -4,13 +4,7 @@ import SelectionArea, { SelectionEvent } from "@viselect/react";
 import { useRouter } from "next/router";
 import copy from "copy-to-clipboard";
 import { nanoid } from "nanoid";
-import {
-  ChevronDownIcon,
-  ClipboardIcon,
-  DownloadIcon,
-  PlusCircle,
-  SnippetsIcon,
-} from "../components/Icons";
+import { SnippetsIcon } from "../components/Icons";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +19,12 @@ import { ButtonGroup } from "../components/ButtonGroup";
 import { isTouchDevice } from "../utils/isTouchDevice";
 import styles from "../styles/Home.module.css";
 import buttonStyles from "../components/Button.module.css";
+import {
+  ChevronDownIcon,
+  CopyClipboardIcon,
+  DownloadIcon,
+  PlusCircleIcon,
+} from "@raycast/icons";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
@@ -265,7 +265,7 @@ export default function Home() {
               disabled={selectedSnippetsConfig.length === 0}
               onClick={() => handleAddToRaycast()}
             >
-              <PlusCircle /> Add to Raycast
+              <PlusCircleIcon /> Add to Raycast
             </Button>
 
             <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
@@ -293,7 +293,7 @@ export default function Home() {
                   disabled={selectedSnippetsConfig.length === 0}
                   onSelect={() => handleCopyData()}
                 >
-                  <ClipboardIcon /> Copy JSON{" "}
+                  <CopyClipboardIcon /> Copy JSON{" "}
                   <span className={styles.hotkeys}>
                     <kbd>⌘</kbd>
                     <kbd>⌥</kbd>
@@ -309,7 +309,7 @@ export default function Home() {
 
       <Toast open={copied} onOpenChange={setCopied}>
         <ToastTitle className={styles.toastTitle}>
-          <ClipboardIcon /> Copied to clipboard
+          <CopyClipboardIcon /> Copied to clipboard
         </ToastTitle>
       </Toast>
 

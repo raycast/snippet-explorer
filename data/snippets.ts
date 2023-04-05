@@ -1,16 +1,18 @@
 import { nanoid } from "nanoid";
 import {
+  CommandIcon,
+  GitHubIcon,
+  SnippetsIcon,
+  UnicodeIcon,
+} from "../components/Icons";
+import {
   CalendarIcon,
   CodeBlockIcon,
   CoinsIcon,
-  CommandIcon,
-  GitHubIcon,
   LowercaseIcon,
   ShuffleIcon,
-  SnippetsIcon,
   SpeechBubbleIcon,
-  UnicodeIcon,
-} from "../components/Icons";
+} from "@raycast/icons";
 
 const arrows = [
   {
