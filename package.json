@@ -16,6 +16,7 @@
     "@radix-ui/react-scroll-area": "^1.0.2",
     "@radix-ui/react-select": "^1.1.1",
     "@radix-ui/react-toast": "^1.1.1",
+    "@raycast/icons": "^0.1.1",
     "@vercel/analytics": "^0.1.8",
     "@viselect/react": "^3.2.4",
     "autoprefixer": "^10.4.11",
