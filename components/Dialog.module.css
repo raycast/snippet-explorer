@@ -77,4 +77,9 @@
   &:hover {
     color: hsla(0, 0%, 100%, 1);
   }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
 }

@@ -30,7 +30,7 @@ export const DialogContent = React.forwardRef<
             {children}
             {showCloseButton && (
               <DialogPrimitive.Close className={styles.close}>
-                <XMarkCircleFilledIcon width={24} height={24} />
+                <XMarkCircleFilledIcon />
               </DialogPrimitive.Close>
             )}
           </div>
