@@ -632,6 +632,13 @@ const coding = [
     keyword: "qs",
     type: "template",
   },
+  {
+    name: "Markdown Link",
+    id: nanoid(),
+    text: `[{cursor}]({clipboard})`,
+    keyword: "md-lnk",
+    type: "template",
+  },
 ];
 
 const project = [
