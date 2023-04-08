@@ -626,6 +626,13 @@ const coding = [
     type: "template",
   },
   {
+    name: "Create and Open Folder in IntelliJ IDEA",
+    id: nanoid(),
+    text: "mkdir {clipboard} && idea {clipboard}",
+    keyword: "idea-init",
+    type: "template",
+  },
+  {
     name: "DOM Query Selector",
     id: nanoid(),
     text: `document.querySelector({cursor})`,
