@@ -50,22 +50,7 @@ const raycastProtocolForEnvironments = {
 };
 const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
 
-type Modifiers =
-  | "!"
-  | ":"
-  | "_"
-  | "__"
-  | "-"
-  | "@"
-  | "@@"
-  | "$"
-  | ";"
-  | ";;"
-  | "/"
-  | "//"
-  | "none";
-
-const modifiers: Modifiers[] = [
+const modifiers = [
   "!",
   ":",
   "_",
@@ -79,7 +64,9 @@ const modifiers: Modifiers[] = [
   "/",
   "//",
   "none",
-];
+] as const;
+
+type Modifiers = (typeof modifiers)[number];
 
 export function getStaticPaths() {
   const paths = snippetGroups.map((snippet) => ({
