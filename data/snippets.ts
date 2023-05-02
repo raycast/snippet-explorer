@@ -1,14 +1,11 @@
 import { nanoid } from "nanoid";
-import {
-  CommandIcon,
-  GitHubIcon,
-  SnippetsIcon,
-  UnicodeIcon,
-} from "../components/Icons";
+import { GitHubIcon, SnippetsIcon } from "../components/Icons";
 import {
   CalendarIcon,
   CodeBlockIcon,
   CoinsIcon,
+  CommandSymbolIcon,
+  KeyboardIcon,
   LowercaseIcon,
   ShuffleIcon,
   SpeechBubbleIcon,
@@ -989,7 +986,7 @@ export const snippetGroups = [
     slug: "/symbols",
     gridCols: 4,
     snippets: [...technical, ...bulletsAndStars, ...maths, ...symbols],
-    icon: CommandIcon,
+    icon: CommandSymbolIcon,
   },
   {
     name: "Arrows",
@@ -1003,7 +1000,7 @@ export const snippetGroups = [
     slug: "/unicode",
     gridCols: 4,
     snippets: unicodes,
-    icon: UnicodeIcon,
+    icon: KeyboardIcon,
   },
   {
     name: "Date & Time",
