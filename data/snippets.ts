@@ -634,61 +634,6 @@ const coding = [
   },
 ];
 
-const project = [
-  {
-    name: "SQL Select",
-    id: nanoid(),
-    text: `SELECT * FROM {cursor} where id = `,
-    keyword: "sql-select",
-    type: "template",
-  },
-  {
-    name: "Get Name of Current Branch",
-    id: nanoid(),
-    text: "git branch --show-current",
-    keyword: "git-current-branch",
-    type: "template",
-  },
-  {
-    name: "AppleScript Dialog",
-    id: nanoid(),
-    text: `try
-  set theResponse to (display dialog "{cursor}" default answer "Placeholder input" buttons {"Option 1", "Option 2", "Cancel"} default button 1 cancel button 3 with title "My Dialog" with icon note giving up after 1800 without hidden answer)
-  return theResponse
-on error
-  return "Canceled!"
-end try`,
-    keyword: "as-diag",
-    type: "template",
-  },
-  {
-    name: "AppleScript Choose From List",
-    id: nanoid(),
-    text: `set theResponse to (choose from list {"Option 1", "Option 2", "Option 3"} with title "Title" with prompt "{cursor}" default items {"Option 2"} OK button name "Continue" cancel button name "Cancel" without multiple selections allowed and empty selection allowed)
-return theResponse`,
-    keyword: "as-chls",
-    type: "template",
-  },
-  {
-    id: nanoid(),
-    name: "Reset HEAD commit",
-    text: "git reset --soft HEAD~{cursor}",
-    keyword: "git-reset-head",
-    type: "template",
-  },
-  {
-    id: nanoid(),
-    name: "Jest Testing",
-    text: `describe("{cursor}", () => {
-  it("should ", () => {
-    
-  });
-});`,
-    keyword: "jest",
-    type: "template",
-  },
-];
-
 const github = [
   {
     id: nanoid(),
