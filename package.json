@@ -16,13 +16,14 @@
     "@radix-ui/react-scroll-area": "^1.0.2",
     "@radix-ui/react-select": "^1.1.1",
     "@radix-ui/react-toast": "^1.1.1",
+    "@raycast/icons": "^0.1.1",
     "@vercel/analytics": "^0.1.8",
     "@viselect/react": "^3.2.4",
     "autoprefixer": "^10.4.11",
     "copy-to-clipboard": "^3.3.2",
     "lodash.debounce": "^4.0.8",
     "nanoid": "^4.0.0",
-    "next": "13.0.2",
+    "next": "^13.2.4",
     "postcss": "^8.4.16",
     "postcss-nested": "^5.0.6",
     "react": "18.2.0",
@@ -32,6 +33,6 @@
   "devDependencies": {
     "@types/node": "18.11.9",
     "eslint": "8.27.0",
-    "eslint-config-next": "13.0.2"
+    "eslint-config-next": "^13.2.4"
   }
 }

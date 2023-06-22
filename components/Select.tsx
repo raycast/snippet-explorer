@@ -1,7 +1,7 @@
 import React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 
-import { ChevronDownIcon } from "./Icons";
+import { ChevronDownIcon } from "@raycast/icons";
 
 import styles from "./Select.module.css";
 

@@ -14,8 +14,9 @@ body {
 body,
 input,
 button {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   color: #fff;
   -webkit-text-size-adjust: 100%;
 }
@@ -35,6 +36,8 @@ button:disabled {
 
 svg {
   display: block;
+  width: 16px;
+  height: 16px;
 }
 
 a {
@@ -47,20 +50,8 @@ ol {
   list-style: none;
 }
 
-code {
-  font-family: JetBrains Mono;
-  border-radius: 4px;
-  padding: 0 4px;
-  font-size: 0.9em;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: hsla(0, 0%, 100%, 0.1);
-  color: hsla(0, 0%, 100%, 0.6);
-}
-
 kbd {
-  font-family: Inter;
+  font-family: var(--font-inter);
   width: 24px;
   height: 24px;
   font-weight: 400;

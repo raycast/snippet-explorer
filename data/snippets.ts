@@ -1,16 +1,15 @@
 import { nanoid } from "nanoid";
+import { GitHubIcon, SnippetsIcon } from "../components/Icons";
 import {
   CalendarIcon,
   CodeBlockIcon,
   CoinsIcon,
-  CommandIcon,
-  GitHubIcon,
+  CommandSymbolIcon,
+  KeyboardIcon,
   LowercaseIcon,
   ShuffleIcon,
-  SnippetsIcon,
   SpeechBubbleIcon,
-  UnicodeIcon,
-} from "../components/Icons";
+} from "@raycast/icons";
 
 const arrows = [
   {
@@ -316,6 +315,62 @@ const currency = [
     keyword: "inr",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "₣",
+    name: "Franc",
+    keyword: "fr",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₩",
+    name: "Won",
+    keyword: "krw",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₱",
+    name: "Peso",
+    keyword: "php",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₦",
+    name: "Naira",
+    keyword: "ngn",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "฿",
+    name: "Baht",
+    keyword: "thb",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₫",
+    name: "Dong",
+    keyword: "vnd",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "₿",
+    name: "Bitcoin",
+    keyword: "btc",
+    type: "symbol",
+  },
+  {
+    id: nanoid(),
+    text: "Ξ",
+    name: "Ethereum",
+    keyword: "eth",
+    type: "symbol",
+  },
 ];
 
 const maths = [
@@ -410,6 +465,13 @@ const maths = [
     keyword: "3/8",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "∞",
+    name: "Infinity",
+    keyword: "infinity",
+    type: "symbol",
+  },
 ];
 
 const symbols = [
@@ -477,6 +539,13 @@ const symbols = [
     keyword: "horizontal-ellipsis",
     type: "symbol",
   },
+  {
+    id: nanoid(),
+    text: "▲",
+    name: "Triangle",
+    keyword: "triangle",
+    type: "symbol",
+  },
 ];
 
 const feedback = [
@@ -496,6 +565,15 @@ Thanks for taking the time to give us your feedback.
     id: nanoid(),
     text: `Glad to know it is resolved. Feel free to reach out for any further clarifications.`,
     keyword: "feedback-resolved",
+    type: "template",
+  },
+  {
+    name: "LinkedIn Feedback",
+    id: nanoid(),
+    text: `Hey {cursor},
+
+I'm thrilled about the opportunity. Unfortunately, I'm currently not available to accept new offers. However, I hope we can stay connected for future positions if you don't mind. Thank you again and hope to talk to you soon.`,
+    keyword: "feedback-lkdn",
     type: "template",
   },
 ];
@@ -643,43 +721,17 @@ const coding = [
     type: "template",
   },
   {
-    name: "SQL Select",
+    name: "Create and Open Folder in VSCode",
     id: nanoid(),
-    text: `SELECT * FROM {cursor} where id = `,
-    keyword: "sql-select",
+    text: "mkdir {clipboard} && code -r {clipboard}",
+    keyword: "vscd-init",
     type: "template",
   },
   {
+    name: "DOM Query Selector",
     id: nanoid(),
-    name: "Get Name of Current Branch",
-    text: "git branch --show-current",
-    keyword: "git-current-branch",
-    type: "template",
-  },
-];
-
-const project = [
-  {
-    id: nanoid(),
-    text: `## Problem Statement
-
-*Why is this project important?* *What user feedback initiated it?*
-
-{cursor}
-
-## Initial Scope
-
-*What needs to be done to solve the problem? What are the constraints?*
-
-## Possible Solution
-
-*How can the scope be achieved? What are possible solutions?*
-
-## Open Questions
-
-*What is unclear and needs further investigations or discussions?*
-    `,
-    name: "Project Spec",
+    text: `document.querySelector({cursor})`,
+    keyword: "qs",
     type: "template",
   },
 ];
@@ -741,6 +793,22 @@ Fixes #
 {cursor}
 </details>`,
     keyword: "gh-details",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Note",
+    text: `> **Note**
+> {cursor}`,
+    keyword: "gh-note",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Warning",
+    text: `> **Warning**
+> {cursor}`,
+    keyword: "gh-warning",
     type: "template",
   },
 ];
@@ -909,14 +977,14 @@ const date = [
   {
     id: nanoid(),
     name: "Weekday",
-    text: "Today is {weekday}.",
+    text: "Today is {day}.",
     keyword: "day",
     type: "template",
   },
   {
     id: nanoid(),
     name: "1 Year from Today",
-    text: "1 year from today will be {weekday +1y}.",
+    text: "1 year from today will be {day +1y}.",
     keyword: "nextyear",
     type: "template",
   },
@@ -993,6 +1061,28 @@ const misc = [
     keyword: "tg",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "Weekly Standup Template",
+    text: `Good morning ✨ 
+
+*Last week:*
+- {cursor}
+
+*Didn't do:*
+- 
+
+*This week:*
+- 
+
+*Blockers:*
+- 
+
+*Highlights:*
+- `,
+    keyword: "standup",
+    type: "template",
+  },
 ];
 
 export const snippetGroups = [
@@ -1001,7 +1091,7 @@ export const snippetGroups = [
     slug: "/symbols",
     gridCols: 4,
     snippets: [...technical, ...bulletsAndStars, ...maths, ...symbols],
-    icon: CommandIcon,
+    icon: CommandSymbolIcon,
   },
   {
     name: "Arrows",
@@ -1015,7 +1105,7 @@ export const snippetGroups = [
     slug: "/unicode",
     gridCols: 4,
     snippets: unicodes,
-    icon: UnicodeIcon,
+    icon: KeyboardIcon,
   },
   {
     name: "Date & Time",
@@ -1025,7 +1115,7 @@ export const snippetGroups = [
     icon: CalendarIcon,
   },
   {
-    name: "Misceallenous",
+    name: "Miscellaneous",
     slug: "/misc",
     gridCols: 2,
     snippets: misc,

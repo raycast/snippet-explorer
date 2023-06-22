@@ -5,17 +5,7 @@ import SelectionArea, { SelectionEvent } from "@viselect/react";
 import { useRouter } from "next/router";
 import copy from "copy-to-clipboard";
 import { Select, SelectItem } from "../components/Select";
-import {
-  ChevronDownIcon,
-  ClipboardIcon,
-  CogIcon,
-  DownloadIcon,
-  LinkIcon,
-  PlusCircle,
-  RaycastLogoIcon,
-  SnippetsIcon,
-  Trash,
-} from "../components/Icons";
+import { SnippetsIcon } from "../components/Icons";
 import {
   Dialog,
   DialogContent,
@@ -43,6 +33,16 @@ import { snippetGroups } from "../data/snippets";
 import styles from "../styles/Home.module.css";
 import { Instructions } from "../components/Instructions";
 import { useSectionInView } from "../utils/useSectionInViewObserver";
+import {
+  ChevronDownIcon,
+  CogIcon,
+  CopyClipboardIcon,
+  DownloadIcon,
+  LinkIcon,
+  PlusCircleIcon,
+  RaycastLogoNegIcon,
+  TrashIcon,
+} from "@raycast/icons";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
@@ -50,20 +50,7 @@ const raycastProtocolForEnvironments = {
 };
 const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
 
-type Modifiers =
-  | "!"
-  | ":"
-  | "_"
-  | "__"
-  | "-"
-  | "@"
-  | "@@"
-  | "$"
-  | ";"
-  | ";;"
-  | "none";
-
-const modifiders: Modifiers[] = [
+const modifiers = [
   "!",
   ":",
   "_",
@@ -74,8 +61,12 @@ const modifiders: Modifiers[] = [
   "$",
   ";",
   ";;",
+  "/",
+  "//",
   "none",
-];
+] as const;
+
+type Modifiers = (typeof modifiers)[number];
 
 export function getStaticPaths() {
   const paths = snippetGroups.map((snippet) => ({
@@ -324,7 +315,7 @@ export default function Home({ onTouchReady }) {
                 <DialogTitle className={styles.dialogTitle}>About</DialogTitle>
                 <DialogDescription className={styles.dialogDescription}>
                   Snippet Explorer is a tool to easily browse and import
-                  Snippets directly in <a href="https://raycast.com">Raycast</a>
+                  Snippets directly to <a href="https://raycast.com">Raycast</a>
                   .
                 </DialogDescription>
                 <p className={styles.dialogDescription}>
@@ -379,7 +370,7 @@ export default function Home({ onTouchReady }) {
                       </span>
                     </li>
                     <li>
-                      Copy URL to share
+                      Copy URL to Share
                       <span className={styles.hotkeys}>
                         <kbd>⌘</kbd>
                         <kbd>⇧</kbd>
@@ -428,7 +419,7 @@ export default function Home({ onTouchReady }) {
               >
                 Made by{" "}
                 <span style={{ color: "#FF6363" }}>
-                  <RaycastLogoIcon />{" "}
+                  <RaycastLogoNegIcon />{" "}
                 </span>
                 <span>Raycast</span>
               </a>
@@ -462,7 +453,7 @@ export default function Home({ onTouchReady }) {
                         setStartMod(newValue)
                       }
                     >
-                      {modifiders.map((mod) => (
+                      {modifiers.map((mod) => (
                         <SelectItem key={mod} value={mod}>
                           {mod}
                         </SelectItem>
@@ -477,7 +468,7 @@ export default function Home({ onTouchReady }) {
                         setEndMod(newValue)
                       }
                     >
-                      {modifiders.map((mod) => (
+                      {modifiers.map((mod) => (
                         <SelectItem key={mod} value={mod}>
                           {mod}
                         </SelectItem>
@@ -496,7 +487,7 @@ export default function Home({ onTouchReady }) {
                 disabled={selectedSnippetsConfig.length === 0}
                 onClick={() => handleAddToRaycast()}
               >
-                <PlusCircle /> Add to Raycast
+                <PlusCircleIcon /> Add to Raycast
               </Button>
 
               <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
@@ -524,7 +515,7 @@ export default function Home({ onTouchReady }) {
                     disabled={selectedSnippetsConfig.length === 0}
                     onSelect={() => handleCopyData()}
                   >
-                    <ClipboardIcon /> Copy JSON{" "}
+                    <CopyClipboardIcon /> Copy JSON{" "}
                     <span className={styles.hotkeys}>
                       <kbd>⌘</kbd>
                       <kbd>⌥</kbd>
@@ -535,7 +526,7 @@ export default function Home({ onTouchReady }) {
                     disabled={selectedSnippetsConfig.length === 0}
                     onSelect={() => handleCopyUrl()}
                   >
-                    <LinkIcon /> Copy URL to share{" "}
+                    <LinkIcon /> Copy URL to Share{" "}
                     <span className={styles.hotkeys}>
                       <kbd>⌘</kbd>
                       <kbd>⇧</kbd>
@@ -553,7 +544,7 @@ export default function Home({ onTouchReady }) {
               disabled={selectedSnippetsConfig.length === 0}
               onClick={() => handleCopyUrl()}
             >
-              <LinkIcon /> Copy URL to share
+              <LinkIcon /> Copy URL to Share
             </Button>
           )}
         </div>
@@ -561,7 +552,7 @@ export default function Home({ onTouchReady }) {
 
       <Toast open={copied} onOpenChange={setCopied}>
         <ToastTitle className={styles.toastTitle}>
-          <ClipboardIcon /> Copied to clipboard
+          <CopyClipboardIcon /> Copied to clipboard
         </ToastTitle>
       </Toast>
 
@@ -617,7 +608,7 @@ export default function Home({ onTouchReady }) {
                                 );
                               }}
                             >
-                              <Trash />
+                              <TrashIcon />
                             </button>
                           </div>
                         ))}
