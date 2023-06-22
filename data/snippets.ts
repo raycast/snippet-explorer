@@ -509,34 +509,6 @@ const coding = [
     type: "template",
   },
   {
-    name: "Console Log Object",
-    id: nanoid(),
-    text: `console.log({{cursor}})`,
-    keyword: "vlog",
-    type: "template",
-  },
-  {
-    name: "Console Assert",
-    id: nanoid(),
-    text: `console.assert({cursor})`,
-    keyword: "assert",
-    type: "template",
-  },
-  {
-    name: "Console Info",
-    id: nanoid(),
-    text: `console.info({cursor})`,
-    keyword: "info",
-    type: "template",
-  },
-  {
-    name: "Console Error",
-    id: nanoid(),
-    text: `console.error({cursor})`,
-    keyword: "error",
-    type: "template",
-  },
-  {
     name: "Try Catch",
     id: nanoid(),
     text: `try {
@@ -580,70 +552,7 @@ const coding = [
     type: "template",
   },
   {
-    name: "React: useReducer",
-    id: nanoid(),
-    text: `const [state, dispatch] = React.useReducer(someReducer, {
-  {cursor}
-})`,
-    keyword: "rur",
-    type: "template",
-  },
-  {
-    name: "React: componentWillMount",
-    id: nanoid(),
-    text: `componentWillMount() {
-  {cursor}
-}`,
-    keyword: "rcwm",
-    type: "template",
-  },
-  {
-    name: "React: componentDidMount",
-    id: nanoid(),
-    text: `componentDidMount() {
-  {cursor}
-}`,
-    keyword: "rcdm",
-    type: "template",
-  },
-  {
-    name: "React: componentWillReceiveProps",
-    id: nanoid(),
-    text: `componentWillReceiveProps(nextProps) {
-  {cursor}
-}`,
-    keyword: "rcwrp",
-    type: "template",
-  },
-  {
-    name: "React: componentWillUpdate",
-    id: nanoid(),
-    text: `componentWillUpdate(nextProps, nextState) {
-  {cursor}
-}`,
-    keyword: "rcwu",
-    type: "template",
-  },
-  {
-    name: "React: componentDidUpdate",
-    id: nanoid(),
-    text: `componentDidUpdate(prevProps, prevState) {
-  {cursor}
-}`,
-    keyword: "rcdu",
-    type: "template",
-  },
-  {
-    name: "React: componentWillUnmount",
-    id: nanoid(),
-    text: `componentWillUnmount() {
-  {cursor}
-}`,
-    keyword: "rcwum",
-    type: "template",
-  },
-  {
-    name: "Vue3 Composition API: Base TypeScript",
+    name: "Vue: Base Single File Component",
     id: nanoid(),
     text: `<script lang="ts" setup>
   {cursor}
@@ -659,65 +568,6 @@ const coding = [
 
 </style>`,
     keyword: "vbase",
-    type: "template",
-  },
-  {
-    name: "Vue3 Composition API: Define props TypeScript",
-    id: nanoid(),
-    text: `const props = defineProps<{
-  {cursor}
-}>();`,
-    keyword: "vprops",
-    type: "template",
-  },
-  {
-    name: "Vue3 Composition API: Emits TypeScript",
-    id: nanoid(),
-    text: `const emits = defineEmits<{
-  (event: "{cursor}"): void,
-}>();`,
-    keyword: "vemits",
-    type: "template",
-  },
-  {
-    name: "Vue3 Composition API: Props with Defaults",
-    id: nanoid(),
-    text: `const props = withDefaults(
-  defineProps<{
-    {cursor}
-  }>(),
-  {
-
-  }
-);`,
-    keyword: "vdefprops",
-    type: "template",
-  },
-  {
-    name: "CSS: Flex Center",
-    id: nanoid(),
-    text: `display: flex;
-justify-content: center;
-align-items: center;`,
-    keyword: "flexcenter",
-    type: "template",
-  },
-  {
-    name: "CSS: Grid Center",
-    id: nanoid(),
-    text: `display: grid;
-place-items: center;`,
-    keyword: "gridcenter",
-    type: "template",
-  },
-  {
-    name: "CSS: Absolute Center",
-    id: nanoid(),
-    text: `position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);`,
-    keyword: "absolutecenter",
     type: "template",
   },
   {
@@ -763,141 +613,6 @@ transform: translate(-50%, -50%);`,
     keyword: "sawait",
     type: "template",
   },
-  {
-    name: "Svelte: Key Block",
-    id: nanoid(),
-    text: `{#key {cursor}}
-
-{/key}`,
-    keyword: "skey",
-    type: "template",
-  },
-  {
-    name: "Svelte: Debug Block",
-    id: nanoid(),
-    text: `{@debug {cursor}}`,
-    keyword: "sdebug",
-    type: "template",
-  },
-  {
-    name: "Svelte: HTML Block",
-    id: nanoid(),
-    text: `{@html {cursor}}`,
-    keyword: "shtml",
-    type: "template",
-  },
-  {
-    name: "Svelte: Component",
-    id: nanoid(),
-    text: `<svelte:component this={{cursor}} />`,
-    keyword: "scomponent",
-    type: "template",
-  },
-  {
-    name: "Svelte: Window",
-    id: nanoid(),
-    text: `<svelte:window on:resize={{cursor}} />`,
-    keyword: "swindow",
-    type: "template",
-  },
-  {
-    name: "Svelte: Head",
-    id: nanoid(),
-    text: `<svelte:head>
-  {cursor}
-</svelte:head>`,
-    keyword: "shead",
-    type: "template",
-  },
-  {
-    name: "Svelte: Body",
-    id: nanoid(),
-    text: `<svelte:body on:mouseenter={{cursor}} />`,
-    keyword: "sbody",
-    type: "template",
-  },
-  {
-    name: "Svelte: Options",
-    id: nanoid(),
-    text: `<svelte:options immutable={{cursor}} />`,
-    keyword: "soptions",
-    type: "template",
-  },
-  {
-    name: "Svelte: Fragment",
-    id: nanoid(),
-    text: `<svelte:fragment> slot="header"
-  {cursor}
-</svelte:fragment>`,
-    keyword: "sfragment",
-    type: "template",
-  },
-  {
-    name: "Svelte: Slot",
-    id: nanoid(),
-    text: `<slot name="header">
-  {cursor}
-</slot>`,
-    keyword: "sslot",
-    type: "template",
-  },
-  {
-    name: "Svelte: Ref",
-    id: nanoid(),
-    text: `bind:this={{cursor}}`,
-    keyword: "sref",
-    type: "template",
-  },
-  {
-    name: "Svelte: Transition Fade",
-    id: nanoid(),
-    text: `transition:fade={{ duration: {cursor} }}`,
-    keyword: "sfade",
-    type: "template",
-  },
-  {
-    name: "Svelte: Transition Fly",
-    id: nanoid(),
-    text: `transition:fly={{ x: 100, y: 100, duration: {cursor} }}`,
-    keyword: "sfly",
-    type: "template",
-  },
-  {
-    name: "Svelte: Transition Slide",
-    id: nanoid(),
-    text: `transition:slide={{ duration: {cursor} }}`,
-    keyword: "sslide",
-    type: "template",
-  },
-  {
-    name: "Svelte: Transition Scale",
-    id: nanoid(),
-    text: `transition:scale={{ duration: {cursor} }}`,
-    keyword: "sscale",
-    type: "template",
-  },
-  {
-    name: "Svelte: Transition Draw",
-    id: nanoid(),
-    text: `transition:draw={{ duration: {cursor} }}`,
-    keyword: "sdraw",
-    type: "template",
-  },
-  {
-    name: "Svelte: Transition CrossFade",
-    id: nanoid(),
-    text: `transition:crossfade={{ duration: {cursor} }}`,
-    keyword: "scrossfade",
-    type: "template",
-  },
-  {
-    name: "Svelte: Transition Blur",
-    id: nanoid(),
-    text: `transition:blur={{ duration: 500 }}`,
-    keyword: "sblur",
-    type: "template",
-  },
-
   {
     name: "Raycast View Command",
     id: nanoid(),
@@ -1277,7 +992,7 @@ const misc = [
     text: "https://t.me/yournickname",
     keyword: "tg",
     type: "template",
-  }
+  },
 ];
 
 export const snippetGroups = [
