@@ -587,6 +587,111 @@ const coding = [
     type: "template",
   },
   {
+    name: "Try Catch",
+    id: nanoid(),
+    text: `try {
+  {cursor}
+} catch (error) {
+
+} finally {
+
+}`,
+    keyword: "try",
+    type: "template",
+  },
+  {
+    name: "Switch Statement",
+    id: nanoid(),
+    text: `switch ({cursor}) {
+  case 'value': {
+    break
+  }
+  default: {
+    break
+  }
+}`,
+    keyword: "switch",
+    type: "template",
+  },
+  {
+    name: "Sleep Promise",
+    id: nanoid(),
+    text: `const sleep = (time = 3000) => new Promise (resolve => setTimeout (resolve, time));`,
+    keyword: "sleep",
+    type: "template",
+  },
+  {
+    name: "React: useEffect",
+    id: nanoid(),
+    text: `React.useEffect(() => {
+  {cursor}
+}, [])`,
+    keyword: "rue",
+    type: "template",
+  },
+  {
+    name: "Vue: Base Single File Component",
+    id: nanoid(),
+    text: `<script lang="ts" setup>
+  {cursor}
+</script>
+
+<template>
+  <div>
+    <h1>Vue Component</h1>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+
+</style>`,
+    keyword: "vbase",
+    type: "template",
+  },
+  {
+    name: "Svelte: If Block",
+    id: nanoid(),
+    text: `{#if {cursor}}
+
+{/if}`,
+    keyword: "sif",
+    type: "template",
+  },
+  {
+    name: "Svelte: If Else Block",
+    id: nanoid(),
+    text: `{#if {cursor}}
+
+{:else}
+
+{/if}`,
+    keyword: "selse",
+    type: "template",
+  },
+  {
+    name: "Svelte: Each Block",
+    id: nanoid(),
+    text: `{#each {cursor} as item}
+
+{/each}`,
+    keyword: "seach",
+    type: "template",
+  },
+  {
+    name: "Svelte: Await Block",
+    id: nanoid(),
+    text: `{#await {cursor}}
+  {#then thing}
+
+  {/then}
+  {#catch error}
+
+  {/catch}
+{/await}`,
+    keyword: "sawait",
+    type: "template",
+  },
+  {
     name: "Raycast View Command",
     id: nanoid(),
     text: `export default function Command() {
