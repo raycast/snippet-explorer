@@ -43,10 +43,13 @@ import {
   RaycastLogoNegIcon,
   TrashIcon,
 } from "@raycast/icons";
+import type { Category, Snippet } from "../data/snippets";
+import { extractSnippets } from "../utils/extractSnippets";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
   production: "raycast",
+  test: "raycastinternal",
 };
 const raycastProtocol = raycastProtocolForEnvironments[process.env.NODE_ENV];
 
@@ -90,10 +93,10 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ onTouchReady }) {
+export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
   const router = useRouter();
 
-  const [selectedSnippets, setSelectedSnippets] = React.useState([]);
+  const [selectedSnippets, setSelectedSnippets] = React.useState<Snippet[]>([]);
   const [copied, setCopied] = React.useState(false);
 
   const [startMod, setStartMod] = React.useState<Modifiers>("!");
@@ -101,12 +104,7 @@ export default function Home({ onTouchReady }) {
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const [aboutOpen, setAboutOpen] = React.useState(false);
-  const [isTouch, setIsTouch] = React.useState(null);
-
-  const selectedSnippetsConfig = selectedSnippets;
-
-  const extractIds = (els: Element[]) =>
-    els.map((v) => v.getAttribute("data-key"));
+  const [isTouch, setIsTouch] = React.useState<boolean>();
 
   const onStart = ({ event, selection }: SelectionEvent) => {
     if (!isTouch && !event?.ctrlKey && !event?.metaKey) {
@@ -120,43 +118,32 @@ export default function Home({ onTouchReady }) {
       changed: { added, removed },
     },
   }: SelectionEvent) => {
-    const addedIds = extractIds(added);
-    const removedIds = extractIds(removed);
+    const addedSnippets = extractSnippets(added, snippetGroups);
+    const removedSnippets = extractSnippets(removed, snippetGroups);
 
-    const addedSnippets = addedIds.map((id) => {
-      const [slug, index] = id.split("-");
-      const snippetCategory = snippetGroups.find(
-        (snippet) => snippet.slug === slug
-      );
-      return snippetCategory.snippets[index];
-    });
+    setSelectedSnippets((prevSnippets) => {
+      const snippets = [...prevSnippets];
 
-    addedSnippets.forEach((snippet) => {
-      setSelectedSnippets((prevSnippets) => {
-        if (prevSnippets.find((s) => s.id === snippet.id)) {
-          return prevSnippets;
+      addedSnippets.forEach((snippet) => {
+        if (!snippet) {
+          return;
         }
-        return [...prevSnippets, snippet];
+        if (snippets.find((p) => p.id === snippet.id)) {
+          return;
+        }
+        snippets.push(snippet);
       });
-    });
 
-    const removedSnippets = removedIds.map((id) => {
-      const [slug, index] = id.split("-");
-      const snippetCategory = snippetGroups.find(
-        (snippet) => snippet.slug === slug
-      );
-      return snippetCategory.snippets[index];
-    });
-
-    removedSnippets.forEach((snippet) => {
-      setSelectedSnippets((prevSnippets) => {
-        return prevSnippets.filter((s) => s.id !== snippet.id);
+      removedSnippets.forEach((snippet) => {
+        return snippets.filter((s) => s?.id !== snippet?.id);
       });
+
+      return snippets;
     });
   };
 
   const makeSnippetImportData = React.useCallback(() => {
-    return `[${selectedSnippetsConfig
+    return `[${selectedSnippets
       .map((snippet) => {
         const { name, text } = snippet;
         const keyword =
@@ -170,10 +157,10 @@ export default function Home({ onTouchReady }) {
         return JSON.stringify({ name, text, keyword });
       })
       .join(",")}]`;
-  }, [selectedSnippetsConfig, startMod, endMod]);
+  }, [selectedSnippets, startMod, endMod]);
 
   const makeQueryString = React.useCallback(() => {
-    const queryString = selectedSnippetsConfig
+    const queryString = selectedSnippets
       .map((snippet) => {
         const { name, text, type } = snippet;
         const keyword =
@@ -190,7 +177,7 @@ export default function Home({ onTouchReady }) {
       })
       .join("&");
     return queryString;
-  }, [selectedSnippetsConfig, startMod, endMod]);
+  }, [selectedSnippets, startMod, endMod]);
 
   const handleDownload = React.useCallback(() => {
     const encodedSnippetsData = encodeURIComponent(makeSnippetImportData());
@@ -225,31 +212,31 @@ export default function Home({ onTouchReady }) {
   }, [isTouch, setIsTouch, onTouchReady]);
 
   React.useEffect(() => {
-    const down = (event) => {
+    const down = (event: KeyboardEvent) => {
       const { key, keyCode, metaKey, shiftKey, altKey } = event;
 
       if (key === "k" && metaKey) {
-        if (selectedSnippetsConfig.length === 0) return;
+        if (selectedSnippets.length === 0) return;
         setActionsOpen((prevOpen) => {
           return !prevOpen;
         });
       }
 
       if (key === "d" && metaKey) {
-        if (selectedSnippetsConfig.length === 0) return;
+        if (selectedSnippets.length === 0) return;
         event.preventDefault();
         handleDownload();
       }
 
       if (key === "Enter" && metaKey) {
-        if (selectedSnippetsConfig.length === 0) return;
+        if (selectedSnippets.length === 0) return;
         event.preventDefault();
         handleAddToRaycast();
       }
 
       // key === "c" doesn't work when using alt key, so we use keCode instead (67)
       if (keyCode === 67 && metaKey && altKey) {
-        if (selectedSnippetsConfig.length === 0) return;
+        if (selectedSnippets.length === 0) return;
         event.preventDefault();
         handleCopyData();
         setActionsOpen(false);
@@ -285,7 +272,7 @@ export default function Home({ onTouchReady }) {
   }, [
     setActionsOpen,
     setAboutOpen,
-    selectedSnippetsConfig,
+    selectedSnippets,
     handleCopyData,
     handleDownload,
     handleCopyUrl,
@@ -484,7 +471,7 @@ export default function Home({ onTouchReady }) {
             <ButtonGroup>
               <Button
                 variant="red"
-                disabled={selectedSnippetsConfig.length === 0}
+                disabled={selectedSnippets.length === 0}
                 onClick={() => handleAddToRaycast()}
               >
                 <PlusCircleIcon /> Add to Raycast
@@ -494,7 +481,7 @@ export default function Home({ onTouchReady }) {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="red"
-                    disabled={selectedSnippetsConfig.length === 0}
+                    disabled={selectedSnippets.length === 0}
                     aria-label="Export options"
                   >
                     <ChevronDownIcon />
@@ -502,7 +489,7 @@ export default function Home({ onTouchReady }) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem
-                    disabled={selectedSnippetsConfig.length === 0}
+                    disabled={selectedSnippets.length === 0}
                     onSelect={() => handleDownload()}
                   >
                     <DownloadIcon /> Download JSON
@@ -512,7 +499,7 @@ export default function Home({ onTouchReady }) {
                     </span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    disabled={selectedSnippetsConfig.length === 0}
+                    disabled={selectedSnippets.length === 0}
                     onSelect={() => handleCopyData()}
                   >
                     <CopyClipboardIcon /> Copy JSON{" "}
@@ -523,7 +510,7 @@ export default function Home({ onTouchReady }) {
                     </span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    disabled={selectedSnippetsConfig.length === 0}
+                    disabled={selectedSnippets.length === 0}
                     onSelect={() => handleCopyUrl()}
                   >
                     <LinkIcon /> Copy URL to Share{" "}
@@ -541,7 +528,7 @@ export default function Home({ onTouchReady }) {
           ) : (
             <Button
               variant="red"
-              disabled={selectedSnippetsConfig.length === 0}
+              disabled={selectedSnippets.length === 0}
               onClick={() => handleCopyUrl()}
             >
               <LinkIcon /> Copy URL to Share
@@ -572,26 +559,24 @@ export default function Home({ onTouchReady }) {
                   ))}
                 </div>
 
-                {selectedSnippetsConfig.length === 0 && <Instructions />}
+                {selectedSnippets.length === 0 && <Instructions />}
 
-                {selectedSnippetsConfig.length > 0 && (
+                {selectedSnippets.length > 0 && (
                   <div>
                     <p className={styles.sidebarTitle}>Add to Raycast</p>
 
                     <Collapsible.Root>
                       <Collapsible.Trigger asChild>
                         <button className={styles.summaryTrigger}>
-                          {selectedSnippetsConfig.length}{" "}
-                          {selectedSnippetsConfig.length > 1
-                            ? "Snippets"
-                            : "Snippet"}{" "}
+                          {selectedSnippets.length}{" "}
+                          {selectedSnippets.length > 1 ? "Snippets" : "Snippet"}{" "}
                           selected
                           <ChevronDownIcon />
                         </button>
                       </Collapsible.Trigger>
 
                       <Collapsible.Content className={styles.summaryContent}>
-                        {selectedSnippetsConfig.map((snippet, index) => (
+                        {selectedSnippets.map((snippet, index) => (
                           <div
                             key={snippet.name + index}
                             className={styles.summaryItem}
@@ -724,7 +709,7 @@ export default function Home({ onTouchReady }) {
   );
 }
 
-function NavItem({ snippetGroup }) {
+function NavItem({ snippetGroup }: { snippetGroup: Category }) {
   const activeSection = useSectionInView();
 
   return (

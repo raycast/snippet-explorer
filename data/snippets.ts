@@ -11,7 +11,23 @@ import {
   SpeechBubbleIcon,
 } from "@raycast/icons";
 
-const arrows = [
+export type Snippet = {
+  id: string;
+  text: string;
+  name: string;
+  keyword: string;
+  type: string;
+};
+
+export type Category = {
+  name: string;
+  slug: string;
+  snippets: Snippet[];
+  icon: (props: any) => JSX.Element;
+  gridCols: number;
+};
+
+const arrows: Snippet[] = [
   {
     id: nanoid(),
     text: "←",
@@ -112,7 +128,7 @@ const arrows = [
   },
 ];
 
-const bulletsAndStars = [
+const bulletsAndStars: Snippet[] = [
   {
     id: nanoid(),
     text: "·",
@@ -206,7 +222,7 @@ const bulletsAndStars = [
   },
 ];
 
-const technical = [
+const technical: Snippet[] = [
   {
     id: nanoid(),
     text: "⌘",
@@ -279,7 +295,7 @@ const technical = [
   },
 ];
 
-const currency = [
+const currency: Snippet[] = [
   {
     id: nanoid(),
     text: "£",
@@ -373,7 +389,7 @@ const currency = [
   },
 ];
 
-const maths = [
+const maths: Snippet[] = [
   {
     id: nanoid(),
     text: "×",
@@ -474,7 +490,7 @@ const maths = [
   },
 ];
 
-const symbols = [
+const symbols: Snippet[] = [
   {
     id: nanoid(),
     text: "®",
@@ -548,7 +564,7 @@ const symbols = [
   },
 ];
 
-const feedback = [
+const feedback: Snippet[] = [
   {
     name: "Feedback Thanks",
     id: nanoid(),
@@ -578,7 +594,7 @@ I'm thrilled about the opportunity. Unfortunately, I'm currently not available t
   },
 ];
 
-const coding = [
+const coding: Snippet[] = [
   {
     name: "Console Log",
     id: nanoid(),
@@ -736,7 +752,7 @@ const coding = [
   },
 ];
 
-const github = [
+const github: Snippet[] = [
   {
     id: nanoid(),
     name: "GitHub Issue Template",
@@ -813,7 +829,7 @@ Fixes #
   },
 ];
 
-const spelling = [
+const spelling: Snippet[] = [
   {
     id: nanoid(),
     name: "Apparantly → Apparently",
@@ -858,7 +874,7 @@ const spelling = [
   },
 ];
 
-const unicodes = [
+const unicodes: Snippet[] = [
   {
     id: nanoid(),
     name: "Shrug",
@@ -952,7 +968,7 @@ const unicodes = [
   },
 ];
 
-const date = [
+const date: Snippet[] = [
   {
     id: nanoid(),
     name: "Current Date",
@@ -1011,7 +1027,7 @@ const date = [
   },
 ];
 
-const misc = [
+const misc: Snippet[] = [
   {
     id: nanoid(),
     name: "Email Address",
@@ -1064,19 +1080,19 @@ const misc = [
   {
     id: nanoid(),
     name: "Weekly Standup Template",
-    text: `Good morning ✨ 
+    text: `Good morning ✨
 
 *Last week:*
 - {cursor}
 
 *Didn't do:*
-- 
+-
 
 *This week:*
-- 
+-
 
 *Blockers:*
-- 
+-
 
 *Highlights:*
 - `,
@@ -1085,7 +1101,7 @@ const misc = [
   },
 ];
 
-export const snippetGroups = [
+export const snippetGroups: Category[] = [
   {
     name: "Symbols",
     slug: "/symbols",
