@@ -31,6 +31,7 @@
     "react-markdown": "^8.0.3"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.9",
     "@types/node": "18.11.9",
     "eslint": "8.27.0",
     "eslint-config-next": "^13.2.4"
