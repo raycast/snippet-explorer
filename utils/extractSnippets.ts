@@ -4,7 +4,7 @@ export function extractSnippets<T>(
 ) {
   const ids = els.map((v) => v.getAttribute("data-key"));
 
-  const prompts = ids
+  const snippets = ids
     .map((id) => {
       if (!id) {
         return;
@@ -16,5 +16,5 @@ export function extractSnippets<T>(
     })
     .filter(Boolean);
 
-  return prompts;
+  return snippets;
 }

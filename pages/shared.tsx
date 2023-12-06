@@ -42,7 +42,7 @@ export default function Home() {
 
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const sharedSnippetsInURL = React.useMemo(
-    () => parseURLPrompt(router.query.prompts),
+    () => parseURLSnippet(router.query.snippet),
     [router.query]
   );
   const [selectedSnippets, setSelectedSnippets] = React.useState([
@@ -52,6 +52,12 @@ export default function Home() {
     () => (typeof window !== "undefined" ? isTouchDevice() : false),
     []
   );
+
+  React.useEffect(() => {
+    // everytime the sharedSnippetsInURL changes, we want to update the selectedSnippets
+    // so that we start with the shared snippets selected
+    setSelectedSnippets([...sharedSnippetsInURL]);
+  }, [sharedSnippetsInURL]);
 
   let gridCols = 1;
   switch (sharedSnippetsInURL.length) {
@@ -73,7 +79,9 @@ export default function Home() {
 
   const categories = [
     {
-      name: `${sharedSnippetsInURL.length} snippets shared with you`,
+      name: `${sharedSnippetsInURL.length} snippet${
+        sharedSnippetsInURL.length > 1 ? "s" : ""
+      } shared with you`,
       gridCols,
       isTemplate: true,
       isShared: true,
@@ -373,18 +381,18 @@ export default function Home() {
   );
 }
 
-function parseURLPrompt(promptQueryString?: string | string[]): Snippet[] {
-  if (!promptQueryString) {
+function parseURLSnippet(queryString?: string | string[]): Snippet[] {
+  if (!queryString) {
     return [];
   }
   let snippets;
-  if (Array.isArray(promptQueryString)) {
-    snippets = promptQueryString;
+  if (Array.isArray(queryString)) {
+    snippets = queryString;
   } else {
-    snippets = [promptQueryString];
+    snippets = [queryString];
   }
-  return snippets.map((prompt) => ({
-    ...JSON.parse(prompt),
+  return snippets.map((snippet) => ({
+    ...JSON.parse(snippet),
     id: nanoid(),
     isShared: true,
   }));
