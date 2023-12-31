@@ -814,7 +814,7 @@ Fixes #
   {
     id: nanoid(),
     name: "GitHub Note",
-    text: `> **Note**
+    text: `> [!NOTE]
 > {cursor}`,
     keyword: "gh-note",
     type: "template",
@@ -822,7 +822,7 @@ Fixes #
   {
     id: nanoid(),
     name: "GitHub Warning",
-    text: `> **Warning**
+    text: `> [!WARNING]
 > {cursor}`,
     keyword: "gh-warning",
     type: "template",
