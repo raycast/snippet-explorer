@@ -206,6 +206,7 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
     ).then((res) => res.json());
 
     if (response.error) {
+      setToastMessage("Error copying URL to clipboard");
       return;
     }
 
