@@ -299,7 +299,7 @@ export default function Home() {
 
       <div>
         <div className={styles.container}>
-          {!isTouch && (
+          {isTouch !== null && (
             <SelectionArea
               className="container"
               onStart={onStart}
