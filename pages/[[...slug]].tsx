@@ -202,7 +202,7 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
     const url = `${window.location.origin}/shared?${makeQueryString()}`;
     const encodedUrl = encodeURIComponent(url);
     const response = await fetch(
-      `https://ray.so/api/shorten-url?url=${encodedUrl}`
+      `https://ray.so/api/shorten-url?url=${encodedUrl}&ref=snippets`
     ).then((res) => res.json());
 
     if (response.error) {
