@@ -61,6 +61,7 @@ export default function Home() {
 
   let gridCols = 1;
   switch (sharedSnippetsInURL.length) {
+    case 1:
     case 2:
       gridCols = 2;
       break;
