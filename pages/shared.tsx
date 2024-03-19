@@ -243,51 +243,53 @@ export default function Home() {
           </span>
         </Link>
         <div className={styles.navControls}>
-          <ButtonGroup>
-            <Button
-              variant="red"
-              disabled={selectedSnippets.length === 0}
-              onClick={() => handleAddToRaycast()}
-            >
-              <PlusCircleIcon /> Add to Raycast
-            </Button>
+          <div className={styles.hiddenOnMobile}>
+            <ButtonGroup>
+              <Button
+                variant="red"
+                disabled={selectedSnippets.length === 0}
+                onClick={() => handleAddToRaycast()}
+              >
+                <PlusCircleIcon /> Add to Raycast
+              </Button>
 
-            <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="red"
-                  disabled={selectedSnippets.length === 0}
-                  aria-label="Export options"
-                >
-                  <ChevronDownIcon />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem
-                  disabled={selectedSnippets.length === 0}
-                  onSelect={() => handleDownload()}
-                >
-                  <DownloadIcon /> Download JSON
-                  <span className={styles.hotkeys}>
-                    <kbd>⌘</kbd>
-                    <kbd>D</kbd>
-                  </span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  disabled={selectedSnippets.length === 0}
-                  onSelect={() => handleCopyData()}
-                >
-                  <CopyClipboardIcon /> Copy JSON{" "}
-                  <span className={styles.hotkeys}>
-                    <kbd>⌘</kbd>
-                    <kbd>⌥</kbd>
-                    <kbd>C</kbd>
-                  </span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </ButtonGroup>
+              <DropdownMenu open={actionsOpen} onOpenChange={setActionsOpen}>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="red"
+                    disabled={selectedSnippets.length === 0}
+                    aria-label="Export options"
+                  >
+                    <ChevronDownIcon />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem
+                    disabled={selectedSnippets.length === 0}
+                    onSelect={() => handleDownload()}
+                  >
+                    <DownloadIcon /> Download JSON
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>D</kbd>
+                    </span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    disabled={selectedSnippets.length === 0}
+                    onSelect={() => handleCopyData()}
+                  >
+                    <CopyClipboardIcon /> Copy JSON{" "}
+                    <span className={styles.hotkeys}>
+                      <kbd>⌘</kbd>
+                      <kbd>⌥</kbd>
+                      <kbd>C</kbd>
+                    </span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </ButtonGroup>
+          </div>
         </div>
       </header>
 

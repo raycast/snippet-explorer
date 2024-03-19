@@ -546,3 +546,9 @@
     margin-bottom: 8px;
   }
 }
+
+.hiddenOnMobile {
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
