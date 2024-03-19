@@ -200,17 +200,17 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
     setToastMessage("Copying URL to clipboard...");
     setShowToast(true);
     const url = `${window.location.origin}/shared?${makeQueryString()}`;
-    const encodedUrl = encodeURIComponent(url);
+    let urlToCopy = url;
+    const encodedUrl = encodeURIComponent(urlToCopy);
     const response = await fetch(
       `https://ray.so/api/shorten-url?url=${encodedUrl}&ref=snippets`
     ).then((res) => res.json());
 
-    if (response.error) {
-      setToastMessage("Error copying URL to clipboard");
-      return;
+    if (response.link) {
+      urlToCopy = response.link;
     }
 
-    copy(response.link);
+    copy(urlToCopy);
     setShowToast(true);
     setToastMessage("Copied URL to clipboard!");
   }, [makeQueryString]);
