@@ -750,6 +750,13 @@ const coding: Snippet[] = [
     keyword: "qs",
     type: "template",
   },
+  {
+    name: "Markdown Link",
+    id: nanoid(),
+    text: `[{cursor}]({clipboard})`,
+    keyword: "md-lnk",
+    type: "template",
+  },
 ];
 
 const github: Snippet[] = [
