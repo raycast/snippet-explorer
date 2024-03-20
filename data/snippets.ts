@@ -1037,6 +1037,13 @@ const misc: Snippet[] = [
   },
   {
     id: nanoid(),
+    name: "Email Address (Argument)",
+    text: "{argument name=\"Email address\" options=\"one@email.com, two@email.com, three@email.com\"}",
+    keyword: "@",
+    type: "template",
+  },
+  {
+    id: nanoid(),
     name: "Address",
     text: "123 Quebec Road, Montreal, QC, H3A 2B2",
     keyword: "address",
