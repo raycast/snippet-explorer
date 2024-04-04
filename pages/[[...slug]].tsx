@@ -688,20 +688,20 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
                             data-key={`${snippetGroup.slug}-${index}`}
                           >
                             <div className={styles.snippet}>
-                              {snippet.type === "template" ||
-                              snippet.type === "spelling" ? (
-                                <ScrollArea>
-                                  <pre className={styles.template}>
-                                    {snippet.text}
-                                  </pre>
-                                </ScrollArea>
-                              ) : (
+                              {snippet.type === "symbol" ||
+                              snippet.type === "unicode" ? (
                                 <span
                                   className={styles.text}
                                   data-type={snippet.type}
                                 >
                                   {snippet.text}
                                 </span>
+                              ) : (
+                                <ScrollArea>
+                                  <pre className={styles.template}>
+                                    {snippet.text}
+                                  </pre>
+                                </ScrollArea>
                               )}
                             </div>
                             <span className={styles.name}>{snippet.name}</span>
