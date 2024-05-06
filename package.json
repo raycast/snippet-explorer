@@ -23,7 +23,7 @@
     "copy-to-clipboard": "^3.3.2",
     "lodash.debounce": "^4.0.8",
     "nanoid": "^4.0.0",
-    "next": "^13.2.4",
+    "next": "^14.2.3",
     "postcss": "^8.4.16",
     "postcss-nested": "^5.0.6",
     "react": "18.2.0",
