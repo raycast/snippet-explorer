@@ -1,15 +1,7 @@
+import { Icons, IconName as RaycastIconName } from "@raycast/icons";
 import { nanoid } from "nanoid";
-import { GitHubIcon, SnippetsIcon } from "../components/Icons";
-import {
-  CalendarIcon,
-  CodeBlockIcon,
-  CoinsIcon,
-  CommandSymbolIcon,
-  KeyboardIcon,
-  LowercaseIcon,
-  ShuffleIcon,
-  SpeechBubbleIcon,
-} from "@raycast/icons";
+
+export type IconName = RaycastIconName | "github";
 
 export type Snippet = {
   id: string;
@@ -23,7 +15,7 @@ export type Category = {
   name: string;
   slug: string;
   snippets: Snippet[];
-  icon: (props: any) => JSX.Element;
+  icon: IconName;
   gridCols: number;
 };
 
@@ -1107,69 +1099,69 @@ export const snippetGroups: Category[] = [
     slug: "/symbols",
     gridCols: 4,
     snippets: [...technical, ...bulletsAndStars, ...maths, ...symbols],
-    icon: CommandSymbolIcon,
+    icon: "command-symbol",
   },
   {
     name: "Arrows",
     slug: "/arrows",
     gridCols: 6,
     snippets: arrows,
-    icon: ShuffleIcon,
+    icon: "shuffle",
   },
   {
     name: "Unicode",
     slug: "/unicode",
     gridCols: 4,
     snippets: unicodes,
-    icon: KeyboardIcon,
+    icon: "keyboard",
   },
   {
     name: "Date & Time",
     slug: "/dates",
     gridCols: 3,
     snippets: date,
-    icon: CalendarIcon,
+    icon: "calendar",
   },
   {
     name: "Miscellaneous",
     slug: "/misc",
     gridCols: 2,
     snippets: misc,
-    icon: SnippetsIcon,
+    icon: "snippets",
   },
   {
     name: "Spelling",
     slug: "/spelling",
     gridCols: 4,
     snippets: spelling,
-    icon: LowercaseIcon,
+    icon: "lowercase",
   },
   {
     name: "Currency",
     slug: "/currency",
     gridCols: 4,
     snippets: currency,
-    icon: CoinsIcon,
+    icon: "coins",
   },
   {
     name: "Coding",
     slug: "/coding",
     gridCols: 3,
     snippets: coding,
-    icon: CodeBlockIcon,
+    icon: "code-block",
   },
   {
     name: "Feedback",
     slug: "/feedback",
     gridCols: 3,
     snippets: feedback,
-    icon: SpeechBubbleIcon,
+    icon: "speech-bubble",
   },
   {
     name: "GitHub",
     slug: "/github",
     gridCols: 2,
     snippets: github,
-    icon: GitHubIcon,
+    icon: "github",
   },
 ];

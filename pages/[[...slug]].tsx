@@ -45,6 +45,7 @@ import {
 } from "@raycast/icons";
 import type { Category, Snippet } from "../data/snippets";
 import { extractSnippets } from "../utils/extractSnippets";
+import { IconComponent } from "../components/IconComponent";
 
 const raycastProtocolForEnvironments = {
   development: "raycastinternal",
@@ -661,7 +662,8 @@ export default function Home({ onTouchReady }: { onTouchReady: () => void }) {
                     tabIndex={-1}
                   >
                     <h2 className={styles.subtitle}>
-                      <snippetGroup.icon /> {snippetGroup.name}
+                      <IconComponent icon={snippetGroup.icon} />{" "}
+                      {snippetGroup.name}
                     </h2>
                     <div
                       className={styles.snippets}
@@ -736,7 +738,11 @@ function NavItem({ snippetGroup }: { snippetGroup: Category }) {
       className={styles.sidebarNavItem}
       data-active={activeSection === snippetGroup.slug}
     >
-      {snippetGroup.icon ? <snippetGroup.icon /> : <SnippetsIcon />}
+      {snippetGroup.icon ? (
+        <IconComponent icon={snippetGroup.icon} />
+      ) : (
+        <SnippetsIcon />
+      )}
 
       {snippetGroup.name}
       <span className={styles.badge}>{snippetGroup.snippets.length}</span>
