@@ -805,6 +805,13 @@ Fixes #
   },
   {
     id: nanoid(),
+    name: "GitHub Image",
+    text: `![{cursor}]({clipboard})`,
+    keyword: "gh-image",
+    type: "template",
+  },
+  {
+    id: nanoid(),
     name: "GitHub Note",
     text: `> [!NOTE]
 > {cursor}`,
@@ -817,6 +824,30 @@ Fixes #
     text: `> [!WARNING]
 > {cursor}`,
     keyword: "gh-warning",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Tip",
+    text: `> [!TIP]
+> {cursor}`,
+    keyword: "gh-tip",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Important",
+    text: `> [!IMPORTANT]
+> {cursor}`,
+    keyword: "gh-important",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "GitHub Caution",
+    text: `> [!CAUTION]
+> {cursor}`,
+    keyword: "gh-caution",
     type: "template",
   },
 ];
