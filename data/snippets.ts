@@ -1091,6 +1091,20 @@ const misc: Snippet[] = [
     keyword: "standup",
     type: "template",
   },
+  {
+    id: nanoid(),
+    name: "LinkedIn Profile URL",
+    text: "https://linkedin.com/in/username",
+    keyword: "in",
+    type: "template",
+  },
+  {
+    id: nanoid(),
+    name: "Twitter / X Profile URL",
+    text: "https://x.com/username",
+    keyword: "tw",
+    type: "template",
+  },
 ];
 
 export const snippetGroups: Category[] = [
